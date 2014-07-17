@@ -18,7 +18,6 @@ class CreatePeople < ActiveRecord::Migration
 		
 		# Metadata
 		t.timestamps
-    	end
     end
   end
 end

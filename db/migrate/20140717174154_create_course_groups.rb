@@ -5,7 +5,7 @@ class CreateCourseGroups < ActiveRecord::Migration
     	t.text :name
     	
     	# If the course is versitile to other Colleges
-    	t.boolean :college_global
+    	t.boolean :college_global_flag
     	
     	# If the course can be used as a minor or on its own
     	t.boolean :college_independent_flag
