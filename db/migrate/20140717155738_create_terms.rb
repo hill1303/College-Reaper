@@ -4,8 +4,8 @@ class CreateTerms < ActiveRecord::Migration
     	
     	# General Term info
     	t.string :name
-    	t.date :start
-    	t.date :end
+    	t.date :start_date
+    	t.date :end_date
 
     	# Metadata field
     	t.timestamps

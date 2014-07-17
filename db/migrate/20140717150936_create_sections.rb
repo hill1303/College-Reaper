@@ -4,8 +4,8 @@ class CreateSections < ActiveRecord::Migration
 
 		# General section info
     	t.string :room
-    	t.time :start
-    	t.time :end
+    	t.time :start_time
+    	t.time :end_time
     	t.string :rpt_pattern
 
 		# Section availability info
