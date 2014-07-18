@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'rake'
 # CodeClimate test coverage integration
 gem 'codeclimate-test-reporter', group: :test, require: nil
+# Needs to be here for the custom doc task
+gem 'rdoc'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
@@ -30,6 +32,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # Geocoding FTW
 gem 'geocoder'
+# Add in Devise to handle the user authentication
+gem 'devise', '~> 3.2'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
