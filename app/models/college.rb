@@ -5,5 +5,6 @@
 # * +:name+ is stored as string and represents the name of the college
 
 class College < ActiveRecord::Base
-
+	validates :name, presence: true, uniqueness: true
+	has_many :course_groups
 end

@@ -1,13 +1,13 @@
+require 'rails_helper'
+
 describe Term do
 	it 'has a valid factory'
 		expect(build(:term)).to be_valid
 	end
-end
 
-describe 'attributes' do
-	before(:each) do
-		@term= build(:term)
-end
+
+context 'has all attributes' do
+	let (:term) {build(:term)}
 
 		it 'has a :name attribute' do
 			expect(@college_group.attributes).to include('name')

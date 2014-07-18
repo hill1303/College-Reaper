@@ -1,14 +1,13 @@
+require 'rails_helper'
+
 describe Section do
 	it 'has a valid factory'
 		expect(build(:section)).to be_valid
 	end
 end
 
-describe 'attributes' do
-	before(:each) do
-		@section= build(:section)
-end
-
+context 'has all attributes' do
+	let (:section) {build(:section)}
 
 		it 'has a :room attribute' do
 			expect(@college_group.attributes).to include('room')
