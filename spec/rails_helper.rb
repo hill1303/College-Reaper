@@ -70,7 +70,7 @@ RSpec.configure do |config|
     Geocoder.configure(:lookup => :test)
 
     Geocoder::Lookup::Test.add_stub(
-        'New York, NY', [
+      'New York, NY', [
         {
             'latitude'     => 40.7143528,
             'longitude'    => -74.0059731,
@@ -80,7 +80,7 @@ RSpec.configure do |config|
             'country'      => 'United States',
             'country_code' => 'US'
         }
-    ]
+      ]
     )
   end
 end
