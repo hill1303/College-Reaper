@@ -67,7 +67,7 @@ RSpec.configure do |config|
   # Set the geocoder to provide certain consistent results for testing the geocoding features in the app
   # noinspection RubyStringKeysInHashInspection
   config.before(:all) do
-    Geocoder.configure(:lookup => :test)
+    Geocoder.configure(lookup: :test)
 
     Geocoder::Lookup::Test.add_stub(
       'New York, NY', [

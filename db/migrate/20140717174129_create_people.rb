@@ -6,11 +6,11 @@ class CreatePeople < ActiveRecord::Migration
 
       # Date of Birth of the person
       t.date :dob
-      
+
       # Description of the person
       t.text :sex
       t.text :gender
-      
+
       # Formal information on the person
       t.text :pronoun
       t.text :title
