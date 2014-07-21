@@ -1,7 +1,7 @@
 FactoryGirl.define do 
-	factory :course_group do
-		name 'CIS-Computer Information Science'
-		course_global_flag true
-		course_independent_flag false
-	end
+  factory :course_group do
+    name                'BS CIS - Bachelor of Science in Computer and Information Science'
+    college_global      true
+    college_independent false
+  end
 end

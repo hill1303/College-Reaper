@@ -74,4 +74,7 @@ RSpec.configure do |config|
     # a real object. This is generally recommended.
     mocks.verify_partial_doubles = true
   end
+
+  # Shut up some of the circular-require nonsense coming out of other gems
+  config.warnings = false
 end

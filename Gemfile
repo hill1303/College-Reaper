@@ -34,6 +34,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'geocoder'
 # Add in Devise to handle the user authentication
 gem 'devise', '~> 3.2'
+# And Omniauth for extension of the Devise system
+gem 'omniauth', '~> 1.2.2'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
@@ -44,9 +46,6 @@ group :development, :test do
   gem 'binding_of_caller'
   # Use LetterOpener to view ActionMailer mailings in the browser
   gem 'letter_opener'
-end
-
-group :test do
   # Use RSpec for testing
   gem 'rspec-rails', '~> 3.0.0'
   # Test with factories, not fixtures
