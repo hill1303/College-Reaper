@@ -11,11 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714170349) do
+ActiveRecord::Schema.define(version: 20140717155738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "colleges", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sections", force: true do |t|
+    t.string   "room"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.string   "rpt_pattern"
+    t.boolean  "open_flag"
+    t.integer  "course_seats"
+    t.integer  "wait_seats"
+    t.integer  "seat_max"
+    t.integer  "wait_max"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "spatial_ref_sys", id: false, force: true do |t|
     t.integer "srid",                   null: false
@@ -23,6 +43,14 @@ ActiveRecord::Schema.define(version: 20140714170349) do
     t.integer "auth_srid"
     t.string  "srtext",    limit: 2048
     t.string  "proj4text", limit: 2048
+  end
+
+  create_table "terms", force: true do |t|
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
