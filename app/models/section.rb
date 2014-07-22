@@ -1,4 +1,4 @@
-# The +Section+ class represents a single section of a course that is offered by the College during a term.
+# The Section class represents a single section of a course that is offered by the College during a term.
 #
 #  Attributes are stored as follows: 
 #

@@ -1,5 +1,4 @@
-# The +Person+ class represents a real world person. A +Person+ may be linked to a user or an instructor. The +Person+
-# class will describe the basic information of a person.
+# The Person class represents a real world person.
 #
 # Attributes are stored as follows:
 #

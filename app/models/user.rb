@@ -1,4 +1,4 @@
-# The +User+ class represents a user in the application, which is understood to mean a person seeking to generate a
+# The User class represents a user in the application, which is understood to mean a person seeking to generate a
 # schedule. Devise uses this model to authenticate sessions as well, so it carries all the attributes necessary for
 # all the included Devise modules.
 #

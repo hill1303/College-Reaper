@@ -1,7 +1,6 @@
-# The +College+ class represents the entity college in a university. Different colleges have 
-#   offer different course groups.
+# The College class represents the entity college in a university.
 #
-#  Attributes are stored as follows: 
+# Attributes are stored as follows:
 #
 #   * +:name+ is stored as string and represents the name of the college
 

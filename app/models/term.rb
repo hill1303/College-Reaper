@@ -1,4 +1,4 @@
-# The +Term+ class represents a single term of a section of a course offered by a College
+# A Term represents a period of time in which a Course may be offered.
 #
 #  Attributes are stored as follows: 
 #
