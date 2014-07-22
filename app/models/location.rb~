@@ -9,13 +9,13 @@
 # the physical address of a building
 #
 class Location < ActiveRecord::Base
-  validates :name, presence: true, uniqueness: true
-  validates :latitude, presence: true, numericality: true
-  validates :longitude, presence: true, numericality: true
-  validates :street1, presence: true
-  validates :city, presence: true
-  validates :state, presence: true
-  validates :zip, presence: true
-
-  has_many :sections
+	validates :name, presence: true, uniqueness: true
+	validates :latitude, presence: true, numericality: true
+	validates :longitude, presence: true, numericality: true
+	validates :street1, presence: true
+	validates :city, presence: true
+	validates :state, presence: true
+	validates :zip, presence: true
+	
 end
+
