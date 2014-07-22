@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722152934) do
+ActiveRecord::Schema.define(version: 20140722220149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,15 +77,15 @@ ActiveRecord::Schema.define(version: 20140722152934) do
   end
 
   create_table "sections", force: true do |t|
-    t.string   "room"
-    t.time     "start_time"
-    t.time     "end_time"
-    t.string   "rpt_pattern"
-    t.boolean  "open"
-    t.integer  "course_seats"
-    t.integer  "wait_seats"
-    t.integer  "seat_max"
-    t.integer  "wait_max"
+    t.string   "room",         default: "",                    null: false
+    t.time     "start_time",   default: '2000-01-01 10:00:00', null: false
+    t.time     "end_time",     default: '2000-01-01 11:00:00', null: false
+    t.string   "rpt_pattern",  default: "",                    null: false
+    t.boolean  "open",         default: false,                 null: false
+    t.integer  "course_seats", default: 0,                     null: false
+    t.integer  "wait_seats",   default: 0,                     null: false
+    t.integer  "seat_max",     default: 0,                     null: false
+    t.integer  "wait_max",     default: 0,                     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id"
@@ -94,9 +94,9 @@ ActiveRecord::Schema.define(version: 20140722152934) do
   end
 
   create_table "terms", force: true do |t|
-    t.string   "name",       null: false
-    t.date     "start_date", null: false
-    t.date     "end_date",   null: false
+    t.string   "name",       default: "",           null: false
+    t.date     "start_date", default: '2014-01-10', null: false
+    t.date     "end_date",   default: '2014-04-30', null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
