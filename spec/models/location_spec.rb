@@ -14,14 +14,6 @@ describe Location do
       expect(location.attributes).to include('name')
     end
 
-    it 'has a :latitude attribute' do
-      expect(location.attributes).to include('latitude')
-    end
-
-    it 'has a :longitude attribute' do
-      expect(location.attributes).to include('longitude')
-    end
-
     it 'has a :street1 attribute' do
         expect(location.attributes).to include('street1')
       end

@@ -4,9 +4,8 @@ class CreateLocations < ActiveRecord::Migration
       # Building name
       t.text :name
 
-      # GPS coordinates
-      t.decimal :latitude, precision: 9, scale: 6
-      t.decimal :longitude, precision: 9, scale: 6
+      # GPS coordinates, using RGeo and PostGIS
+      t.point :latlong, :geographic => true
 
       # Street address components
       t.text :street1
@@ -19,13 +18,8 @@ class CreateLocations < ActiveRecord::Migration
       t.timestamps
     end
 
-    execute %{
-      create index index_on_location_location ON locations using gist (
-        ST_GeographyFromText(
-          'SRID=4326;POINT(' || locations.longitude || ' ' || locations.latitude || ')'
-        )
-      )
-    }
+    # Spatial index on the coordinates
+    add_index :locations, :latlong, :spatial => true
   end
 
   def down

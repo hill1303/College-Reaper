@@ -51,8 +51,7 @@ ActiveRecord::Schema.define(version: 20140722152934) do
 
   create_table "locations", force: true do |t|
     t.text     "name"
-    t.decimal  "latitude",   precision: 9, scale: 6
-    t.decimal  "longitude",  precision: 9, scale: 6
+    t.spatial  "latlong",    limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.text     "street1"
     t.text     "street2"
     t.text     "city"
@@ -62,6 +61,8 @@ ActiveRecord::Schema.define(version: 20140722152934) do
     t.datetime "updated_at"
     t.integer  "section_id"
   end
+
+  add_index "locations", ["latlong"], :name => "index_locations_on_latlong", :spatial => true
 
   create_table "people", force: true do |t|
     t.text     "name"
