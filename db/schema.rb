@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20140722220149) do
     t.integer  "course_id"
     t.integer  "person_id"
     t.integer  "location_id"
+    t.integer  "term_id"
   end
 
   create_table "terms", force: true do |t|

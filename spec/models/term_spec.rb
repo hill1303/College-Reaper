@@ -5,6 +5,10 @@ describe Term do
     expect(build(:term)).to be_valid
   end
 
+  it 'has and belongs to many :courses' do
+    should have_and_belong_to_many :courses
+  end
+
   context 'attributes' do
     let :term do
       build :term
@@ -33,10 +37,5 @@ describe Term do
     it 'the presence of the :end_date attribute' do
       should validate_presence_of :end_date
     end
-
-     it 'has_and_belongs_to_many :courses' do
-      should has_and_belongs_to_many :courses
-    end
-
   end
 end
