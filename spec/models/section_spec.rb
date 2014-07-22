@@ -45,5 +45,69 @@ describe Section do
     it 'includes a :wait_max attribute' do
       expect(section.attributes).to include('wait_max')
     end
+
+    it 'the presence of the :room attribute' do
+      should validate_presence_of :room
+    end
+
+    it 'the presence of the :start_time attribute' do
+      should validate_presence_of :start_time
+    end
+
+    it 'the presence of the :end_time attribute' do
+      should validate_presence_of :end_time
+    end
+
+    it 'the presence of the :rpt_pattern attribute' do
+      should validate_presence_of :rpt_pattern
+    end
+
+    it 'the presence of the :course_seats attribute' do
+      should validate_presence_of :course_seats
+    end
+
+    it 'the presence of the :wait_seats attribute' do
+      should validate_presence_of :wait_seats
+    end
+
+    it 'the presence of the :seat_max attribute' do
+      should validate_presence_of :seat_max
+    end
+
+    it 'the presence of the :wait_max attribute' do
+      should validate_presence_of :wait_max
+    end
+
+    it 'belongs to a :person' do
+      should belong_to :person
+    end
+
+    it 'belongs to a :course' do
+      should belong_to :course
+    end
+
+    it 'belongs to a :location' do
+      should belong_to :location
+    end
+
+     it 'belongs to a :term' do
+      should belong_to :term
+    end
+
+    it 'numericality of the :course_seats 'do
+      should validate_numericality_of(:course_seats)
+    end
+    
+    it 'numericality of the :wait_seats 'do
+      should validate_numericality_of(:wait_seats)
+    end
+
+     it 'numericality of the :seat_max 'do
+      should validate_numericality_of(:seat_max)
+    end
+    
+    it 'numericality of the :wait_max 'do
+      should validate_numericality_of(:wait_max)
+    end
   end
 end

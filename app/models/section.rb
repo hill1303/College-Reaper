@@ -26,4 +26,6 @@ class Section < ActiveRecord::Base
   belongs_to :course
   belongs_to :person
   belongs_to :location
+  belongs_to :term
+  
 end
