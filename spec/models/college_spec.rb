@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe College do
-	it 'has a valid factory'
+	it 'has a valid factory' 
 		expect(build(:college)).to be_valid
 	end
 
