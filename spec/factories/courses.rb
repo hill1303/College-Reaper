@@ -1,4 +1,4 @@
-FactoryGirl.define do |variable|
+FactoryGirl.define do
 	factory :course do
 		instrUnit	'CSE'
 		courseNo	'3901'
@@ -6,4 +6,3 @@ FactoryGirl.define do |variable|
 		creditHrs	'4'
 	end
 end
-

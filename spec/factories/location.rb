@@ -1,4 +1,4 @@
-FactoryGirl.define do |var|
+FactoryGirl.define do
 	factory :location do
 		name	'Hagerty Hall'
 		latitude '39.998454'

@@ -206,6 +206,7 @@ DEPENDENCIES
   poltergeist (~> 1.5)
   rails (= 4.1.4)
   rake
+  rdoc
   rspec-rails (~> 3.0.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
