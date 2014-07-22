@@ -10,9 +10,10 @@ class CreateCourses < ActiveRecord::Migration
         # Descriptive name for course
         t.text :name
 
-    	#Number of credit hours counted toward degree
+    	# Number of credit hours counted toward degree
     	t.text :creditHrs
 
+        # Metadata field
         t.timestamps
     end
   end

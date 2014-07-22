@@ -8,12 +8,15 @@ class CreateLocations < ActiveRecord::Migration
       t.decimal :latitude, precision: 9, scale: 6
       t.decimal :longitude, precision: 9, scale: 6
 
-      # Street address
+      # Street address components
       t.text :street1
       t.text :street2
       t.text :city
       t.text :state
-      t.text :zip      
+      t.text :zip 
+
+      # Metadata field
+      t.timestamps     
     end
 
     execute %{
