@@ -1,4 +1,0 @@
-class AddSectionToCourses < ActiveRecord::Migration
-  def change
-  end
-end

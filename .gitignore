@@ -27,3 +27,9 @@ config/initializers/secret_token.rb
 
 # ignore RubyMine files from those of us using it as a courtesy to the repo
 /.idea
+
+# ignore Eclipse too
+/.project
+
+# I hate GEdit
+**.*~
