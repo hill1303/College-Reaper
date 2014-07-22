@@ -23,7 +23,7 @@
         </h1>
         <ul class="files">
             <li>app/models/user.rb</li>
-            <li>Last modified: 2014-07-21 14:03:55 -0400</li>
+            <li>Last modified: 2014-07-15 19:58:48 -0400</li>
         </ul>
     </div>
 
@@ -32,92 +32,7 @@
   
     <div class="description">
       
-<p>The <code>User</code> class represents a user in the application, which is
-understood to mean a person seeking to generate a schedule. Devise uses
-this model to authenticate sessions as well, so it carries all the
-attributes necessary for all the included Devise modules.</p>
-
-<p>Attributes are stored as follows:</p>
-<ul><li>
-<p><code>:uuid</code> is a “universal” user id, typically some sort of student
-ID number</p>
-</li><li>
-<p><code>:rank</code> is an indicator of class rank, left a little arbitrary,
-as an integer so comparisons are fast</p>
-</li><li>
-<p>Attributes wich are required by Devise, organized by the module which
-requires them are:</p>
-<ul><li>
-<p><code>:dabase_authenticatable</code> module</p>
-<ul><li>
-<p><code>:email</code> is the user&#39;s email address, stored in plain text,
-but downcased</p>
-</li><li>
-<p><code>:encrypted_password</code> is the peppered and hashed password for
-the user</p>
-</li></ul>
-</li><li>
-<p><code>:recoverable</code> module</p>
-<ul><li>
-<p><code>:reset_password_token</code> holds the actual token a user must
-present to allow access to the reset form</p>
-</li><li>
-<p><code>:reset_password_sent_at</code> tracks when the last reset token was
-sent to the user (via email)</p>
-</li></ul>
-</li><li>
-<p><code>:rememberable</code> module</p>
-<ul><li>
-<p><code>:remember_created_at</code> records when the user was last “seen” for
-the purposes of maintaining the session</p>
-</li></ul>
-</li><li>
-<p><code>:trackable</code> module</p>
-<ul><li>
-<p><code>:sign_in_count</code> counts the number of times the user has signed
-in</p>
-</li><li>
-<p><code>:current_sign_in_at</code> records when the <em>currently active</em>
-session was started</p>
-</li><li>
-<p><code>:last_sign_in_at</code> notes when the <em>last</em> session the user
-had was started</p>
-</li><li>
-<p><code>:current_sign_in_ip</code> gives the IP address of the <em>currently
-active</em> session</p>
-</li><li>
-<p><code>:last_sign_in_ip</code> gives the IP address of the <em>last</em>
-session the user had</p>
-</li></ul>
-</li><li>
-<p><code>:confirmable</code> module</p>
-<ul><li>
-<p><code>:confirmation_token</code> the token that must be presented to
-consider the new email confirmed</p>
-</li><li>
-<p><code>:confirmed_at</code> records when the user successfully confirmed
-their current email address</p>
-</li><li>
-<p><code>:confirmation_sent_at</code> records when the user was sent the
-current confirmation token (via email)</p>
-</li><li>
-<p><code>:unconfirmed_email</code> the new email, which has not yet been
-confirmed</p>
-</li></ul>
-</li><li>
-<p><code>:lockable</code> module</p>
-<ul><li>
-<p><code>:failed_attempts</code> counts the number of failed sign ins that
-have occurred since the last successful one</p>
-</li><li>
-<p><code>:unlock_token</code> the token that must be presented to re-enable
-the ability to sign in</p>
-</li><li>
-<p><code>:locked_at</code> records when the account reached the maximum number
-of failures and was locked out</p>
-</li></ul>
-</li></ul>
-</li></ul>
+<p>The <code>User</code> class represents…</p>
 
     </div>
   
