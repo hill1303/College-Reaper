@@ -9,5 +9,5 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
 script:
-  - RAILS_ENV=test bundle exec rake --trace db:migrate
+  - RAILS_ENV=test bundle exec rake --trace db:gis:setup db:migrate
   - RAILS_ENV=text bundle exec rspec
