@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>course.rb</title>
+    <title>course.rb~</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
@@ -19,11 +19,11 @@
     <div class="banner">
         
         <h1>
-            course.rb
+            course.rb~
         </h1>
         <ul class="files">
-            <li>app/models/course.rb</li>
-            <li>Last modified: 2014-07-22 12:19:50 -0400</li>
+            <li>app/models/course.rb~</li>
+            <li>Last modified: 2014-07-22 11:56:50 -0400</li>
         </ul>
     </div>
 
@@ -32,20 +32,29 @@
   
     <div class="description">
       
-<p>The <code>Course</code> class provides information about an individual
-course. Each course is related to a <a
+<p># The <code>Course</code> class provides information about an individual
+course.  # Each course is related to a <a
 href="../../../classes/Course.html">Course</a> Group, <a
 href="../../../classes/College.html">College</a> and <a
-href="../../../classes/Term.html">Term</a>. After a user enters their
-preferences, courses will be evaluated and eliminated. <a
+href="../../../classes/Term.html">Term</a>. After  # a user enters their
+preferences, courses will be evaluated and eliminated. # <a
 href="../../../classes/Course.html">Course</a> information will also be
-displayed to the user once a schedule is determined.</p>
+displayed to the user once a schedule is # determined. # #
+<code>:courseNo</code> is the four digit course number for a specific
+course # <code>:instrUnit</code> represents the acronym that procedes a
+course number # <code>:name</code> provides a descriptive title for the
+course # <code>:creditHrs</code> provides the number of hours counted
+toward degree requirements class <a
+href="../../../classes/Course.html">Course</a> &lt; ActiveRecord::Base</p>
 
-<p><code>:courseNo</code> is the four digit course number for a specific
-course <code>:instrUnit</code> represents the acronym that procedes a
-course number <code>:name</code> provides a descriptive title for the
-course <code>:creditHrs</code> provides the number of hours counted toward
-degree requirements</p>
+<pre><code>validates :courseNo, presence: true, numericality: true
+validates :instrUnit, presence: true</code></pre>
+
+<p>validates :name, presence: true validates :creditHrs, presence: true</p>
+
+<p>has_many :sections has_many :course_groups has_many :terms</p>
+
+<p>end</p>
 
     </div>
   
@@ -58,17 +67,6 @@ degree requirements</p>
   
 
 
-  
-    <!-- Namespace -->
-    <div class="sectiontitle">Namespace</div>
-    <ul>
-      
-        <li>
-          <span class="type">CLASS</span>
-          <a href="../../../classes/Course.html">Course</a>
-        </li>
-      
-    </ul>
   
 
 

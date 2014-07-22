@@ -5,7 +5,7 @@ describe Person do
     expect(build(:person)).to be_valid
   end
 
-  describe 'attributes' do
+  context 'attributes' do
     let :person do
       build :person
     end

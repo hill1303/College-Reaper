@@ -5,7 +5,7 @@ describe CourseGroup do
     expect(build(:course_group)).to be_valid
   end
 
-  describe 'attributes' do
+  context 'attributes' do
     let :course_group do
       build :course_group
     end

@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :course do
-    instrUnit 'CSE'
-    courseNo  '3901'
-    name      'Web Applications'
-    creditHrs '4'
+    instructional_unit  'CSE'
+    course_number       '3901'
+    name                'Web Applications'
+    credit_hours        '4'
   end
 end

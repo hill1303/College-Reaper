@@ -2,16 +2,16 @@ class CreateCourses < ActiveRecord::Migration
   def change
     create_table :courses do |t|
       # Instructional unit
-      t.text :instrUnit
+      t.text :instructional_unit
 
       # Course identification number
-      t.text :courseNo
+      t.text :course_number
 
       # Descriptive name for course
       t.text :name
 
       # Number of credit hours counted toward degree
-      t.text :creditHrs
+      t.text :credit_hours
 
       # Metadata field
       t.timestamps

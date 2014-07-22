@@ -33,10 +33,10 @@ ActiveRecord::Schema.define(version: 20140722152934) do
   end
 
   create_table "courses", force: true do |t|
-    t.text     "instrUnit"
-    t.text     "courseNo"
+    t.text     "instructional_unit"
+    t.text     "course_number"
     t.text     "name"
-    t.text     "creditHrs"
+    t.text     "credit_hours"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "terms_id"

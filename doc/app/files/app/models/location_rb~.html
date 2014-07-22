@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>location.rb</title>
+    <title>location.rb~</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
@@ -19,11 +19,11 @@
     <div class="banner">
         
         <h1>
-            location.rb
+            location.rb~
         </h1>
         <ul class="files">
-            <li>app/models/location.rb</li>
-            <li>Last modified: 2014-07-22 12:03:30 -0400</li>
+            <li>app/models/location.rb~</li>
+            <li>Last modified: 2014-07-22 11:56:50 -0400</li>
         </ul>
     </div>
 
@@ -32,15 +32,26 @@
   
     <div class="description">
       
-<p>The <code>Location</code> class represents the location of a University
-building. Coordinates are used to calculate distances between buildings to
-find the most efficient route for a student.</p>
+<p># The <code>Location</code> class represents the location of a University
+building.  # Coordinates are used to calculate distances between buildings
+to find  # the most efficient route for a student.</p>
 
-<p><code>:name</code> string that represents the building name
+<p># # <code>:name</code> string that represents the building name #
 <code>:latitude</code> coordinate for North/South representation of
-location <code>:longitude</code> coordinate for East/West representation of
-location +:street1, :street2, :city, :state, :zip+ are strings that
-represent the physical address of a building</p>
+location # <code>:longitude</code> coordinate for East/West representation
+of location # +:street1, :street2, :city, :state, :zip+ are strings that
+represent  # the physical address of a building # class <a
+href="../../../classes/Location.html">Location</a> &lt; ActiveRecord::Base</p>
+
+<pre><code>validates :name, presence: true, uniqueness: true
+validates :latitude, presence: true, numericality: true
+validates :longitude, presence: true, numericality: true
+validates :street1, presence: true
+validates :city, presence: true
+validates :state, presence: true
+validates :zip, presence: true</code></pre>
+
+<p>end</p>
 
     </div>
   
@@ -53,17 +64,6 @@ represent the physical address of a building</p>
   
 
 
-  
-    <!-- Namespace -->
-    <div class="sectiontitle">Namespace</div>
-    <ul>
-      
-        <li>
-          <span class="type">CLASS</span>
-          <a href="../../../classes/Location.html">Location</a>
-        </li>
-      
-    </ul>
   
 
 

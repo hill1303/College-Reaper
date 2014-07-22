@@ -5,7 +5,7 @@ describe Term do
     expect(build(:term)).to be_valid
   end
 
-  context 'has all attributes' do
+  context 'attributes' do
     let :term do
       build :term
     end
