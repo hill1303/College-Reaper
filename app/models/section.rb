@@ -1,6 +1,6 @@
 # The Section class represents a single section of a course that is offered by the College during a term.
 #
-#  Attributes are stored as follows: 
+# Attributes are stored as follows:
 #
 #   * +:room+ is stored as an integer represents the room number
 #   * +:start_time+ is stored as time and represents the start time of the section for that section 
