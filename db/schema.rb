@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140718220751) do
     t.datetime "updated_at"
   end
 
-  add_index "colleges", ["name"], name: "index_colleges_on_name", unique: true, using: :btree
+  add_index "colleges", ["name"], :name => "index_colleges_on_name", :unique => true
 
   create_table "course_groups", force: true do |t|
     t.text    "name"
@@ -66,14 +66,6 @@ ActiveRecord::Schema.define(version: 20140718220751) do
     t.integer  "location_id"
   end
 
-  create_table "spatial_ref_sys", id: false, force: true do |t|
-    t.integer "srid",                   null: false
-    t.string  "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string  "srtext",    limit: 2048
-    t.string  "proj4text", limit: 2048
-  end
-
   create_table "terms", force: true do |t|
     t.string   "name",       null: false
     t.date     "start_date", null: false
@@ -107,10 +99,10 @@ ActiveRecord::Schema.define(version: 20140718220751) do
     t.integer  "person_id"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
-  add_index "users", ["uuid"], name: "index_users_on_uuid", unique: true, using: :btree
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
+  add_index "users", ["uuid"], :name => "index_users_on_uuid", :unique => true
 
 end

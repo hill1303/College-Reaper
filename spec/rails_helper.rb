@@ -20,7 +20,7 @@ ActiveRecord::Migration.maintain_test_schema!
 # Get FactoryGirl into scope
 require 'factory_girl'
 
-# Make Capybara available for request specs
+# Make Capybara DSL available in appropriate places
 require 'capybara/rspec'
 
 # Bring in the NullDB libraries and matchers and such
