@@ -11,6 +11,9 @@ gem 'rdoc'
 gem 'rails', '4.1.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
+# Let there be PostGIS
+gem 'rgeo'
+gem 'activerecord-postgis-adapter'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -34,6 +37,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'geocoder'
 # Add in Devise to handle the user authentication
 gem 'devise', '~> 3.2'
+# And Omniauth for extension of the Devise system
+gem 'omniauth', '~> 1.2.2'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
@@ -44,9 +49,6 @@ group :development, :test do
   gem 'binding_of_caller'
   # Use LetterOpener to view ActionMailer mailings in the browser
   gem 'letter_opener'
-end
-
-group :test do
   # Use RSpec for testing
   gem 'rspec-rails', '~> 3.0.0'
   # Test with factories, not fixtures
@@ -54,7 +56,7 @@ group :test do
   # Make a null object pattern adapter available for unit testing
   gem 'activerecord-nulldb-adapter'
   # Use shoulda matchers for concise testing
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', require: false
   # Make Capybara available for feature specs
   gem 'capybara', '~> 2.4'
   # Run JavaScript in Capybara tests

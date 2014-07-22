@@ -1,0 +1,4 @@
+class AddSectionToLocations < ActiveRecord::Migration
+  def change
+  end
+end

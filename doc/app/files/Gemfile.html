@@ -23,7 +23,7 @@
         </h1>
         <ul class="files">
             <li>Gemfile</li>
-            <li>Last modified: 2014-07-18 12:56:27 -0400</li>
+            <li>Last modified: 2014-07-22 11:57:40 -0400</li>
         </ul>
     </div>
 
@@ -39,13 +39,15 @@
 &#39;codeclimate-test-reporter&#39;, group: :test, require: nil # Needs to
 be here for the custom doc task gem &#39;rdoc&#39;</p>
 
-<p># Bundle edge Rails instead: gem &#39;rails&#39;, github:
-&#39;rails/rails&#39; gem &#39;rails&#39;, &#39;4.1.4&#39; # Use postgresql
-as the database for Active Record gem &#39;pg&#39; # Use SCSS for
-stylesheets gem &#39;sass-rails&#39;, &#39;~&gt; 4.0.3&#39; # Use Uglifier
-as compressor for JavaScript assets gem &#39;uglifier&#39;, &#39;&gt;=
-1.3.0&#39; # Use CoffeeScript for .js.coffee assets and views gem
-&#39;coffee-rails&#39;, &#39;~&gt; 4.0.0&#39; # See <a
+<p># Custom doc task gem &#39;rdoc&#39; # Bundle edge Rails instead: gem
+&#39;rails&#39;, github: &#39;rails/rails&#39; gem &#39;rails&#39;,
+&#39;4.1.4&#39; # Use postgresql as the database for Active Record gem
+&#39;pg&#39; # Let there be PostGIS gem &#39;rgeo&#39; gem
+&#39;activerecord-postgis-adapter&#39; # Use SCSS for stylesheets gem
+&#39;sass-rails&#39;, &#39;~&gt; 4.0.3&#39; # Use Uglifier as compressor
+for JavaScript assets gem &#39;uglifier&#39;, &#39;&gt;= 1.3.0&#39; # Use
+CoffeeScript for .js.coffee assets and views gem &#39;coffee-rails&#39;,
+&#39;~&gt; 4.0.0&#39; # See <a
 href="https://github.com/sstephenson/execjs#readme">github.com/sstephenson/execjs#readme</a>
 for more supported runtimes gem &#39;therubyracer&#39;,  platforms: :ruby</p>
 
@@ -59,7 +61,8 @@ gem &#39;turbolinks&#39; # Build JSON APIs with ease. Read more: <a
 href="https://github.com/rails/jbuilder">github.com/rails/jbuilder</a> gem
 &#39;jbuilder&#39;, &#39;~&gt; 2.0&#39; # Geocoding FTW gem
 &#39;geocoder&#39; # Add in Devise to handle the user authentication gem
-&#39;devise&#39;, &#39;~&gt; 3.2&#39;</p>
+&#39;devise&#39;, &#39;~&gt; 3.2&#39; # And Omniauth for extension of the
+Devise system gem &#39;omniauth&#39;, &#39;~&gt; 1.2.2&#39;</p>
 
 <p># bundle exec rake doc:rails generates the API under doc/api. gem
 &#39;sdoc&#39;, &#39;~&gt; 0.4.0&#39;,          group: :doc</p>
@@ -70,20 +73,15 @@ href="https://github.com/rails/jbuilder">github.com/rails/jbuilder</a> gem
 gem &#39;better_errors&#39;
 gem &#39;binding_of_caller&#39;
 # Use LetterOpener to view ActionMailer mailings in the browser
-gem &#39;letter_opener&#39;</code></pre>
-
-<p>end</p>
-
-<p>group :test do</p>
-
-<pre><code># Use RSpec for testing
+gem &#39;letter_opener&#39;
+# Use RSpec for testing
 gem &#39;rspec-rails&#39;, &#39;~&gt; 3.0.0&#39;
 # Test with factories, not fixtures
 gem &#39;factory_girl_rails&#39;, &#39;~&gt; 4.4&#39;
 # Make a null object pattern adapter available for unit testing
 gem &#39;activerecord-nulldb-adapter&#39;
 # Use shoulda matchers for concise testing
-gem &#39;shoulda-matchers&#39;
+gem &#39;shoulda-matchers&#39;, require: false
 # Make Capybara available for feature specs
 gem &#39;capybara&#39;, &#39;~&gt; 2.4&#39;
 # Run JavaScript in Capybara tests

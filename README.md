@@ -1,4 +1,4 @@
-[![Code Climate](https://codeclimate.com/github/jimcavoli/College-Reaper.png)](https://codeclimate.com/github/jimcavoli/College-Reaper) [![Build Status](https://travis-ci.org/jimcavoli/College-Reaper.svg?branch=master)](https://travis-ci.org/jimcavoli/College-Reaper)
+[![Code Climate](https://codeclimate.com/github/jimcavoli/College-Reaper.png)](https://codeclimate.com/github/jimcavoli/College-Reaper) [![Build Status](https://travis-ci.org/jimcavoli/College-Reaper.svg?branch=master)](https://travis-ci.org/jimcavoli/College-Reaper) [![Test Coverage](https://codeclimate.com/github/jimcavoli/College-Reaper/coverage.png)](https://codeclimate.com/github/jimcavoli/College-Reaper)
 ------------------------------------------------------------------------------------------------------------------------
 
 College-Reaper
@@ -23,4 +23,4 @@ when the task runs.
 
 Test Suite
 ----------
-The test suite is written using the RSpec framework, and can be run with the `rake spec` task.
+The test suite is written using the RSpec framework, and can be run with the `bundle exec rspec` command.

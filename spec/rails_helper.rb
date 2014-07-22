@@ -20,7 +20,7 @@ ActiveRecord::Migration.maintain_test_schema!
 # Get FactoryGirl into scope
 require 'factory_girl'
 
-# Make Capybara available for request specs
+# Make Capybara DSL available in appropriate places
 require 'capybara/rspec'
 
 # Bring in the NullDB libraries and matchers and such
@@ -67,7 +67,7 @@ RSpec.configure do |config|
   # Set the geocoder to provide certain consistent results for testing the geocoding features in the app
   # noinspection RubyStringKeysInHashInspection
   config.before(:all) do
-    Geocoder.configure(:lookup => :test)
+    Geocoder.configure(lookup: :test)
 
     Geocoder::Lookup::Test.add_stub(
       'New York, NY', [
