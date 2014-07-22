@@ -1,4 +1,4 @@
-Tue, 22 Jul 2014 12:23:55 -0400
+Tue, 22 Jul 2014 13:54:46 -0400
 ./app/assets/javascripts/application.coffee	Mon, 14 Jul 2014 13:21:12 -0400
 ./app/assets/stylesheets/application.scss	Mon, 14 Jul 2014 13:16:44 -0400
 ./app/assets/stylesheets/foundation_and_overrides.scss	Mon, 14 Jul 2014 13:15:48 -0400
@@ -8,7 +8,7 @@ Tue, 22 Jul 2014 12:23:55 -0400
 ./app/models/course.rb	Tue, 22 Jul 2014 12:19:50 -0400
 ./app/models/course.rb~	Tue, 22 Jul 2014 11:56:50 -0400
 ./app/models/course_group.rb	Mon, 21 Jul 2014 14:03:55 -0400
-./app/models/location.rb	Tue, 22 Jul 2014 12:03:30 -0400
+./app/models/location.rb	Tue, 22 Jul 2014 13:35:24 -0400
 ./app/models/location.rb~	Tue, 22 Jul 2014 11:56:50 -0400
 ./app/models/person.rb	Mon, 21 Jul 2014 14:03:55 -0400
 ./app/models/section.rb	Mon, 21 Jul 2014 14:03:55 -0400
@@ -45,7 +45,7 @@ Tue, 22 Jul 2014 12:23:55 -0400
 ./coverage/assets/0.8.0/smoothness/images/ui-icons_888888_256x240.png	Tue, 22 Jul 2014 12:20:09 -0400
 ./coverage/assets/0.8.0/smoothness/images/ui-icons_cd0a0a_256x240.png	Tue, 22 Jul 2014 12:20:09 -0400
 ./coverage/index.html	Tue, 22 Jul 2014 12:20:09 -0400
-./Gemfile	Tue, 22 Jul 2014 11:57:40 -0400
+./Gemfile	Tue, 22 Jul 2014 12:36:25 -0400
 ./Gemfile.lock	Tue, 22 Jul 2014 12:02:32 -0400
 ./public/404.html	Wed, 09 Jul 2014 13:51:25 -0400
 ./public/422.html	Wed, 09 Jul 2014 13:51:25 -0400
