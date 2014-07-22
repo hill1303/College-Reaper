@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Location</title>
+    <title>Person</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
@@ -20,7 +20,7 @@
         
         <h1>
             <span class="type">Class</span> 
-            Location 
+            Person 
             
                 <span class="parent">&lt; 
                     
@@ -31,7 +31,7 @@
         </h1>
         <ul class="files">
             
-            <li><a href="../files/app/models/location_rb.html">app/models/location.rb</a></li>
+            <li><a href="../files/app/models/person_rb.html">app/models/person.rb</a></li>
             
         </ul>
     </div>
@@ -40,15 +40,29 @@
   
     <div class="description">
       
-<p>The <code>Location</code> class represents the location of a University
-building. Coordinates are used to calculate distances between buildings to
-find the most efficient route for a student.</p>
+<p>The <code>Person</code> class represents a real world person. A
+<code>Person</code> may be linked to a user or an instructor. The
+<code>Person</code> class will describe the basic information of a person.</p>
 
-<p><code>:name</code> string that represents the building name
-<code>:latitude</code> coordinate for North/South representation of
-location <code>:longitude</code> coordinate for East/West representation of
-location +:street1, :street2, :city, :state, :zip+ are strings that
-represent the physical address of a building</p>
+<p>Attributes are stored as follows:</p>
+<ul><li>
+<p><code>:name</code> stores the name of the person.</p>
+</li><li>
+<p><code>:dob</code> gives the date of birth of the person.</p>
+</li><li>
+<p><code>:sex</code> is the sex of the person (Male, Female, or Neither).</p>
+</li><li>
+<p><code>:gender</code> gives the gender identy of the person.</p>
+</li><li>
+<p><code>:pronoun</code> is the word the person wants to be refer to by in
+third person (He, She, It, Their, etc.).</p>
+</li><li>
+<p><code>:title</code> is the prefix of the person when refered to in a formal
+manor (Mr., Mrs, Dr., etc).</p>
+</li><li>
+<p><code>:suffix</code> is a set of qualifications or genealogical identifers
+of a person (PHD, MD, etc).</p>
+</li></ul>
 
     </div>
   

@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Location</title>
+    <title>Term</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
@@ -20,7 +20,7 @@
         
         <h1>
             <span class="type">Class</span> 
-            Location 
+            Term 
             
                 <span class="parent">&lt; 
                     
@@ -31,7 +31,7 @@
         </h1>
         <ul class="files">
             
-            <li><a href="../files/app/models/location_rb.html">app/models/location.rb</a></li>
+            <li><a href="../files/app/models/term_rb.html">app/models/term.rb</a></li>
             
         </ul>
     </div>
@@ -39,16 +39,15 @@
         <div id="content">
   
     <div class="description">
-      
-<p>The <code>Location</code> class represents the location of a University
-building. Coordinates are used to calculate distances between buildings to
-find the most efficient route for a student.</p>
-
-<p><code>:name</code> string that represents the building name
-<code>:latitude</code> coordinate for North/South representation of
-location <code>:longitude</code> coordinate for East/West representation of
-location +:street1, :street2, :city, :state, :zip+ are strings that
-represent the physical address of a building</p>
+      <ul><li>
+<p><code>:name</code> is stored as string and represents the name of the term</p>
+</li><li>
+<p><code>:start_date</code> is stored as date and represents the start date of
+the section for the term</p>
+</li><li>
+<p><code>:end_date</code> is stored as date and represents the end date of the
+section for the term</p>
+</li></ul>
 
     </div>
   

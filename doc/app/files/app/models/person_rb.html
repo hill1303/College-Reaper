@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>course.rb</title>
+    <title>person.rb</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
@@ -19,11 +19,11 @@
     <div class="banner">
         
         <h1>
-            course.rb
+            person.rb
         </h1>
         <ul class="files">
-            <li>app/models/course.rb</li>
-            <li>Last modified: 2014-07-22 11:43:03 -0400</li>
+            <li>app/models/person.rb</li>
+            <li>Last modified: 2014-07-21 14:03:55 -0400</li>
         </ul>
     </div>
 
@@ -32,20 +32,29 @@
   
     <div class="description">
       
-<p>The <code>Course</code> class provides information about an individual
-course. Each course is related to a <a
-href="../../../classes/Course.html">Course</a> Group, <a
-href="../../../classes/College.html">College</a> and <a
-href="../../../classes/Term.html">Term</a>. After a user enters their
-preferences, courses will be evaluated and eliminated. <a
-href="../../../classes/Course.html">Course</a> information will also be
-displayed to the user once a schedule is determined.</p>
+<p>The <code>Person</code> class represents a real world person. A
+<code>Person</code> may be linked to a user or an instructor. The
+<code>Person</code> class will describe the basic information of a person.</p>
 
-<p><code>:courseNo</code> is the four digit course number for a specific
-course <code>:instrUnit</code> represents the acronym that procedes a
-course number <code>:name</code> provides a descriptive title for the
-course <code>:creditHrs</code> provides the number of hours counted toward
-degree requirements</p>
+<p>Attributes are stored as follows:</p>
+<ul><li>
+<p><code>:name</code> stores the name of the person.</p>
+</li><li>
+<p><code>:dob</code> gives the date of birth of the person.</p>
+</li><li>
+<p><code>:sex</code> is the sex of the person (Male, Female, or Neither).</p>
+</li><li>
+<p><code>:gender</code> gives the gender identy of the person.</p>
+</li><li>
+<p><code>:pronoun</code> is the word the person wants to be refer to by in
+third person (He, She, It, Their, etc.).</p>
+</li><li>
+<p><code>:title</code> is the prefix of the person when refered to in a formal
+manor (Mr., Mrs, Dr., etc).</p>
+</li><li>
+<p><code>:suffix</code> is a set of qualifications or genealogical identifers
+of a person (PHD, MD, etc).</p>
+</li></ul>
 
     </div>
   
@@ -65,7 +74,7 @@ degree requirements</p>
       
         <li>
           <span class="type">CLASS</span>
-          <a href="../../../classes/Course.html">Course</a>
+          <a href="../../../classes/Person.html">Person</a>
         </li>
       
     </ul>

@@ -56,7 +56,7 @@ group :development, :test do
   # Make a null object pattern adapter available for unit testing
   gem 'activerecord-nulldb-adapter'
   # Use shoulda matchers for concise testing
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', require: false
   # Make Capybara available for feature specs
   gem 'capybara', '~> 2.4'
   # Run JavaScript in Capybara tests

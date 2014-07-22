@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140718220751) do
+ActiveRecord::Schema.define(version: 20140722152934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,9 +32,35 @@ ActiveRecord::Schema.define(version: 20140718220751) do
     t.boolean "college_independent"
   end
 
+  create_table "courses", force: true do |t|
+    t.text     "instrUnit"
+    t.text     "courseNo"
+    t.text     "name"
+    t.text     "creditHrs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "terms_id"
+    t.integer  "course_group_id"
+    t.integer  "section_id"
+  end
+
   create_table "courses_terms", id: false, force: true do |t|
     t.integer "course_id"
     t.integer "term_id"
+  end
+
+  create_table "locations", force: true do |t|
+    t.text     "name"
+    t.decimal  "latitude",   precision: 9, scale: 6
+    t.decimal  "longitude",  precision: 9, scale: 6
+    t.text     "street1"
+    t.text     "street2"
+    t.text     "city"
+    t.text     "state"
+    t.text     "zip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "section_id"
   end
 
   create_table "people", force: true do |t|
