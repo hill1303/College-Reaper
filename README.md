@@ -17,9 +17,9 @@ gemset as well, under the same assumption.
 
 Documentation
 -------------
-To generate the documentation for the application, use the `rake doc:app_reaper` command. The `doc:app_reaper` task uses
-the `sdoc` gem and will place it's output in `doc/app`, replacing the contents of the entire directory, should any exist
-when the task runs.
+To generate the documentation for the application, use the `bundle exec rake doc:app_reaper` command. The
+`doc:app_reaper` task uses the `sdoc` gem and will place it's output in `doc/app`, replacing the contents of the entire
+directory, should any exist when the task runs.
 
 Test Suite
 ----------
