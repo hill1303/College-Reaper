@@ -13,6 +13,7 @@ class Person < ActiveRecord::Base
 	validates :name, presence: true
 	validates :dob, presence: true
   	validates :sex, presence: true
+  	validates :pronoun, presence: true
 
 	has_one :user
 end

@@ -46,6 +46,10 @@ describe Person do
       expect(person.attributes).to include('pronoun')
     end
 
+    it 'the presence of :pronoun attribute' do
+      should validate_presence_of :pronoun
+    end
+
     it 'includes a :title attribute' do
       expect(person.attributes).to include('title')
     end
