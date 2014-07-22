@@ -4,9 +4,9 @@
 #
 # Attributes are stored as follows:
 #
-#   *+:name+ holds the name of the Course_Group
-#   *+:college_global_flag+ determines whether or not the Course_Group is versitile 
-#   *+:college_independent_flag+ reports whether or not a group does not apply to College_Global.
+#   * +:name+ holds the name of the Course_Group
+#   * +:college_global_flag+ determines whether or not the Course_Group is versitile 
+#   * +:college_independent_flag+ reports whether or not a group does not apply to College_Global.
 class CourseGroup < ActiveRecord::Base
 
 end
