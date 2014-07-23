@@ -23,6 +23,9 @@ GEM
       arel (~> 5.0.0)
     activerecord-nulldb-adapter (0.3.1)
       activerecord (>= 2.0.0)
+    activerecord-postgis-adapter (2.1.1)
+      activerecord (~> 4.0)
+      rgeo-activerecord (~> 1.0)
     activesupport (4.1.4)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -77,6 +80,7 @@ GEM
       railties (>= 3.1.0)
       sass (>= 3.2.0)
     geocoder (1.2.3)
+    hashie (3.2.0)
     hike (1.2.3)
     i18n (0.6.11)
     jbuilder (2.1.3)
@@ -98,8 +102,11 @@ GEM
     mini_portile (0.6.0)
     minitest (5.4.0)
     multi_json (1.10.1)
-    nokogiri (1.6.2.1)
+    nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
+      rack (~> 1.0)
     orm_adapter (0.5.0)
     pg (0.17.1)
     poltergeist (1.5.1)
@@ -130,14 +137,18 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     ref (1.0.5)
-    rspec-core (3.0.2)
+    rgeo (0.3.20)
+    rgeo-activerecord (1.1.0)
+      activerecord (~> 4.0)
+      rgeo (~> 0.3)
+    rspec-core (3.0.3)
       rspec-support (~> 3.0.0)
-    rspec-expectations (3.0.2)
+    rspec-expectations (3.0.3)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.0.0)
-    rspec-mocks (3.0.2)
+    rspec-mocks (3.0.3)
       rspec-support (~> 3.0.0)
-    rspec-rails (3.0.1)
+    rspec-rails (3.0.2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
@@ -145,7 +156,7 @@ GEM
       rspec-expectations (~> 3.0.0)
       rspec-mocks (~> 3.0.0)
       rspec-support (~> 3.0.0)
-    rspec-support (3.0.2)
+    rspec-support (3.0.3)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -155,7 +166,7 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
-    shoulda-matchers (2.6.1)
+    shoulda-matchers (2.6.2)
       activesupport (>= 3.0.0)
     simplecov (0.9.0)
       docile (~> 1.1.0)
@@ -198,6 +209,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-nulldb-adapter
+  activerecord-postgis-adapter
   bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller
@@ -212,11 +224,13 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener
+  omniauth (~> 1.2.2)
   pg
   poltergeist (~> 1.5)
   rails (= 4.1.4)
   rake
   rdoc
+  rgeo
   rspec-rails (~> 3.0.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

@@ -1,4 +1,8 @@
 test:
-  adapter: postgresql
+  adapter: postgis
   database: travis_ci_test
   username: postgres
+  encoding: unicode
+  pool: 5
+  postgis_extension: postgis
+  schema_search_path: '"$user", public, postgis'

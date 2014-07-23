@@ -40,10 +40,10 @@
   
     <div class="description">
       
-<p>The <code>User</code> class represents a user in the application, which is
-understood to mean a person seeking to generate a schedule. Devise uses
-this model to authenticate sessions as well, so it carries all the
-attributes necessary for all the included Devise modules.</p>
+<p>The <a href="User.html">User</a> class represents a user in the
+application, which is understood to mean a person seeking to generate a
+schedule. Devise uses this model to authenticate sessions as well, so it
+carries all the attributes necessary for all the included Devise modules.</p>
 
 <p>Attributes are stored as follows:</p>
 <ul><li>
@@ -51,11 +51,7 @@ attributes necessary for all the included Devise modules.</p>
 ID number</p>
 </li><li>
 <p><code>:rank</code> is an indicator of class rank, left a little arbitrary,
-as a text field to be flexible</p>
-</li><li>
-<p><code>:majors</code> is</p>
-</li><li>
-<p><code>:minors</code> is</p>
+as an integer so comparisons are fast</p>
 </li><li>
 <p>Attributes wich are required by Devise, organized by the module which
 requires them are:</p>
