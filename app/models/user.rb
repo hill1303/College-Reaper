@@ -38,4 +38,6 @@ class User < ActiveRecord::Base
   validates :uuid, uniqueness: true, presence: true
 
   belongs_to :person
+  has_many :completions
+  has_many :courses, through: :completions
 end

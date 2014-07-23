@@ -9,6 +9,14 @@ describe User do
     should belong_to :person
   end
 
+  it 'has many :completions' do
+    should have_many(:completions)
+  end
+
+  it 'has many :courses through :completions' do
+    should have_many(:courses).through(:completions)
+  end
+
   context 'attributes' do
     let :user do
       build :user, password: 'password123'
