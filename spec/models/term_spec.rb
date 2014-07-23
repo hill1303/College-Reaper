@@ -25,7 +25,9 @@ describe Term do
     it 'has a :end_date attribute' do
       expect(term.attributes).to include('end_date')
     end
-
+  end 
+  
+  context 'validates' do
     it 'the presence of the :name attribute' do
       should validate_presence_of :name
     end
