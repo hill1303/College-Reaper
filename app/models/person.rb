@@ -10,5 +10,10 @@
 #   * +:title+ is the prefix of the person when referred to in a formal manor (Mr., Mrs, Dr., etc).
 #   * +:suffix+ is a set of qualifications or genealogical identifiers of a person (PHD, MD, etc).
 class Person < ActiveRecord::Base
+	validates :name, presence: true
+	validates :dob, presence: true
+  	validates :sex, presence: true
+  	validates :pronoun, presence: true
 
+	has_one :user
 end
