@@ -4,12 +4,12 @@
 # 
 # Attributes are stored as follows:
 #   * +:name+ holds the name of the RequirementGroup
-#   * +:rule+ the completion rule that is associated with a stored procedure for validating a user's completion of requirements
+#   * +:rule+ the completion rule that is associated with a stored procedure for validating a user's completion of
+#     requirements
 class RequirementGroup < ActiveRecord::Base
   validates :name, presence: true
   validates :rule, presence: true
 
-  belongs_to :course_group
-  belongs_to :course
+  belongs_to :owner, polymorphic: true
   has_and_belongs_to_many :courses
 end

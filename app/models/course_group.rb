@@ -8,9 +8,8 @@
 #   * +:college_global+ determines whether or not the CourseGroup is versatile
 #   * +:college_independent+ reports whether or not a group does not apply to College_Global.
 class CourseGroup < ActiveRecord::Base
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   belongs_to :college
-  has_many :requirement_groups
-
+  has_many :completion_rules, class_name: 'RequirementGroup', as: :owner
 end

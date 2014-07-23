@@ -13,7 +13,6 @@ class Course < ActiveRecord::Base
   validates :credit_hours, presence: true, numericality: { only_integer: true }
 
   has_many :sections
-  has_many :requirement_groups, as: :prerequisites
-  #has_and_belongs_to_many :course_groups
+  has_many :pre_requisites, class_name: 'RequirementGroup', as: :owner
   has_and_belongs_to_many :terms
 end

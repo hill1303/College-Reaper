@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723170038) do
+ActiveRecord::Schema.define(version: 20140723192245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,10 +33,13 @@ ActiveRecord::Schema.define(version: 20140723170038) do
   end
 
   create_table "course_groups", force: true do |t|
-    t.text    "name"
-    t.boolean "college_global"
-    t.boolean "college_independent"
+    t.text    "name",                default: "",    null: false
+    t.boolean "college_global",      default: false, null: false
+    t.boolean "college_independent", default: false, null: false
+    t.integer "college_id"
   end
+
+  add_index "course_groups", ["name"], :name => "index_course_groups_on_name", :unique => true
 
   create_table "courses", force: true do |t|
     t.text     "instructional_unit"
@@ -47,6 +50,11 @@ ActiveRecord::Schema.define(version: 20140723170038) do
     t.datetime "updated_at"
     t.integer  "terms_id"
     t.integer  "section_id"
+  end
+
+  create_table "courses_requirement_groups", id: false, force: true do |t|
+    t.integer "course_id"
+    t.integer "requirement_group_id"
   end
 
   create_table "courses_terms", id: false, force: true do |t|
@@ -82,8 +90,10 @@ ActiveRecord::Schema.define(version: 20140723170038) do
   end
 
   create_table "requirement_groups", force: true do |t|
-    t.text "name"
-    t.text "rule"
+    t.text    "name",       default: "", null: false
+    t.text    "rule",       default: "", null: false
+    t.integer "owner_id"
+    t.string  "owner_type"
   end
 
   create_table "sections", force: true do |t|
