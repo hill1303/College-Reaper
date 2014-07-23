@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722220149) do
+ActiveRecord::Schema.define(version: 20140723192245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,11 +26,20 @@ ActiveRecord::Schema.define(version: 20140722220149) do
 
   add_index "colleges", ["name"], :name => "index_colleges_on_name", :unique => true
 
-  create_table "course_groups", force: true do |t|
-    t.text    "name"
-    t.boolean "college_global"
-    t.boolean "college_independent"
+  create_table "completions", force: true do |t|
+    t.text    "grade",     default: "W", null: false
+    t.integer "user_id"
+    t.integer "course_id"
   end
+
+  create_table "course_groups", force: true do |t|
+    t.text    "name",                default: "",    null: false
+    t.boolean "college_global",      default: false, null: false
+    t.boolean "college_independent", default: false, null: false
+    t.integer "college_id"
+  end
+
+  add_index "course_groups", ["name"], :name => "index_course_groups_on_name", :unique => true
 
   create_table "courses", force: true do |t|
     t.text     "instructional_unit"
@@ -40,8 +49,12 @@ ActiveRecord::Schema.define(version: 20140722220149) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "terms_id"
-    t.integer  "course_group_id"
     t.integer  "section_id"
+  end
+
+  create_table "courses_requirement_groups", id: false, force: true do |t|
+    t.integer "course_id"
+    t.integer "requirement_group_id"
   end
 
   create_table "courses_terms", id: false, force: true do |t|
@@ -65,15 +78,22 @@ ActiveRecord::Schema.define(version: 20140722220149) do
   add_index "locations", ["latlong"], :name => "index_locations_on_latlong", :spatial => true
 
   create_table "people", force: true do |t|
-    t.text     "name"
-    t.date     "dob"
-    t.text     "sex"
+    t.text     "name",       default: "",           null: false
+    t.date     "dob",        default: '2014-01-01', null: false
+    t.text     "sex",        default: "N",          null: false
     t.text     "gender"
-    t.text     "pronoun"
+    t.text     "pronoun",    default: "their",      null: false
     t.text     "title"
     t.text     "suffix"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "requirement_groups", force: true do |t|
+    t.text    "name",       default: "", null: false
+    t.text    "rule",       default: "", null: false
+    t.integer "owner_id"
+    t.string  "owner_type"
   end
 
   create_table "sections", force: true do |t|

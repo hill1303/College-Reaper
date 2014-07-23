@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>application_controller.rb</title>
+    <title>requirement_group.rb</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
@@ -19,11 +19,11 @@
     <div class="banner">
         
         <h1>
-            application_controller.rb
+            requirement_group.rb
         </h1>
         <ul class="files">
-            <li>app/controllers/application_controller.rb</li>
-            <li>Last modified: 2014-07-23 16:30:18 -0400</li>
+            <li>app/models/requirement_group.rb</li>
+            <li>Last modified: 2014-07-23 15:41:08 -0400</li>
         </ul>
     </div>
 
@@ -32,14 +32,18 @@
   
     <div class="description">
       
-<p>The <a
-href="../../../classes/ApplicationController.html">ApplicationController</a>
-is the superclass for all controllers in the application and can be used to
-apply certain requirements or provide certain functionality to all actions
-in the application. Obviously, things here should be done sparingly and
-judiciously, with clear documentation provided which both describes the
-functionality and justifies its placement here instead of in a lower level
-controller.</p>
+<p>The <a href="../../../classes/RequirementGroup.html">RequirementGroup</a>
+class represents a set of Courses and associates a completion rule to that
+<a href="../../../classes/Course.html">Course</a> set. This allows for a
+representation of prerequisites for Courses or for <a
+href="../../../classes/CourseGroup.html">CourseGroup</a> completion checks
+(ie. did the user take all Courses in a major or minor, satisfy a general
+curriculum requirement, etc.)</p>
+
+<p>Attributes are stored as follows:  * <code>:name</code> holds the name of
+the <a href="../../../classes/RequirementGroup.html">RequirementGroup</a> 
+* <code>:rule</code> the completion rule that is associated with a stored
+procedure for validating a user&#39;s completion of  requirements</p>
 
     </div>
   
@@ -59,7 +63,7 @@ controller.</p>
       
         <li>
           <span class="type">CLASS</span>
-          <a href="../../../classes/ApplicationController.html">ApplicationController</a>
+          <a href="../../../classes/RequirementGroup.html">RequirementGroup</a>
         </li>
       
     </ul>

@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>application_controller.rb</title>
+    <title>completion.rb</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
@@ -19,11 +19,11 @@
     <div class="banner">
         
         <h1>
-            application_controller.rb
+            completion.rb
         </h1>
         <ul class="files">
-            <li>app/controllers/application_controller.rb</li>
-            <li>Last modified: 2014-07-23 16:30:18 -0400</li>
+            <li>app/models/completion.rb</li>
+            <li>Last modified: 2014-07-23 12:28:50 -0400</li>
         </ul>
     </div>
 
@@ -32,14 +32,18 @@
   
     <div class="description">
       
-<p>The <a
-href="../../../classes/ApplicationController.html">ApplicationController</a>
-is the superclass for all controllers in the application and can be used to
-apply certain requirements or provide certain functionality to all actions
-in the application. Obviously, things here should be done sparingly and
-judiciously, with clear documentation provided which both describes the
-functionality and justifies its placement here instead of in a lower level
-controller.</p>
+<p>The <a href="../../../classes/Completion.html">Completion</a> class
+represents a course which a student has taken, relating a <a
+href="../../../classes/User.html">User</a> and <a
+href="../../../classes/Course.html">Course</a> while recording the grade
+received so that GPAs can be calculated.</p>
+
+<p>Attributs are stored as follows:</p>
+<ul><li>
+<p><code>:grade</code> is a 1-character string, with a default of &#39;W&#39;
+to indicate the mark received by the associated user in the associated
+course</p>
+</li></ul>
 
     </div>
   
@@ -59,7 +63,7 @@ controller.</p>
       
         <li>
           <span class="type">CLASS</span>
-          <a href="../../../classes/ApplicationController.html">ApplicationController</a>
+          <a href="../../../classes/Completion.html">Completion</a>
         </li>
       
     </ul>
