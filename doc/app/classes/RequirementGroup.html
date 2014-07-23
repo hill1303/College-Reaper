@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Location</title>
+    <title>RequirementGroup</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
@@ -20,7 +20,7 @@
         
         <h1>
             <span class="type">Class</span> 
-            Location 
+            RequirementGroup 
             
                 <span class="parent">&lt; 
                     
@@ -31,7 +31,7 @@
         </h1>
         <ul class="files">
             
-            <li><a href="../files/app/models/location_rb.html">app/models/location.rb</a></li>
+            <li><a href="../files/app/models/requirement_group_rb.html">app/models/requirement_group.rb</a></li>
             
         </ul>
     </div>
@@ -40,19 +40,17 @@
   
     <div class="description">
       
-<p>The <a href="Location.html">Location</a> class represents the location of a
-building, storing both its street address and a spatial representation of
-its GPS coordinates</p>
+<p>The <a href="RequirementGroup.html">RequirementGroup</a> class represents a
+set of Courses and associates a completion rule to that <a
+href="Course.html">Course</a> set. This allows for a representation of
+prerequisites for Courses or for <a href="CourseGroup.html">CourseGroup</a>
+completion checks (ie. did the user take all Courses in a major or minor,
+satisfy a general curriculum requirement, etc.)</p>
 
-<p>Attributes are stored as follows:  * <code>:name</code> string that
-represents the building name  * <code>:latitude</code> coordinate for
-North/South representation of location  * <code>:longitude</code>
-coordinate for East/West representation of location  *
-<code>:street1</code> string that stores primary street address  *
-<code>:street2</code> string for optional entry  * <code>:city</code>
-string to store city from address  * <code>:state</code> string to hold
-state from address  * <code>:zip</code> zip code of address stored as
-string</p>
+<p>Attributes are stored as follows:  * <code>:name</code> holds the name of
+the <a href="RequirementGroup.html">RequirementGroup</a>  *
+<code>:rule</code> the completion rule that is associated with a stored
+procedure for validating a user&#39;s completion of  requirements</p>
 
     </div>
   
@@ -65,17 +63,6 @@ string</p>
   
 
 
-  
-    <!-- Namespace -->
-    <div class="sectiontitle">Namespace</div>
-    <ul>
-      
-        <li>
-          <span class="type">MODULE</span>
-          <a href="Location/RGeo.html">Location::RGeo</a>
-        </li>
-      
-    </ul>
   
 
 
