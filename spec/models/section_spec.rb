@@ -45,7 +45,9 @@ describe Section do
     it 'includes a :wait_max attribute' do
       expect(section.attributes).to include('wait_max')
     end
-
+  end
+  
+  context 'validates' do
     it 'the presence of the :room attribute' do
       should validate_presence_of :room
     end
