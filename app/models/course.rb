@@ -3,16 +3,17 @@
 # Attributes are stored as follows:
 #
 #   * +:course_number+ is the four digit course number for a specific course
-#   * +:instructional_unit+ represents the acronym that procedes a course number
+#   * +:instructional_unit+ represents the acronym that precedes a course number
 #   * +:name+ provides a descriptive title for the course
 #   * +:credit_hours+ provides the number of credit hours counted toward degree
 class Course < ActiveRecord::Base
   validates :course_number, presence: true, numericality: true
   validates :instructional_unit, presence: true
   validates :name, presence: true
-  validates :credit_hours, presence: true
+  validates :credit_hours, presence: true, numericality: { only_integer: true }
 
   has_many :sections
-  has_and_belongs_to_many :course_groups
+  has_many :requirement_groups, as: :prerequisites
+  #has_and_belongs_to_many :course_groups
   has_and_belongs_to_many :terms
 end
