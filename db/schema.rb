@@ -65,11 +65,11 @@ ActiveRecord::Schema.define(version: 20140722152934) do
   add_index "locations", ["latlong"], :name => "index_locations_on_latlong", :spatial => true
 
   create_table "people", force: true do |t|
-    t.text     "name"
-    t.date     "dob"
-    t.text     "sex"
+    t.text     "name",       default: "",           null: false
+    t.date     "dob",        default: '2014-01-01', null: false
+    t.text     "sex",        default: "N",          null: false
     t.text     "gender"
-    t.text     "pronoun"
+    t.text     "pronoun",    default: "their",      null: false
     t.text     "title"
     t.text     "suffix"
     t.datetime "created_at"

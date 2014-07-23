@@ -8,7 +8,7 @@ class CreatePeople < ActiveRecord::Migration
       t.date :dob, default: Date.new(2014, 1, 1), null: false
 
       # Description of the person
-      t.text :sex, :default 'N', null: false
+      t.text :sex, default: 'N', null: false
       t.text :gender
 
       # Formal information on the person
