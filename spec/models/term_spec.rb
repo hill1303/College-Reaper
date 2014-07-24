@@ -9,6 +9,14 @@ describe Term do
     should have_and_belong_to_many :courses
   end
 
+  it 'has one :preference' do
+    should have_one :preference
+  end
+
+  it 'has many :schedules' do
+    should have_many :schedules
+  end
+
   context 'attributes' do
     let :term do
       build :term

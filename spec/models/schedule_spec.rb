@@ -1,4 +1,4 @@
-require 'rails_helpers'
+require 'rails_helper'
 
 describe Schedule do
   it 'has a valid factory' do
@@ -10,7 +10,7 @@ describe Schedule do
   end
 
   it 'has and belongs to many :sections' do
-    should have_and_belong_to_many :section
+    should have_and_belong_to_many :sections
   end
 
   it 'belongs to a :term' do
@@ -30,9 +30,10 @@ describe Schedule do
       expect(schedule.attributes).to include('score')
     end
 
-    it 'includes a :sub_score attribute' do
-      expect(schedule.attributes).to include('sub_score')
+    it 'includes a :sub_scores attribute' do
+      expect(schedule.attributes).to include('sub_scores')
     end
+  end
 
   context 'validates' do
     it 'the presence of the :score attribute' do

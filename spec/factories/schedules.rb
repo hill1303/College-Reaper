@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :schedule do
     score       500
-    subscore    Hash.new
+    sub_scores    Hash.new
   end
 end

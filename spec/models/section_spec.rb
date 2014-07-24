@@ -5,6 +5,22 @@ describe Section do
     expect(build(:section)).to be_valid
   end
 
+  it 'belongs to a :person' do
+    should belong_to :person
+  end
+
+  it 'belongs to a :course' do
+    should belong_to :course
+  end
+
+  it 'belongs to a :location' do
+    should belong_to :location
+  end
+
+  it 'belongs to a :term' do
+    should belong_to :term
+  end
+
   context 'attributes' do
     let :section do
       build :section
@@ -78,22 +94,6 @@ describe Section do
 
     it 'the presence of the :wait_max attribute' do
       should validate_presence_of :wait_max
-    end
-
-    it 'belongs to a :person' do
-      should belong_to :person
-    end
-
-    it 'belongs to a :course' do
-      should belong_to :course
-    end
-
-    it 'belongs to a :location' do
-      should belong_to :location
-    end
-
-     it 'belongs to a :term' do
-      should belong_to :term
     end
 
     it 'numericality of the :course_seats 'do

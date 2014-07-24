@@ -4,6 +4,11 @@ class CreatePreferences < ActiveRecord::Migration
       # hstore user scheduling preferences
       t.hstore :choices
 
+      # Associations
+      t.belongs_to :schedule
+      t.belongs_to :term
+      t.belongs_to :user
+
       # Metadata
       t.timestamps
     end

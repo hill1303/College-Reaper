@@ -17,6 +17,14 @@ describe User do
     should have_many(:courses).through(:completions)
   end
 
+  it 'has many :preferences' do
+    should have_many(:preferences)
+  end
+
+  it 'has many :schedules' do
+    should have_many(:schedules)
+  end
+
   context 'attributes' do
     let :user do
       build :user, password: 'password123'
