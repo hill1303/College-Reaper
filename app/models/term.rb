@@ -10,5 +10,7 @@ class Term < ActiveRecord::Base
   validates :start_date, presence: true
   validates :end_date, presence: true
 
+  has_one :preference
+  has_many :schedules
   has_and_belongs_to_many :courses
 end

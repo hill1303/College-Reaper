@@ -1,4 +1,5 @@
-# The Course class provides information about an individual course. Each course is related to one or more CourseGroup, Section and Term.
+# The Course class provides information about an individual course. Each course is related to one or more CourseGroup,
+# Section and Term.
 #
 # Attributes are stored as follows:
 #
