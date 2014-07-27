@@ -3,4 +3,7 @@
 # information, describes what sort of functionality it provides to the application, which components of the application
 # it was initially designed for, and use case examples with demonstration code.
 module ApplicationHelper
+  def courses_for_autocomplete
+    
+  end
 end
