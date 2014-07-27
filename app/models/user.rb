@@ -40,4 +40,5 @@ class User < ActiveRecord::Base
   belongs_to :person
   has_many :completions
   has_many :courses, through: :completions
+  
 end
