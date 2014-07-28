@@ -5,7 +5,7 @@ class CreateLocations < ActiveRecord::Migration
       t.text :name
 
       # GPS coordinates, using RGeo and PostGIS
-      t.point :latlong, :geographic => true
+      t.point :lonlat, :geographic => true
 
       # Street address components
       t.text :street1
@@ -19,7 +19,7 @@ class CreateLocations < ActiveRecord::Migration
     end
 
     # Spatial index on the coordinates
-    add_index :locations, :latlong, :spatial => true
+    add_index :locations, :lonlat, :spatial => true
   end
 
   def down

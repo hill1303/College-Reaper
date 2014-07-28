@@ -50,7 +50,7 @@ locations = Location.create([{
                                  city: 'Anytown',
                                  state: 'OH NO',
                                  zip: '43210',
-                                 latlong: 'POINT(39.998479 -83.01019)'
+                                 lonlat: 'POINT(39.998479 -83.01019)'
                              },
                              {
                                  name: 'Dreese Lab',
@@ -59,7 +59,7 @@ locations = Location.create([{
                                  city: 'Anytown',
                                  state: 'OH NO',
                                  zip: '43210',
-                                 latlong: 'POINT(40.002241, -83.015965)'
+                                 lonlat: 'POINT(40.002241 -83.015965)'
                              },
                              {
                                  name: 'Caldwell Lab',
@@ -68,7 +68,7 @@ locations = Location.create([{
                                  city: 'Anytown',
                                  state: 'OH NO',
                                  zip: '43210',
-                                 latlong: 'POINT(40.002471, -83.015145)'
+                                 lonlat: 'POINT(40.002471 -83.015145)'
                              },
                              {
                                  name: 'Fontana Lab',
@@ -77,7 +77,7 @@ locations = Location.create([{
                                  city: 'Anytown',
                                  state: 'OH NO',
                                  zip: '43210',
-                                 latlong: 'POINT(40.003548, -83.012501)'
+                                 lonlat: 'POINT(40.003548 -83.012501)'
                              },
                              {
                                  name: 'Jennings Hall',
@@ -86,13 +86,13 @@ locations = Location.create([{
                                  city: 'Anytown',
                                  state: 'OH NO',
                                  zip: '43210',
-                                 latlong: 'POINT(39.996793, -83.015366)'
+                                 lonlat: 'POINT(39.996793 -83.015366)'
                              }])
 
 section_params = Array.new
 
-50.times do |i|
-  time_delta = 60 * rand(60..120)
+75.times do |i|
+  time_delta = 60 * rand(0..480)
   repeat_patterns = %w(MWF TR TWRF F)
 
   section_params.push({
@@ -135,7 +135,8 @@ user = User.create({
                        uuid: '200085637',
                        rank: 3,
                        email: 'buckeye.1@osu.edu',
-                       encrypted_password: 'nope',
+                       password: 'password',
+                       password_confirmation: 'password',
                        course_groups: CourseGroup.where(name: 'CIS')
                    })
 
@@ -147,14 +148,14 @@ Preference.create({
                          num_courses: 3,
                          credit_min: 8,
                          credit_max: 18,
-                         credit_lean: 0,
+                         credit_lean: 'low',
                          credit_lean_weight: 0.6,
                          distance_weight: 0.4,
                          ge_major_lean: 'major',
                          ge_major_lean_weight: 0.75,
                          waitlist: false,
-                         start_time: Time.at(3600*11), # 6 AM, probably  \ These depend on the time zone
-                         end_time: Time.at(3600*26), # 9 PM, probably    / currently set for -0500
+                         start_time: Time.at(36000*11), # 6 AM, probably  \ These depend on the time zone
+                         end_time: Time.at(39600*26), # 9 PM, probably    / currently set for -0500
                          time_weight: 0.3,
                          exclude_day_pattern: 'M'
                      }
