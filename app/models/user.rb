@@ -36,6 +36,9 @@ class User < ActiveRecord::Base
          :confirmable, :lockable, :timeoutable, :omniauthable
 
   validates :uuid, uniqueness: true, presence: true
+  validates :email, uniqueness: true, presence: true
+  validates :password, presence: true
+  validates :password_confirmation, presence: true
 
   has_many :preferences, dependent: :delete_all
   belongs_to :person

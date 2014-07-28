@@ -16,6 +16,8 @@ class Preference < ActiveRecord::Base
   validates :ge_major_lean_weight, presence: true, numericality: true
   validates :time_weight, presence: true, numericality: true
 
+  attr_accessor :force_courses
+
   belongs_to :user
   belongs_to :schedule
   belongs_to :term

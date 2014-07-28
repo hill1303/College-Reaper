@@ -440,7 +440,7 @@ module GenScheduleHelper
         schedule.set_class_sections possible_schedule
         if schedule.is_valid?
           schedule.evaluate!
-          schedules.add?(schedule) 
+          schedules.add?  (schedule)
         end
       end    
       return schedules

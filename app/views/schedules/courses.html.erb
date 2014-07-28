@@ -1,14 +1,10 @@
+<%= render 'wizard_breadcrumbs' %>
 <div class="row">
   <div class="medium-8 columns">
     <%= simple_form_for @preference, url: wizard_path, method: :put do |f| %>
-      <%=  f.input :num_courses, label: 'How many classes would you like to take this semester?'  %>
-
-      <%= f.submit 'Next >', class: 'button right' %>
+    <%=  f.input :num_courses, label: 'How many classes would you like to take this semester?', collection: 1..15, inline: true  %>
+    <%= f.submit 'Next >', class: 'button right' %>
     <% end %>
   </div>
-  <div class="medium-4 columns">
-    <div class="panel">
-      stuff
-    </div>
-  </div>
+  <%= render 'wizard_tips' %>
 </div>

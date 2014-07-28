@@ -135,7 +135,8 @@ user = User.create({
                        uuid: '200085637',
                        rank: 3,
                        email: 'buckeye.1@osu.edu',
-                       encrypted_password: 'nope',
+                       password: 'password',
+                       password_confirmation: 'password',
                        course_groups: CourseGroup.where(name: 'CIS')
                    })
 

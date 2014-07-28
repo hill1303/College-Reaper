@@ -1,0 +1,11 @@
+<%= render 'wizard_breadcrumbs' %>
+<div class="row">
+  <div class="medium-8 columns">
+    <%= simple_form_for @preference, url: wizard_path, method: :put do |f| %>
+    <%= f.input :num_courses, label: 'How many classes would you like to take this semester (total)?', collection: 1..15, inline: true  %>
+    <%= f.input :force_courses, as: :boolean, label: 'I need to specify certain course numbers that I <strong>must</strong> take'.html_safe, boolean_style: :inline %>
+    <%= f.submit 'Next >', class: 'button right' %>
+    <% end %>
+  </div>
+  <%= render 'wizard_tips' %>
+</div>

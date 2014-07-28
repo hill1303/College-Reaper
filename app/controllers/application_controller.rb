@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # Add require authentication for all controllers and actions unless explicitly exempted.
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   # Modifies the set of permitted parameters to certain Devise actions, if we're about to call a Devise controller
   before_action :configure_permitted_parameters, if: :devise_controller?

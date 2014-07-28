@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 20140728023845) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "terms_id"
-    t.integer  "section_id"
   end
 
   create_table "courses_requirement_groups", id: false, force: true do |t|
