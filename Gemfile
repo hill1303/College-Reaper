@@ -7,6 +7,9 @@ gem 'codeclimate-test-reporter', group: :test, require: nil
 # Needs to be here for the custom doc task
 gem 'rdoc'
 
+# Twitter typeahead for autocomplete
+gem 'twitter-typeahead-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 # Use postgresql as the database for Active Record
