@@ -2,7 +2,7 @@ class CreateColleges < ActiveRecord::Migration
   def change
     create_table :colleges do |t|
       # College name
-      t.string :name, null:false, default: ''
+      t.text :name, null:false, default: ''
 
       # Metadata field
       t.timestamps
