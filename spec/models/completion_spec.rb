@@ -29,7 +29,7 @@ describe Completion do
     end
 
     it 'the length of :grade' do
-      should ensure_length_of(:grade).is_equal_to(1)
+      should ensure_length_of(:grade).is_equal_to(2)
     end
   end
 end
