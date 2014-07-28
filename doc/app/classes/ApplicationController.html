@@ -63,6 +63,24 @@ controller.</p>
 
 
   
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-configure_permitted_parameters">configure_permitted_parameters</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
 
   
 
@@ -81,7 +99,58 @@ controller.</p>
 
 
     <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-configure_permitted_parameters">
+            
+              <b>configure_permitted_parameters</b>()
+            
+            <a href="../classes/ApplicationController.html#method-i-configure_permitted_parameters" name="method-i-configure_permitted_parameters" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Add parameters to the list of allowed params on the appropriate Devise
+controllers in order to facilitate them accepting nested attributes for <a
+href="Person.html">Person</a> and such. All of the params in the array
+<code>params</code> are added to each of the actions in
+<code>actions</code> automatically when a Devise controller is being called
+(as per the before_action call above).</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-configure_permitted_parameters_source')" id="l_method-i-configure_permitted_parameters_source">show</a>
+                
+              </p>
+              <div id="method-i-configure_permitted_parameters_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">configure_permitted_parameters</span>
+  <span class="ruby-identifier">actions</span> = [<span class="ruby-value">:sign_up</span>, <span class="ruby-value">:account_update</span>]
+  <span class="ruby-identifier">params</span> = [<span class="ruby-value">:name</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:suffix</span>, <span class="ruby-value">:dob</span>, <span class="ruby-value">:sex</span>, <span class="ruby-value">:gender</span>, <span class="ruby-value">:pronoun</span>, <span class="ruby-value">:uuid</span>]
+
+  <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">action</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">params</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">param</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">devise_parameter_sanitizer</span>.<span class="ruby-identifier">for</span>(<span class="ruby-identifier">action</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">param</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
               </div>
+            </div>
+            
+          </div>
+                    </div>
 
     </div>
   </body>

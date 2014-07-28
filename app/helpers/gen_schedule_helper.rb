@@ -294,15 +294,17 @@ module GenScheduleHelper
   
     def ge_major_score
       ge_major_pref_weight = @@preferences.choices[:ge_major_lean_weight]
-      ge_major_pref_lean = @@preferences.choices[:ge_major_lean]
+      ge_major_pref_lean = @@preferences.choices[:ge_major_lean].downcase!
   
       classes_in_pref = 0
       if ge_major_pref_lean == 'ge'
         # sum of classes that come from gen course group
-        @@preferences.user.course_groups.where(college_global: true, college_independent: false).each do |course_group|
-          @class_section_set.each do |class_section|
-            if course_group.courses.include? class_section.course
-            classes_in_pref += 1
+        @@preferences.user.course_groups.where(college_independent: false).each do |major|
+          major.college.course_groups.where(college_global: true).each do |course_group|
+            @class_section_set.each do |class_section|
+              if course_group.courses.include? class_section.course
+                classes_in_pref += 1
+              end
             end
           end
         end
@@ -311,7 +313,7 @@ module GenScheduleHelper
         @@preferences.user.course_groups.where(college_global: false).each do |course_group|
           @class_section_set.each do |class_section|
             if course_group.courses.include? class_section.course
-            classes_in_pref += 1
+              classes_in_pref += 1
             end
           end
         end
@@ -382,8 +384,8 @@ module GenScheduleHelper
         if not mate.nil?        
           # Breed the two schedules and mutate the children
           child1, child2 = exchange_genes!(schedule, mate)
-          mutate! child1
-          mutate! child2
+          mutate! child1, class_section_set
+          mutate! child2, class_section_set
         
           if not child1.is_valid?
             child1.reset! class_section_set
@@ -433,7 +435,7 @@ module GenScheduleHelper
       schedules = Set.new
       class_section_list = class_section_set.to_a
       
-      class_section_list.combination(preferences.choices[:num_courses]) do |possible_schedule|
+      class_section_list.combination(preferences.choices[:num_courses].to_i) do |possible_schedule|
         schedule = MockSchedule.new(preferences)
         schedule.set_class_sections possible_schedule
         if schedule.is_valid?

@@ -17,6 +17,10 @@ describe Course do
     should have_and_belong_to_many :terms
   end
 
+  it 'has and belongs to many :course_groups' do
+    should have_and_belong_to_many :course_groups
+  end
+
   context 'attributes' do
     let :course do
       build :course
