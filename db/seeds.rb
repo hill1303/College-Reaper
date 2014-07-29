@@ -31,6 +31,12 @@ courses = Course.create([{
                             credit_hours: 4
                          },
                          {
+                             instructional_unit: 'MATH',
+                             course_number: '1151',
+                             name: 'Calculus 1',
+                             credit_hours: 5
+                         },
+                         {
                             instructional_unit: 'CSE',
                             course_number: '2501',
                             name: 'Ethics',
@@ -57,7 +63,7 @@ courses = Course.create([{
                          {
                             instructional_unit: 'CSE',
                             course_number: '3321',
-                            name: 'Formal Lnaguages',
+                            name: 'Formal Languages',
                             credit_hours: 3
                          },
                          {
@@ -275,62 +281,59 @@ courses = Course.create([{
                            course_number: '2230',
                            name: 'Gender, Sexuality, and Race in Popular Culture',
                            credit_hours: 3
-                         }
-
-                        ])
+                         }])
 
 locations = Location.create([{
                                  name: 'Hagerty Hall',
-                                 street1: 'Street Name',
+                                 street1: '1775 Oval Dr S',
                                  street2: nil,
                                  city: 'Columbus',
-                                 state: 'OH NO',
+                                 state: 'OH',
                                  zip: '43210',
                                  latlong: 'POINT(39.998479 -83.01019)'
                              },
                              {
                                  name: 'Dreese Lab',
-                                 street1: 'Street Name',
+                                 street1: '2015 Neil Ave',
                                  street2: nil,
                                  city: 'Columbus',
-                                 state: 'OH NO',
+                                 state: 'OH',
                                  zip: '43210',
                                  latlong: 'POINT(40.002241, -83.015965)'
                              },
                              {
                                  name: 'Caldwell Lab',
-                                 street1: 'Street Name',
+                                 street1: '2024 Neil Ave',
                                  street2: nil,
                                  city: 'Columbus',
-                                 state: 'OH NO',
+                                 state: 'OH',
                                  zip: '43210',
                                  latlong: 'POINT(40.002471, -83.015145)'
                              },
                              {
                                  name: 'Fontana Lab',
-                                 street1: 'Street Name',
+                                 street1: '99 W Woodruff Ave',
                                  street2: nil,
                                  city: 'Columbus',
-                                 state: 'OH NO',
+                                 state: 'OH',
                                  zip: '43210',
                                  latlong: 'POINT(40.003548, -83.012501)'
                              },
                              {
                                  name: 'Jennings Hall',
-                                 street1: 'Street Name',
+                                 street1: 'W 12th Ave',
                                  street2: nil,
                                  city: 'Columbus',
-                                 state: 'OH NO',
+                                 state: 'OH',
                                  zip: '43210',
                                  latlong: 'POINT(39.996793, -83.015366)'
                              },
-
                              {
                                  name: 'Bolz Hall',
                                  street1: '2036 Neil Ave Mall',
                                  street2: nil,
                                  city: 'Columbus',
-                                 state: 'OH NO',
+                                 state: 'OH',
                                  zip: '43210',
                                  latlong: 'POINT(40.002992, -83.015160)'
                              },
@@ -339,7 +342,7 @@ locations = Location.create([{
                                  street1: '275 W Woodruff Ave',
                                  street2: nil,
                                  city: 'Columbus',
-                                 state: 'OH NO',
+                                 state: 'OH',
                                  zip: '43210',
                                  latlong: 'POINT(40.003621, -83.016619)'
                              },
@@ -348,7 +351,7 @@ locations = Location.create([{
                                  street1: '174 W 18th Ave',
                                  street2: nil,
                                  city: 'Columbus',
-                                 state: 'OH NO',
+                                 state: 'OH',
                                  zip: '43210',
                                  latlong: 'POINT(40.002679, -83.013223)'
                              },
@@ -357,7 +360,7 @@ locations = Location.create([{
                                  street1: ' 231 W 18th Ave',
                                  street2: nil,
                                  city: 'Columbus',
-                                 state: 'OH NO',
+                                 state: 'OH',
                                  zip: '43210',
                                  latlong: 'POINT(40.001575, -83.014064)'
                              },
@@ -366,13 +369,12 @@ locations = Location.create([{
                                  street1: ' 230 N Oval Mall',
                                  street2: nil,
                                  city: 'Columbus',
-                                 state: 'OH NO',
+                                 state: 'OH',
                                  zip: '43210',
                                  latlong: 'POINT(40.000479, -83.014178)'
-                             },
+                             }])
 
-                             ])
-people = Person.create( [
+people = Person.create([
                   {
                      name: 'Ada Lovelace',
                      dob: Date.new(1970,8,4),
@@ -427,7 +429,7 @@ people = Person.create( [
                      title: 'Dr.',
                      suffix: 'Ph.D.'
                  },
-                 {
+                 {   
                      name: 'James Prescott Joule',
                      dob: Date.new(1960,9,5),
                      sex: 'Male',
@@ -435,9 +437,7 @@ people = Person.create( [
                      pronoun: 'his',
                      title: 'Dr.',
                      suffix: 'Ph.D.'
-                 }
-
-                ])
+                 }])
 
 section_params = Array.new
 
@@ -464,32 +464,30 @@ end
 
 Section.create(section_params)
 
-college = College.create({ name: 'Arts and Sciences'})
+college = College.create({ name: 'Arts and Sciences' })
 
 CourseGroup.create([{
                       college: college,
                       college_global: false,
                       college_independent: false,
                       name: 'CIS',
-                      courses: Course.where(instructional_unit: 'CSE')
+                      courses: Course.where('instructional_unit = ? OR course_number = ? OR instructional_unit = ? OR instructional_unit = ?', 'CSE', '3345', 'ECE', 'STAT')
                     },
                     {
                       college: college,
                       college_global: true,
                       college_independent: false,
-                      name: 'ASC GE Math',
-                      courses: Course.where(instructional_unit: 'MATH' )
+                      name: 'ASC GE Foreign Language',
+                      courses: Course.where(instructional_unit: 'SWAHILI')
                     },
-
-                     {
+                    {
                       college: college,
                       college_global: true,
                       college_independent: false,
                       name: 'ASC GE Writing',
                       courses: Course.where(instructional_unit: 'ENGLISH' )
                     },
-
-                     {
+                    {
                       college: college,
                       college_global: true,
                       college_independent: false,
@@ -553,8 +551,22 @@ Preference.create({
                      }
                  })
 
-Completion.create([
-                   {
+Completion.create([{
+                      user: user,
+                      course: Course.where(instructional_unit: 'MATH').find_by_course_number('1151'),
+                      grade: 'B+'
+                  },
+                  {
+                      user: user,
+                      course: Course.where(instructional_unit: 'BIOLOGY').find_by_course_number('1113'),
+                      grade: 'C'
+                  },
+                  {
+                      user: user,
+                      course: Course.where(instructional_unit: 'STAT').find_by_course_number('3470'),
+                      grade: 'A-'
+                  },
+                  {
                      user: user,
                      course: Course.where(instructional_unit: 'PSYCHOLOGY').find_by_course_number('3371'),
                      grade: 'A'
@@ -593,6 +605,38 @@ Completion.create([
                      user: user,
                      course: Course.where(instructional_unit: 'CSE').find_by_course_number('3901'),
                      grade: 'E'
-                   }
-                 ])
+                   }])
 
+people = Person.create([{
+                  name: 'Meean Feerash',
+                  dob: Date.new(1970, 8, 11),
+                  sex: 'Female',
+                  pronoun: 'her',
+                  title: 'Prof.',
+                  suffix: ''
+                },
+                {
+                  name: 'Thomas Edison',
+                  dob: Date.new(1956, 2, 29),
+                  sex: 'Male',
+                  pronoun: 'him',
+                  title: 'Mr.',
+                  suffix: 'Ph.D.'
+                },
+                {
+                  name: 'Jimmy Neutron',
+                  dob: Date.new(1988, 11, 8),
+                  sex: 'Male',
+                  pronoun: 'him',
+                  title: 'Mr.',
+                  suffix: ''
+                },
+                {
+                  name: 'Aubrey Hawkins',
+                  dob: Date.new(1956, 2, 29),
+                  sex: 'Female',
+                  pronoun: 'her',
+                  title: 'Mrs.',
+                  suffix: ''
+                }
+  ])
