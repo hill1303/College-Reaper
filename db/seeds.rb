@@ -41,7 +41,9 @@ courses = Course.create([{
                              course_number: '1251',
                              name: 'Mechanical Physics',
                              credit_hours: 5
-                         }])
+                         }
+                            
+                              ])
 
 locations = Location.create([{
                                  name: 'Hagerty Hall',
