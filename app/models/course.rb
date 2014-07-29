@@ -16,4 +16,5 @@ class Course < ActiveRecord::Base
   has_many :sections
   has_many :pre_requisites, class_name: 'RequirementGroup', as: :owner
   has_and_belongs_to_many :terms
+  has_and_belongs_to_many :course_groups
 end

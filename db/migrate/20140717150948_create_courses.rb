@@ -11,7 +11,7 @@ class CreateCourses < ActiveRecord::Migration
       t.text :name
 
       # Number of credit hours counted toward degree
-      t.text :credit_hours
+      t.integer :credit_hours
 
       # Metadata field
       t.timestamps

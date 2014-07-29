@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="large-8 columns">
+    <h2>Your Schedule</h2>
+  </div>
+  <div class="large-4 columns">
+    <h3>Actions</h3>
+    <ul class="side-nav panel">
+      <% if current_user.schedules.where('start_date >= ?') %>
+      <li><%= link_to 'Start your schedule!', wizard_path(:courses) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

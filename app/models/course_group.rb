@@ -11,5 +11,8 @@ class CourseGroup < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   belongs_to :college
+  has_and_belongs_to_many :users
+  has_and_belongs_to_many :courses
+
   has_many :completion_rules, class_name: 'RequirementGroup', as: :owner
 end

@@ -77,6 +77,41 @@ of a person (PHD, MD, etc).</p>
 
 
   
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-sexes">sexes</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-suffixes">suffixes</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-titles">titles</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
 
   
 
@@ -95,7 +130,138 @@ of a person (PHD, MD, etc).</p>
 
 
     <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-sexes">
+            
+              <b>sexes</b>()
+            
+            <a href="../classes/Person.html#method-c-sexes" name="method-c-sexes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Gets the set of sexes which are valid</p>
+
+<p>Returns:</p>
+<ul><li>
+<p>an array of sexes which will be accepted by the inclusion validator on the
+:sex field</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-sexes_source')" id="l_method-c-sexes_source">show</a>
+                
+              </p>
+              <div id="method-c-sexes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/person.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">sexes</span>
+  <span class="ruby-node">%w(Male Female Neither)</span>
+<span class="ruby-keyword">end</span></pre>
               </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-suffixes">
+            
+              <b>suffixes</b>()
+            
+            <a href="../classes/Person.html#method-c-suffixes" name="method-c-suffixes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Gets the set of words which are valid suffixes</p>
+
+<p>Returns:</p>
+<ul><li>
+<p>an array of suffixes which will be accepted by the inclusion validator on
+the :suffix field</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-suffixes_source')" id="l_method-c-suffixes_source">show</a>
+                
+              </p>
+              <div id="method-c-suffixes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/person.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">suffixes</span>
+  <span class="ruby-node">%w(Jr. Sr. D.V.M. M.D. D.O. Pharm.D. Ph.D. LL.D. Eng.D. J.D. Ed.D. Esq. III IV V)</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-titles">
+            
+              <b>titles</b>()
+            
+            <a href="../classes/Person.html#method-c-titles" name="method-c-titles" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Gets the set of words which are valid titles</p>
+
+<p>Returns:</p>
+<ul><li>
+<p>an array of titles which will be accepted by the inclusion validator on the
+:title field</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-titles_source')" id="l_method-c-titles_source">show</a>
+                
+              </p>
+              <div id="method-c-titles_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/person.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">titles</span>
+  <span class="ruby-node">%w(Mr. Mrs. Ms. Dr. Rev. Fr. Prof. Hon. Ofc.)</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                        </div>
 
     </div>
   </body>

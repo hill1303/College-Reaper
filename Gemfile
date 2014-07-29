@@ -39,6 +39,10 @@ gem 'geocoder'
 gem 'devise', '~> 3.2'
 # And Omniauth for extension of the Devise system
 gem 'omniauth', '~> 1.2.2'
+# Wicked gives a wizard workflow with minimal effort
+gem 'wicked'
+# More goodness from Plataformatec to condense the forms in views
+gem 'simple_form'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc

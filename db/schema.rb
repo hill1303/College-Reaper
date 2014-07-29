@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724203209) do
+ActiveRecord::Schema.define(version: 20140728023845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140724203209) do
   add_index "colleges", ["name"], :name => "index_colleges_on_name", :unique => true
 
   create_table "completions", force: true do |t|
-    t.text    "grade",     default: "W", null: false
+    t.text    "grade",     default: "I", null: false
     t.integer "user_id"
     t.integer "course_id"
   end
@@ -41,15 +41,24 @@ ActiveRecord::Schema.define(version: 20140724203209) do
 
   add_index "course_groups", ["name"], :name => "index_course_groups_on_name", :unique => true
 
+  create_table "course_groups_courses", id: false, force: true do |t|
+    t.integer "course_id"
+    t.integer "course_group_id"
+  end
+
+  create_table "course_groups_users", id: false, force: true do |t|
+    t.integer "course_group_id"
+    t.integer "user_id"
+  end
+
   create_table "courses", force: true do |t|
     t.text     "instructional_unit"
     t.text     "course_number"
     t.text     "name"
-    t.text     "credit_hours"
+    t.integer  "credit_hours"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "terms_id"
-    t.integer  "section_id"
   end
 
   create_table "courses_requirement_groups", id: false, force: true do |t|
@@ -80,7 +89,7 @@ ActiveRecord::Schema.define(version: 20140724203209) do
   create_table "people", force: true do |t|
     t.text     "name",       default: "",           null: false
     t.date     "dob",        default: '2014-01-01', null: false
-    t.text     "sex",        default: "N",          null: false
+    t.text     "sex",        default: "Neither",    null: false
     t.text     "gender"
     t.text     "pronoun",    default: "their",      null: false
     t.text     "title"
@@ -120,10 +129,10 @@ ActiveRecord::Schema.define(version: 20140724203209) do
   end
 
   create_table "sections", force: true do |t|
-    t.string   "room",         default: "",                    null: false
+    t.text     "room",         default: "",                    null: false
     t.time     "start_time",   default: '2000-01-01 10:00:00', null: false
     t.time     "end_time",     default: '2000-01-01 11:00:00', null: false
-    t.string   "rpt_pattern",  default: "",                    null: false
+    t.text     "rpt_pattern",  default: "",                    null: false
     t.boolean  "open",         default: false,                 null: false
     t.integer  "course_seats", default: 0,                     null: false
     t.integer  "wait_seats",   default: 0,                     null: false
