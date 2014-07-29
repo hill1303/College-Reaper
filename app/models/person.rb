@@ -41,8 +41,7 @@ class Person < ActiveRecord::Base
   validates :dob, presence: true
   validates :sex, inclusion: { in: self.sexes, messages: 'is not a valid sex' }
   validates :pronoun, presence: true
-  validates :title, inclusion: { in: self.titles, message: 'is not a valid title' }
-  validates :suffix, inclusion: { in: self.suffixes, message: 'is not a valid suffix' }
-
+  validates :title, inclusion: { in: self.titles, message: 'is not a valid title' }, allow_blank: true
+  validates :suffix, inclusion: { in: self.suffixes, message: 'is not a valid suffix' }, allow_blank: true
   has_one :user
 end
