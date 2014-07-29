@@ -486,4 +486,51 @@ module GenScheduleHelper
       return population_snapshot
     end
   end
+
+
+#  The Sectionizer class searches through 
+  class Sectionizer
+
+    def get_required_courses req_group
+      taken = 0
+      need_to_complete_set = Set.new
+      num_of_req_courses = req_group.rule.to_i
+      req_group.each do |req_course|
+        if user.completions.include? req_course
+          taken += 1
+        end
+        else  
+          need_to_complete_set << req_course
+        end
+      end
+      if taken >= num_of_req_courses 
+        return Set.new
+      end
+      return need_to_complete_set
+    end
+
+    def prerequisites_met? course
+      course.pre_requisites.each do |check|
+        if not user.completions.include? check
+          return false
+        end
+      end
+      return true
+    end
+
+    def get_complete_section_set
+      complete_section_set = Set.new
+      User.Course_group.each do |user_course_group|
+        user_course_group.Requirement_group.each do |user_req_group|
+          req_course_set = get_required_courses user_req_group
+          req_course_set.each do |req_course|
+            if prerequisites_met? req_course 
+              req_course.section.each {|rcsec| complete_section_set << rcsec}
+            end
+          end  
+        end
+      end
+    return complete_section_set
+  end  
+
 end
