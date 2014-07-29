@@ -10,10 +10,39 @@
 #   * +:title+ is the prefix of the person when referred to in a formal manor (Mr., Mrs, Dr., etc).
 #   * +:suffix+ is a set of qualifications or genealogical identifiers of a person (PHD, MD, etc).
 class Person < ActiveRecord::Base
-	validates :name, presence: true
-	validates :dob, presence: true
-  	validates :sex, presence: true
-  	validates :pronoun, presence: true
+  # Gets the set of words which are valid titles
+  #
+  # Returns:
+  #
+  #   * an array of titles which will be accepted by the inclusion validator on the :title field
+  def self.titles
+    %w(Mr. Mrs. Ms. Dr. Rev. Fr. Prof. Hon. Ofc.)
+  end
 
-	has_one :user
+  # Gets the set of words which are valid suffixes
+  #
+  # Returns:
+  #
+  #   * an array of suffixes which will be accepted by the inclusion validator on the :suffix field
+  def self.suffixes
+    %w(Jr. Sr. D.V.M. M.D. D.O. Pharm.D. Ph.D. LL.D. Eng.D. J.D. Ed.D. Esq. III IV V)
+  end
+
+  # Gets the set of sexes which are valid
+  #
+  # Returns:
+  #
+  #   * an array of sexes which will be accepted by the inclusion validator on the :sex field
+  def self.sexes
+    %w(Male Female Neither)
+  end
+
+  validates :name, presence: true
+  validates :dob, presence: true
+  validates :sex, inclusion: { in: self.sexes, messages: 'is not a valid sex' }
+  validates :pronoun, presence: true
+  validates :title, inclusion: { in: self.titles, message: 'is not a valid title' }
+  validates :suffix, inclusion: { in: self.suffixes, message: 'is not a valid suffix' }
+
+  has_one :user
 end
