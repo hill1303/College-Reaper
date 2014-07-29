@@ -65,7 +65,7 @@ describe Person do
     end
 
     it 'the acceptance of valid sexes' do
-      should validate_inclusion_of(:title).
+      should validate_inclusion_of(:sex).
                  in_array(%w(Male Female Neither))
     end
 
