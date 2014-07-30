@@ -2,10 +2,12 @@
   <div class="medium-8 columns">
     <h1>Editing completion</h1>
       <%= render 'form' %>
-      <%= link_to 'Delete', @completion, method: :delete %>
-      <%= link_to 'Show', @completion %> |
-      <%= link_to 'Back', completions_path %>
-      <%= link_to 'Update', completions_path %>
-
+  </div>
+  <div class="medium-4 columns">
+    <h3>Actions</h3>
+    <ul class="side-nav panel">
+      <li><%= link_to 'Delete', @completion, method: :delete %></li>
+      <li><%= link_to 'Cancel', completion_path(@completion) %></li>
+    </ul>
   </div>
 </div>
