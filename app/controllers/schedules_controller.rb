@@ -23,8 +23,8 @@ class SchedulesController < ApplicationController
         end
       when :generate_schedules
         preference = Preference.where(user_id: current_user.id).last
-        section_set = Sections.all.to_set
-        schedules = GenScheduleHelper::ScheduleGenerator.evolve_schedules preference, sections
+        section_set = Section.all.to_set
+        schedules = GenScheduleHelper::ScheduleGenerator.evolve_schedules preference, section_set
         # Save the schedules to the database
         schedules.each do |schedule|
           section_ids = [] 
@@ -63,28 +63,10 @@ class SchedulesController < ApplicationController
     case step
       when :course_load
         # Bias the major/ge lean slider and interpret the results
-        bias_hash = view_context.bias_slider params['preference']['ge_major_lean_weight']
-        if bias_hash[:bias] == 0
-          params['preference']['ge_major_lean'] = 'ge'
-          params['preference']['ge_major_lean_weight'] = bias_hash[:strength].to_s
-        elsif bias_hash[:bias] == 1
-          params['preference']['ge_major_lean'] = 'major'
-          params['preference']['ge_major_lean_weight'] = bias_hash[:strength].to_s
-        else
-          params['preference']['ge_major_lean'] = 'none'
-        end
+        bias_param 'ge_major_lean', 'ge', 'major'
 
         # Bias the credit lean slider and interpret the results
-        bias_hash = view_context.bias_slider params['preference']['credit_lean_weight']
-        if bias_hash[:bias] == 0
-          params['preference']['credit_lean'] = 'low'
-          params['preference']['credit_lean_weight'] = bias_hash[:strength].to_s
-        elsif bias_hash[:bias] == 1
-          params['preference']['credit_lean'] = 'high'
-          params['preference']['credit_lean_weight'] = bias_hash[:strength].to_s
-        else
-          params['preference']['credit_lean'] = 'none'
-        end
+        bias_param 'credit_lean', 'low', 'high'
 
         user_session['new_prefs'].merge! params['preference']
       when :courses
@@ -172,5 +154,18 @@ class SchedulesController < ApplicationController
           'If you include a lot of courses here, you will also raise the odds that no valid schedule will exist.'
       ]
     }
+  end
+
+  def bias_param(parameter, low, high)
+    bias_hash = view_context.bias_slider params['preference'][parameter + '_weight']
+    if bias_hash[:bias] == 0
+      params['preference'][parameter] = low
+      params['preference'][parameter + '_weight'] = bias_hash[:strength].to_s
+    elsif bias_hash[:bias] == 1
+      params['preference'][parameter] = high
+      params['preference'][parameter + '_weight'] = bias_hash[:strength].to_s
+    else
+      params['preference'][parameter] = 'none'
+    end
   end
 end
