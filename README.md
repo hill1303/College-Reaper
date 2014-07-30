@@ -23,4 +23,5 @@ directory, should any exist when the task runs.
 
 Test Suite
 ----------
-The test suite is written using the RSpec framework, and can be run with the `bundle exec rspec` command.
+The test suite is written using the RSpec framework, and can be run with the `bundle exec rspec` command. 
+
