@@ -5,11 +5,12 @@ class SchedulesController < ApplicationController
   include Wicked::Wizard
 
   steps :course_load, :courses, :times, :locations, :generate_schedules
-
+# Routes to the home page for SchedulesController
   def index
 
   end
 
+  # Shows a schedule
   def show
     @tips = ('<p>' << tips[step].join('</p><p>') << '</p>').html_safe if tips[step]
 
@@ -27,6 +28,7 @@ class SchedulesController < ApplicationController
     render_wizard
   end
 
+  # Updates the score of a schedule taking into account, the user preferences
   def update
     user_session['new_prefs'] ||= Hash.new
 
@@ -131,6 +133,7 @@ class SchedulesController < ApplicationController
     redirect_to next_wizard_path
   end
 
+  # Displays some useful tips to the user based on their preference selection.
   protected
   def tips
     {
