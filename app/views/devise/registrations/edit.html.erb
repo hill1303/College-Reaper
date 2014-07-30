@@ -1,7 +1,7 @@
 <div class="row">
   <div class="medium-12 columns authform">
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, role: 'form'}) do |f| %>
-    <%= simple_fields_for :person do |ff| %>
+    <%= simple_fields_for resource.person do |ff| %>
     <h2>Edit Your Account</h2>
     <div class="row">
       <div class="medium-6 columns">
@@ -30,10 +30,10 @@
           </div>
           <div class="row">
             <div class="medium-6 columns">
-              <%= ff.input :gender %>
+              <%= ff.input :gender, as: :string %>
             </div>
             <div class="medium-6 columns">
-              <%= ff.input :pronoun %>
+              <%= ff.input :pronoun, as: :string %>
             </div>
           </div>
           <%= f.input :uuid, as: :string, label: 'Student ID' %>

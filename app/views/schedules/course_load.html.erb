@@ -1,9 +1,41 @@
 <%= render 'wizard_breadcrumbs' %>
 <div class="row">
   <div class="medium-8 columns">
+    <h2>Course Load</h2>
+    <p>Let's start with some basics about your semester.</p>
     <%= simple_form_for @preference, url: wizard_path, method: :put do |f| %>
       <%= f.input :num_courses, label: 'How many classes would you like to take this semester (total)?', collection: 1..15  %>
       <%= f.input :force_courses, as: :boolean, label: 'I need to specify certain course numbers that I <strong>must</strong> take'.html_safe, boolean_style: :inline %>
+      <%= f.input :waitlist, as: :boolean, label: 'I want my schedule to <strong>include</strong> waitlist-only courses'.html_safe, boolean_style: :inline %>
+      <div class="row">
+        <div class="medium-6 columns">
+          <%= f.input :credit_min, as: :string, label: 'What\'s the minimum number of credit hours you\'d like to take?', input_html: { value: 12 } %>
+        </div>
+        <div class="medium-6 columns">
+          <%= f.input :credit_max, as: :string, label: 'What\'s the maximum number of credit hours you\'d like to take?', input_html: { value: 18 } %>
+        </div>
+      </div>
+      <br />
+      <p>Would you rather have a schedule with generally fewer or more credit hours?</p>
+      <br />
+      <span class="left">Few Credits</span>
+      <span class="right">More Credits</span>
+      <div class="range-slider" data-slider>
+        <span class="range-slider-handle"></span>
+        <span class="range-slider-active-segment"></span>
+        <%= hidden_field_tag 'preference[credit_lean_weight]', 0.5 %>
+      </div>
+      <br />
+      <p>Would you rather take more general education or more for-major courses, in general?</p>
+      <br />
+      <span class="left">General Education</span>
+      <span class="right">Major Courses</span>
+      <div class="range-slider" data-slider>
+        <span class="range-slider-handle"></span>
+        <span class="range-slider-active-segment"></span>
+        <%= hidden_field_tag 'preference[ge_major_lean_weight]', 0.5 %>
+      </div>
+      <br />
       <%= f.submit 'Next >', class: 'button right' %>
     <% end %>
   </div>

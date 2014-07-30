@@ -1,5 +1,6 @@
 # The SchedulesController handles requests for generating a new schedule, as well as displaying the results thereof and
 # any currently selected schedule of the current user.
+# noinspection RubyStringKeysInHashInspection
 class SchedulesController < ApplicationController
   include Wicked::Wizard
 
@@ -10,11 +11,16 @@ class SchedulesController < ApplicationController
   end
 
   def show
-    @tips = ('<li>' << tips[step].join('</li><li>') << '</li>').html_safe if tips[step]
+    @tips = ('<p>' << tips[step].join('</p><p>') << '</p>').html_safe if tips[step]
 
     case step
       when :course_load
+        user_session['new_prefs'] = Hash.new
         @preference = Preference.new
+      when :courses
+        unless user_session['new_prefs']['force_courses'] == '1'
+          skip_step
+        end
       else
     end
     @preference = Preference.new choices: user_session['new_prefs'], user: current_user
@@ -22,26 +28,116 @@ class SchedulesController < ApplicationController
   end
 
   def update
-    user_session[:new_prefs] ||= Hash.new
+    user_session['new_prefs'] ||= Hash.new
 
     case step
-      when :generate_schedules
-        Preference.create user_session[:new_prefs]
+      when :course_load
+        # Bias the major/ge lean slider and interpret the results
+        bias_hash = view_context.bias_slider params['preference']['ge_major_lean_weight']
+        if bias_hash[:bias] == 0
+          params['preference']['ge_major_lean'] = 'ge'
+          params['preference']['ge_major_lean_weight'] = bias_hash[:strength].to_s
+        elsif bias_hash[:bias] == 1
+          params['preference']['ge_major_lean'] = 'major'
+          params['preference']['ge_major_lean_weight'] = bias_hash[:strength].to_s
+        else
+          params['preference']['ge_major_lean'] = 'none'
+        end
+
+        # Bias the credit lean slider and interpret the results
+        bias_hash = view_context.bias_slider params['preference']['credit_lean_weight']
+        if bias_hash[:bias] == 0
+          params['preference']['credit_lean'] = 'low'
+          params['preference']['credit_lean_weight'] = bias_hash[:strength].to_s
+        elsif bias_hash[:bias] == 1
+          params['preference']['credit_lean'] = 'high'
+          params['preference']['credit_lean_weight'] = bias_hash[:strength].to_s
+        else
+          params['preference']['credit_lean'] = 'none'
+        end
+
+        user_session['new_prefs'].merge! params['preference']
+      when :courses
+        # Flatten the :choices effect from fields_for here so it merges correctly
+        params['preference']['choices'].each_key do |key|
+          if key[0,6] == 'course' and not params['preference']['choices'][key.to_s].empty?
+            id = view_context.autocompleted_course_to_id params['preference']['choices'][key.to_s]
+            if id.nil?
+              params['preference']['choices'][key] = ''
+            else
+              params['preference']['choices'][key] = id.to_s
+            end
+          end
+        end
+        user_session['new_prefs'].merge! params['preference']['choices']
+      when :times
+        day_remap = {
+            'Sunday' => 'U',
+            'Monday' => 'M',
+            'Tuesday' => 'T',
+            'Wednesday' => 'W',
+            'Thursday' => 'R',
+            'Friday' => 'F',
+            'Saturday' => 'S'
+        }
+
+        # Invert choices to build the exclusion string
+        attendance_string = String.new
+        Date::DAYNAMES.each do |day|
+          if params['preference']['choices'][day] == '0'
+            attendance_string << day_remap[day]
+          end
+        end
+        params['preference'].delete('choices')
+        params['preference']['exclude_day_pattern'] = attendance_string
+
+        user_session['new_prefs'].merge! params['preference']
+
+      when :locations
+        user_session['new_prefs'].merge! params['preference']
+
+        # Begin cleanup of times
+        user_session['new_prefs']['start_time'] = DateTime.new(user_session['new_prefs']['start_time(1i)'].to_i,
+                                                               user_session['new_prefs']['start_time(2i)'].to_i,
+                                                               user_session['new_prefs']['start_time(3i)'].to_i,
+                                                               user_session['new_prefs']['start_time(4i)'].to_i,
+                                                               user_session['new_prefs']['start_time(5i)'].to_i)
+        user_session['new_prefs'].delete_if do |key, value|
+          key =~ /start_time\(\di\)/
+        end
+
+        user_session['new_prefs']['end_time'] = DateTime.new(user_session['new_prefs']['end_time(1i)'].to_i,
+                                                             user_session['new_prefs']['end_time(2i)'].to_i,
+                                                             user_session['new_prefs']['end_time(3i)'].to_i,
+                                                             user_session['new_prefs']['end_time(4i)'].to_i,
+                                                             user_session['new_prefs']['end_time(5i)'].to_i)
+        user_session['new_prefs'].delete_if do |key, value|
+          key =~ /end_time\(\di\)/
+        end
+
+        # Clean out extra key
+        user_session['new_prefs'].delete('force_courses')
+
+        pref = Preference.create choices: user_session['new_prefs'], user: current_user
       else
-        user_session[:new_prefs].merge! params['preference']
+        user_session['new_prefs'].merge! params['preference']
     end
+
+    # Strip empty values in hash
+    user_session['new_prefs'].delete_if do |key, value|
+      value == ''
+    end
+
     redirect_to next_wizard_path
   end
 
   protected
   def tips
     {
-      course_load: [
-          'No!',
-          'You will regret it'
-      ],
       courses: [
-          'please stop'
+          'Leaving more blank fields will result in more possible schedules.',
+          'Having more possible schedules means we can find the best fit for you more easily.',
+          'If you include a lot of courses here, you will also raise the odds that no valid schedule will exist.'
       ]
     }
   end

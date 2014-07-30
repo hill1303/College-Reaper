@@ -29,10 +29,10 @@
         </div>
         <div class="row">
           <div class="medium-6 columns">
-            <%= ff.input :gender %>
+            <%= ff.input :gender, as: :string %>
           </div>
           <div class="medium-6 columns">
-            <%= ff.input :pronoun %>
+            <%= ff.input :pronoun, as: :string %>
           </div>
         </div>
         <%= f.input :uuid, as: :string, label: 'Student ID' %>

@@ -1,4 +1,4 @@
-[![Code Climate](https://codeclimate.com/github/jimcavoli/College-Reaper.png)](https://codeclimate.com/github/jimcavoli/College-Reaper) [![Build Status](https://travis-ci.org/jimcavoli/College-Reaper.svg?branch=master)](https://travis-ci.org/jimcavoli/College-Reaper) [![Test Coverage](https://codeclimate.com/github/jimcavoli/College-Reaper/coverage.png)](https://codeclimate.com/github/jimcavoli/College-Reaper)
+[![Code Climate](https://codeclimate.com/github/jimcavoli/College-Reaper.png)](https://codeclimate.com/github/jimcavoli/College-Reaper) [![Build Status](https://travis-ci.org/jimcavoli/College-Reaper.svg?branch=master)](https://travis-ci.org/jimcavoli/College-Reaper) [![Test Coverage](https://codeclimate.com/github/jimcavoli/College-Reaper/coverage.png)](https://codeclimate.com/github/jimcavoli/College-Reaper)[![Documentation](http://inch-ci.org/github/jimcavoli/College-Reaper.png?branch=master)](http://inch-ci.org/github/jimcavoli/College-Reaper)
 ------------------------------------------------------------------------------------------------------------------------
 
 College-Reaper

@@ -18,7 +18,13 @@
 #= require_tree .
 
 $ ->
-  $(document).foundation()
+  $(document).foundation(
+    slider:
+      start: 0.0
+      end: 1.0
+      step: 0.01
+  )
+
   $('[data-autocomplete-courses]').typeahead
       hint: true
       highlight: true
@@ -27,4 +33,4 @@ $ ->
       displayKey: 'course'
       source: window.courses.ttAdapter()
 
-return
+  return
