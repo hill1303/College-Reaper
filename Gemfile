@@ -32,6 +32,8 @@ gem 'jquery-rails'
 gem 'foundation-rails', '~> 5.0'
 # Add Font Awesome icons to the CSS available
 gem 'font-awesome-sass'
+# Leaflet.js for maps
+gem 'leaflet-rails', '~> 0.7.3'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

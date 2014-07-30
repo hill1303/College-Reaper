@@ -24,24 +24,23 @@ class CompletionsController < ApplicationController
     @completion = Completion.find(params[:id])
   end
 
-  # Create allows a user to store a new completion in the database
+  # Allows user to create a new Completion
   def create
-    @completion = Completion.new(params[:id])
+    params['completion']['user_id'] = current_user.id
+    params['completion']['course_id'] = view_context.autocompleted_course_to_id params['completion']['course_id']
+    completion = Completion.create(params['completion'].permit(:course_id, :grade, :user_id))
+    redirect_to completion
   end
 
-  # Updates existing completion in database
+  # Allows user to update their Completion information
   def update
-    @completion = Completion.find(params[:id])
-    respond_to do |format|
-      if @completion.update(params[:id])
-        redirect_to @completion, notice: 'Completion was successfully updated.'
-      else
-        render :edit
-      end
-    end
+    completion = Completion.find(params[:id])
+    params['completion']['course_id'] = view_context.autocompleted_course_to_id params['completion']['course_id']
+    completion.update_attributes! params['completion'].permit(:id, :course_id, :grade)
+    redirect_to completion
   end
 
-  # Removes a completion from user history
+  # +destroy+ a completion from user history
   def destroy
     @completion = Completion.find(params[:id])
     @completion.destroy
