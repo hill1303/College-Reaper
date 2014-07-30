@@ -25,7 +25,7 @@ class CompletionsController < ApplicationController
   end
 
 
-  # Allows user to create new Completion
+  # Allows user to create a new Completion
   def create
     params['completion']['user_id'] = current_user.id
     params['completion']['course_id'] = view_context.autocompleted_course_to_id params['completion']['course_id']
