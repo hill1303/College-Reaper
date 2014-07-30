@@ -28,8 +28,5 @@ describe Completion do
       should validate_presence_of :grade
     end
 
-    it 'the length of :grade' do
-      should ensure_length_of(:grade).is_equal_to(2)
-    end
   end
 end

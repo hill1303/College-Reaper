@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :user
   get 'schedules' => 'schedules#index', as: :user_root
 
-  resources :schedules
+  resources :schedules, :completions
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
