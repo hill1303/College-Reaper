@@ -521,8 +521,8 @@ section_params = Array.new
 
   section_params.push({
       room: '10' << i.to_s,
-      start_time: Time.at(36000 + time_delta),
-      end_time: Time.at(39600 + time_delta),
+      start_time: Time.parse("08:00:00") + time_delta,
+      end_time: Time.parse("14:00:00") + time_delta,
       rpt_pattern: repeat_patterns.sample,
       open: true,
       course_seats: 40,
@@ -612,16 +612,16 @@ Preference.create({
                          num_courses: 3,
                          credit_min: 8,
                          credit_max: 18,
-                         credit_lean: 'low',
-                         credit_lean_weight: 0.6,
-                         distance_weight: 0.4,
+                         credit_lean: 'high',
+                         credit_lean_weight: 0.5333333333333334,
+                         distance_weight: 0.28,
                          ge_major_lean: 'major',
-                         ge_major_lean_weight: 0.75,
+                         ge_major_lean_weight: 0.7777777777777778,
                          waitlist: false,
-                         start_time: Time.at(36000*11), # 6 AM, probably  \ These depend on the time zone
-                         end_time: Time.at(39600*26), # 9 PM, probably    / currently set for -0500
-                         time_weight: 0.3,
-                         exclude_day_pattern: 'M'
+                         start_time: Time.parse("06:00:00"), # 6 AM, probably  \ These depend on the time zone
+                         end_time: Time.parse("21:00:00"), # 9 PM, probably    / currently set for -0500
+                         time_weight: 0.78,
+                         exclude_day_pattern: "UWS"
                      }
                  })
 

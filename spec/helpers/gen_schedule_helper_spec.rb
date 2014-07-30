@@ -1,9 +1,10 @@
 require 'rails_helper'
+include GenScheduleHelper
 
 describe MockSchedule do
   before :all do
     preference = build :preference
-    @mock_schedule = GenScheduleHelper::MockSchedule.new preference
+    @mock_schedule = MockSchedule.new preference
   end
   
   
@@ -46,10 +47,6 @@ describe MockSchedule do
     end
     
   end
-  
-    context 'with a preference' do
-      it 'should have an empty class section set'
-    end
       # evaluate!
       # fill_schedule!
       # class_section_set
@@ -64,7 +61,4 @@ describe MockSchedule do
       # safe_assignment?
       # set_class_sections
       # preference  
-          
-  end
-  
 end
