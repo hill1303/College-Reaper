@@ -38,6 +38,42 @@
     <div id="bodyContent">
         <div id="content">
   
+    <div class="description">
+      
+<p>This <a href="ScheduleGenerator.html">ScheduleGenerator</a> class provides
+some general methods for generating sets of schedules based on user
+preferences and a set of class sections that are available from which to
+make schedules.</p>
+
+<p>NOTES: Behind the scenes, a genetic algorithm is employed which attempts to
+approach the NP-Complete problem of creating all possible schedule
+permutations from a set of class sections and provides an approximation of
+an optimal schedule based on preferences. Because of this, some of the
+methods available to the schedule generators consider schedules in a
+genetic paradigm rather than strictly as schedules/classes. Notably, the
+documentation will have the following vocabulary.  * Individual: a single
+entity that exists as part of a population. As it pertains to this class,
+an individual is a  schedule.  * Mutation: altering a genetic sequence to
+contain new, possibly unseen genes. As it pertains to this class, a 
+schedule&#39;s class section set gets altered to possibly contain new,
+random class sections.  * Mate Selection: individuals select mates that are
+close in fitness to themselves, but have a low probability of  selecting a
+random mate from a gene pool. As it pertains to this class, a mate is a
+schedule whose aggregate score  is most similar to another schedule&#39;s
+aggregate score, or a random selection from a schedule set.  * Fitness: the
+overall rank/ability of an individual to survive in a population. As it
+pertains to this class, a  schedule&#39;s fitness is it&#39;s aggregate
+heuristic score.  * Population: a large group of individuals that interact
+by “mating” (ie. exchanging genes) and dying. As it pertains  to this
+class, a population is a set of schedules.  * Genes: a single item used in
+a sequence/set to represent an individual&#39;s unique properties. As it
+pertains to this  class, a schedule&#39;s class sections are considered
+individual genes.  * Gene Sequence: a set of genes that make up the
+representation of an indivual. As it pertains to this class, a 
+schedule&#39;s class section set is considered a gene sequence.</p>
+
+    </div>
+  
 
 
   
@@ -61,17 +97,17 @@
             
               
               <li>
-                <a href="#method-i-evaluate_population">evaluate_population</a>,
+                <a href="#method-c-evaluate_population">evaluate_population</a>,
               </li>
             
               
               <li>
-                <a href="#method-i-evolve_schedules">evolve_schedules</a>,
+                <a href="#method-c-evolve_schedules">evolve_schedules</a>,
               </li>
             
               
               <li>
-                <a href="#method-i-exchange_genes-21">exchange_genes!</a>
+                <a href="#method-c-exchange_genes-21">exchange_genes!</a>
               </li>
             
           </ul>
@@ -83,12 +119,12 @@
             
               
               <li>
-                <a href="#method-i-generate_schedules">generate_schedules</a>,
+                <a href="#method-c-generate_permutations_of_schedules">generate_permutations_of_schedules</a>,
               </li>
             
               
               <li>
-                <a href="#method-i-generate_schedules_easy">generate_schedules_easy</a>
+                <a href="#method-c-generate_schedules">generate_schedules</a>
               </li>
             
           </ul>
@@ -100,7 +136,7 @@
             
               
               <li>
-                <a href="#method-i-mutate-21">mutate!</a>
+                <a href="#method-c-mutate-21">mutate!</a>
               </li>
             
           </ul>
@@ -112,7 +148,19 @@
             
               
               <li>
-                <a href="#method-i-new_generation-21">new_generation!</a>
+                <a href="#method-c-new_generation-21">new_generation!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-purge_and_replace_invalid_schedules-21">purge_and_replace_invalid_schedules!</a>
               </li>
             
           </ul>
@@ -124,7 +172,7 @@
             
               
               <li>
-                <a href="#method-i-select_mate">select_mate</a>
+                <a href="#method-c-select_mate">select_mate</a>
               </li>
             
           </ul>
@@ -156,7 +204,8 @@
           
             <tr valign='top'>
               <td>&nbsp;</td>
-              <td colspan="2" class="attr-desc"></td>
+              <td colspan="2" class="attr-desc"><p>A low probability used in determining whether a schedule&#39;s gene
+sequence should be mutated with new, random genes.</p></td>
             </tr>
           
         
@@ -168,19 +217,34 @@
           
             <tr valign='top'>
               <td>&nbsp;</td>
-              <td colspan="2" class="attr-desc"></td>
+              <td colspan="2" class="attr-desc"><p>A some-what low probability that an individual will select a random mate
+rather one that is the next best individual.</p></td>
             </tr>
           
         
           <tr valign='top'>
             <td class="attr-name">MAX_STALE_GENERATIONS</td>
             <td>=</td>
-            <td class="attr-value">5</td>
+            <td class="attr-value">3</td>
           </tr>
           
             <tr valign='top'>
               <td>&nbsp;</td>
-              <td colspan="2" class="attr-desc"></td>
+              <td colspan="2" class="attr-desc"><p>The number of generations that should pass before a population is to be
+considered as converged.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">MAX_POPULATION_SIZE</td>
+            <td>=</td>
+            <td class="attr-value">500</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>The maximum number of individuals that are to be generated by way of
+permutation generation.</p></td>
             </tr>
           
         
@@ -192,20 +256,31 @@
 
 
     <!-- Methods -->
-        
-      <div class="sectiontitle">Instance Public methods</div>
+    
+      <div class="sectiontitle">Class Public methods</div>
       
         <div class="method">
-          <div class="title method-title" id="method-i-evaluate_population">
+          <div class="title method-title" id="method-c-evaluate_population">
             
               <b>evaluate_population</b>(schedule_set)
             
-            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-i-evaluate_population" name="method-i-evaluate_population" class="permalink">Link</a>
+            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-c-evaluate_population" name="method-c-evaluate_population" class="permalink">Link</a>
           </div>
           
           
             <div class="description">
-              
+              <p>Evaluates the overall fitness of a population as well as the fitness of the
+most fit individual in a population.</p>
+
+<p>Returns:</p>
+
+<p>The fitness of the most fit individual in <code>schedule_set</code> and the
+overall average fitness of <code>schedule_set</code>.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>schedule_set</code> - The population of schedules to be evaluated.</p>
+</li></ul>
             </div>
           
           
@@ -219,20 +294,18 @@
               
               <p class="source-link">
                 Source: 
-                <a href="javascript:toggleSource('method-i-evaluate_population_source')" id="l_method-i-evaluate_population_source">show</a>
+                <a href="javascript:toggleSource('method-c-evaluate_population_source')" id="l_method-c-evaluate_population_source">show</a>
                 
               </p>
-              <div id="method-i-evaluate_population_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 420</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">evaluate_population</span>(<span class="ruby-identifier">schedule_set</span>)
+              <div id="method-c-evaluate_population_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 846</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">evaluate_population</span>(<span class="ruby-identifier">schedule_set</span>)
   <span class="ruby-identifier">schedule_list</span> = <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">to_a</span>
-  <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">sort!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">aggregate_score</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">aggregate_score</span> }
-  <span class="ruby-identifier">top_individual_score</span> = <span class="ruby-identifier">schedule_list</span>[<span class="ruby-number">0</span>].<span class="ruby-identifier">aggregate_score</span>
-  
+  <span class="ruby-identifier">schedule_list</span>.<span class="ruby-identifier">sort!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">aggregate_score</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">aggregate_score</span> }
+  <span class="ruby-identifier">top_individual_score</span> = <span class="ruby-identifier">schedule_list</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">aggregate_score</span>
   <span class="ruby-identifier">score_sum</span> = <span class="ruby-number">0</span>
   <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">schedule</span><span class="ruby-operator">|</span> <span class="ruby-identifier">score_sum</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">aggregate_score</span> }
   <span class="ruby-identifier">avg</span> = <span class="ruby-identifier">score_sum</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">size</span>
-  
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">top_individual_score</span>, <span class="ruby-identifier">avg</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
@@ -241,16 +314,31 @@
           </div>
         
         <div class="method">
-          <div class="title method-title" id="method-i-evolve_schedules">
+          <div class="title method-title" id="method-c-evolve_schedules">
             
-              <b>evolve_schedules</b>(class_section_set)
+              <b>evolve_schedules</b>(preferences, class_section_set)
             
-            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-i-evolve_schedules" name="method-i-evolve_schedules" class="permalink">Link</a>
+            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-c-evolve_schedules" name="method-c-evolve_schedules" class="permalink">Link</a>
           </div>
           
           
             <div class="description">
-              
+              <p>Generates a set of somewhat optimal schedules from specified user
+preferences and a set of available class sections using a genetic
+algorithm.</p>
+
+<p>Returns:</p>
+
+<p>A set of schedules.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>preferences</code> - A collection of user specified preferences that
+help shape the set of schedules generated.</p>
+</li><li>
+<p><code>class_section_set</code> - A set of available class sections from
+which schedules can be generated.</p>
+</li></ul>
             </div>
           
           
@@ -264,34 +352,39 @@
               
               <p class="source-link">
                 Source: 
-                <a href="javascript:toggleSource('method-i-evolve_schedules_source')" id="l_method-i-evolve_schedules_source">show</a>
+                <a href="javascript:toggleSource('method-c-evolve_schedules_source')" id="l_method-c-evolve_schedules_source">show</a>
                 
               </p>
-              <div id="method-i-evolve_schedules_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 462</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">evolve_schedules</span>(<span class="ruby-identifier">class_section_set</span>)
-  
+              <div id="method-c-evolve_schedules_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 943</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">evolve_schedules</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">convergence_tracker</span> = <span class="ruby-number">0</span>
   <span class="ruby-identifier">best_top_individual_score</span> = <span class="ruby-number">0</span>
   <span class="ruby-identifier">best_population_avg_score</span> = <span class="ruby-number">0</span>
   
   <span class="ruby-identifier">population_snapshot</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">population</span> = <span class="ruby-identifier">generate_schedules</span>(<span class="ruby-identifier">class_section_set</span>, <span class="ruby-identifier">preferences</span>)
-  
+  <span class="ruby-identifier">population</span> = <span class="ruby-identifier">generate_schedules</span> <span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>
   <span class="ruby-keyword">while</span> <span class="ruby-identifier">convergence_tracker</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">MAX_STALE_GENERATIONS</span>
-    <span class="ruby-identifier">new_generation</span> = <span class="ruby-identifier">new_generation!</span>(<span class="ruby-identifier">population</span>, <span class="ruby-identifier">class_section_set</span>)
-    <span class="ruby-identifier">top_individual_score</span>, <span class="ruby-identifier">population_avg_score</span> = <span class="ruby-identifier">evaluate_population</span> <span class="ruby-identifier">new_generation</span>
+    <span class="ruby-identifier">population_copy</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">population</span>
+    <span class="ruby-comment"># Progress the population through a generation and rank the population</span>
+    <span class="ruby-identifier">population</span> = <span class="ruby-identifier">new_generation!</span> <span class="ruby-identifier">population_copy</span>, <span class="ruby-identifier">class_section_set</span>
+    <span class="ruby-identifier">purge_and_replace_invalid_schedules!</span> <span class="ruby-identifier">population</span>, <span class="ruby-identifier">class_section_set</span>
     
+    <span class="ruby-identifier">top_individual_score</span>, <span class="ruby-identifier">population_avg_score</span> = <span class="ruby-identifier">evaluate_population</span> <span class="ruby-identifier">population</span>
+    <span class="ruby-comment"># Check for population improvement</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">top_individual_score</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">best_top_individual_score</span>
       <span class="ruby-comment"># There was a change in the best individual, reset convergence tracker</span>
       <span class="ruby-identifier">convergence_tracker</span> = <span class="ruby-number">0</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">population_avg_score</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">best_top_individual_score</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">population_avg_score</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">best_population_avg_score</span> 
         <span class="ruby-comment"># Population is the best we have seen, take snapshot</span>
-        <span class="ruby-identifier">population_snapshot</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">new_generation</span>)
+        <span class="ruby-identifier">best_top_individual_score</span> = <span class="ruby-identifier">top_individual_score</span>
+        <span class="ruby-identifier">best_population_avg_score</span> = <span class="ruby-identifier">population_avg_score</span>
+        <span class="ruby-identifier">population_snapshot</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">population</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># No improvement was observed, mark for potential convergence</span>
       <span class="ruby-identifier">convergence_tracker</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
-    <span class="ruby-keyword">end</span>       
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">population_snapshot</span>
 <span class="ruby-keyword">end</span></pre>
@@ -301,16 +394,31 @@
           </div>
         
         <div class="method">
-          <div class="title method-title" id="method-i-exchange_genes-21">
+          <div class="title method-title" id="method-c-exchange_genes-21">
             
               <b>exchange_genes!</b>(schedule, other_schedule)
             
-            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-i-exchange_genes-21" name="method-i-exchange_genes-21" class="permalink">Link</a>
+            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-c-exchange_genes-21" name="method-c-exchange_genes-21" class="permalink">Link</a>
           </div>
           
           
             <div class="description">
-              
+              <p>Swaps a random number of class sections/genes from one schedule to another
+and vice versa. This is considered a breeding of the two schedules.</p>
+
+<p>Returns:</p>
+
+<p>The two schedules that result from swapping over random class
+sections/genes.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>schedule</code> - One of the schedules to be mated with another
+schedule.</p>
+</li><li>
+<p><code>other_schedule</code> - The other schedule to be mated with another
+schedule.</p>
+</li></ul>
             </div>
           
           
@@ -324,25 +432,22 @@
               
               <p class="source-link">
                 Source: 
-                <a href="javascript:toggleSource('method-i-exchange_genes-21_source')" id="l_method-i-exchange_genes-21_source">show</a>
+                <a href="javascript:toggleSource('method-c-exchange_genes-21_source')" id="l_method-c-exchange_genes-21_source">show</a>
                 
               </p>
-              <div id="method-i-exchange_genes-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 355</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">exchange_genes!</span>(<span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">other_schedule</span>)
-  <span class="ruby-identifier">num_genes_to_swap</span> = (<span class="ruby-number">1</span><span class="ruby-operator">...</span><span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">size</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sample</span>
-  
+              <div id="method-c-exchange_genes-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 762</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">exchange_genes!</span>(<span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">other_schedule</span>)
+  <span class="ruby-comment"># Get a random number of genes to swap</span>
+  <span class="ruby-identifier">num_genes_to_swap</span> = (<span class="ruby-number">1</span><span class="ruby-operator">...</span><span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">num_courses</span>.<span class="ruby-identifier">to_i</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sample</span>
   <span class="ruby-identifier">schedule_swap</span> = <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sample</span> <span class="ruby-identifier">num_genes_to_swap</span>
   <span class="ruby-identifier">other_schedule_swap</span> = <span class="ruby-identifier">other_schedule</span>.<span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sample</span> <span class="ruby-identifier">num_genes_to_swap</span>
-  
   <span class="ruby-comment"># Remove the genes to be swapped from their original gene sequence...</span>
-  <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">subtract</span>(<span class="ruby-identifier">schedule_swap</span>)
-  <span class="ruby-identifier">other_schedule</span>.<span class="ruby-identifier">class_section_set</span>(<span class="ruby-identifier">other_schedule_swap</span>)
-  
+  <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">subtract</span> <span class="ruby-identifier">schedule_swap</span>
+  <span class="ruby-identifier">other_schedule</span>.<span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">subtract</span> <span class="ruby-identifier">other_schedule_swap</span>
   <span class="ruby-comment"># ...and insert them into the other gene sequence</span>
-  <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">other_schedule_swap</span>)
-  <span class="ruby-identifier">other_schedule</span>.<span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">schedule_swap</span>)
-  
+  <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">merge</span> <span class="ruby-identifier">other_schedule_swap</span>
+  <span class="ruby-identifier">other_schedule</span>.<span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">merge</span> <span class="ruby-identifier">schedule_swap</span> 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">other_schedule</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
@@ -351,16 +456,30 @@
           </div>
         
         <div class="method">
-          <div class="title method-title" id="method-i-generate_schedules">
+          <div class="title method-title" id="method-c-generate_permutations_of_schedules">
             
-              <b>generate_schedules</b>(class_section_set, preferences)
+              <b>generate_permutations_of_schedules</b>(preferences, class_section_set)
             
-            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-i-generate_schedules" name="method-i-generate_schedules" class="permalink">Link</a>
+            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-c-generate_permutations_of_schedules" name="method-c-generate_permutations_of_schedules" class="permalink">Link</a>
           </div>
           
           
             <div class="description">
-              
+              <p>Generates a set of schedules by way of permutation generation. NOTE: For
+large sets of class sections, this becomes computationally intractable and
+is in fact capped by a total population size constant.</p>
+
+<p>Returns:</p>
+
+<p>A set of random, valid schedules.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>preferences</code> - A collection of user preference settings.</p>
+</li><li>
+<p><code>class_section_set</code> - A set of class sections that are available
+and from which to generate a schedule.</p>
+</li></ul>
             </div>
           
           
@@ -374,22 +493,88 @@
               
               <p class="source-link">
                 Source: 
-                <a href="javascript:toggleSource('method-i-generate_schedules_source')" id="l_method-i-generate_schedules_source">show</a>
+                <a href="javascript:toggleSource('method-c-generate_permutations_of_schedules_source')" id="l_method-c-generate_permutations_of_schedules_source">show</a>
                 
               </p>
-              <div id="method-i-generate_schedules_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 447</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">generate_schedules</span>(<span class="ruby-identifier">class_section_set</span>, <span class="ruby-identifier">preferences</span>)
-  <span class="ruby-identifier">class_section_set_copy</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">class_section_set</span>)
-  
-  <span class="ruby-identifier">schedule_set</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
-  
-  <span class="ruby-identifier">class_section_set_copy</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">class_section</span><span class="ruby-operator">|</span>
+              <div id="method-c-generate_permutations_of_schedules_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 868</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">generate_permutations_of_schedules</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
+  <span class="ruby-identifier">schedules</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">class_section_list</span> = <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">to_a</span>
+  <span class="ruby-comment"># Create a set of valid possible schedules with a cap set to prevent long computation time</span>
+  <span class="ruby-identifier">class_section_list</span>.<span class="ruby-identifier">combination</span> <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">num_courses</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">possible_schedule</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">schedule</span> = <span class="ruby-constant">MockSchedule</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">preferences</span>)
+    <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">class_section_set</span> = <span class="ruby-identifier">possible_schedule</span>
+    
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">is_valid?</span>
+      <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">evaluate!</span>
+      <span class="ruby-identifier">schedules</span>.<span class="ruby-identifier">add?</span> <span class="ruby-identifier">schedule</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">schedules</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-constant">MAX_POPULATION_SIZE</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">schedules</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-generate_schedules">
+            
+              <b>generate_schedules</b>(preferences, class_section_set)
+            
+            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-c-generate_schedules" name="method-c-generate_schedules" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Generates a limited set of random, valid schedules from a set of available
+class sections. NOTE: This does not generate the set of all
+<em>possible</em> schedules.</p>
+
+<p>Returns:</p>
+
+<p>A set of random, valid schedules.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>preferences</code> - A collection of user specified preferences.</p>
+</li><li>
+<p>+class_section_set + - The set of class sections available from which to
+generate schedules.</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-generate_schedules_source')" id="l_method-c-generate_schedules_source">show</a>
+                
+              </p>
+              <div id="method-c-generate_schedules_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 915</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">generate_schedules</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
+  <span class="ruby-identifier">schedule_set</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-comment"># Make a copy of the class section set so that we can delete visited class sections</span>
+  <span class="ruby-identifier">class_section_set_copy</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">class_section_set</span>)
+  <span class="ruby-identifier">class_section_set_copy</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">class_section</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">schedule</span> = <span class="ruby-constant">MockSchedule</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">preferences</span>
     <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">fill_schedule!</span> <span class="ruby-identifier">class_section_set_copy</span>
-    <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">evaluate!</span>
-    <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">add?</span>(<span class="ruby-identifier">schedule</span>)
-    <span class="ruby-identifier">class_section_set_copy</span>.<span class="ruby-identifier">delete?</span> <span class="ruby-identifier">class_section</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">is_valid?</span>
+      <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">evaluate!</span>
+      <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">add?</span> <span class="ruby-identifier">schedule</span>
+      <span class="ruby-comment"># Delete the section, preventing generation from possibly starting with that section again</span>
+      <span class="ruby-identifier">class_section_set_copy</span>.<span class="ruby-identifier">delete?</span> <span class="ruby-identifier">class_section</span>
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">schedule_set</span>
 <span class="ruby-keyword">end</span></pre>
@@ -399,64 +584,30 @@
           </div>
         
         <div class="method">
-          <div class="title method-title" id="method-i-generate_schedules_easy">
-            
-              <b>generate_schedules_easy</b>(class_section_set, preferences)
-            
-            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-i-generate_schedules_easy" name="method-i-generate_schedules_easy" class="permalink">Link</a>
-          </div>
-          
-          
-            <div class="description">
-              
-            </div>
-          
-          
-          
-
-          
-          
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                Source: 
-                <a href="javascript:toggleSource('method-i-generate_schedules_easy_source')" id="l_method-i-generate_schedules_easy_source">show</a>
-                
-              </p>
-              <div id="method-i-generate_schedules_easy_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 432</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">generate_schedules_easy</span>(<span class="ruby-identifier">class_section_set</span>, <span class="ruby-identifier">preferences</span>)
-  <span class="ruby-identifier">schedules</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">class_section_list</span> = <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">to_a</span>
-  
-  <span class="ruby-identifier">class_section_list</span>.<span class="ruby-identifier">combination</span>(<span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">choices</span>[<span class="ruby-value">:num_courses</span>]) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">possible_schedule</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">schedule</span> = <span class="ruby-constant">MockSchedule</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">preferences</span>)
-    <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">set_class_sections</span> <span class="ruby-identifier">possible_schedule</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">is_valid?</span>
-      <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">evaluate!</span>
-      <span class="ruby-identifier">schedules</span>.<span class="ruby-identifier">add?</span>(<span class="ruby-identifier">schedule</span>) 
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>    
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">schedules</span>
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
-        
-        <div class="method">
-          <div class="title method-title" id="method-i-mutate-21">
+          <div class="title method-title" id="method-c-mutate-21">
             
               <b>mutate!</b>(schedule, class_section_set)
             
-            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-i-mutate-21" name="method-i-mutate-21" class="permalink">Link</a>
+            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-c-mutate-21" name="method-c-mutate-21" class="permalink">Link</a>
           </div>
           
           
             <div class="description">
-              
+              <p>Randomly replaces class sections/genes in a schedule with class
+sections/genes from a pool of available class sections/genes.</p>
+
+<p>Returns:</p>
+
+<p>The resulting <code>class_section_set</code> (gene sequence) of a schedule
+after being mutated with random new  class sections/genes.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>schedule</code> - The individual to be mutated.</p>
+</li><li>
+<p><code>class_section_set</code> - The pool of available class sections,
+selections from which randomly get inserted into <code>schedule</code>.</p>
+</li></ul>
             </div>
           
           
@@ -470,15 +621,14 @@
               
               <p class="source-link">
                 Source: 
-                <a href="javascript:toggleSource('method-i-mutate-21_source')" id="l_method-i-mutate-21_source">show</a>
+                <a href="javascript:toggleSource('method-c-mutate-21_source')" id="l_method-c-mutate-21_source">show</a>
                 
               </p>
-              <div id="method-i-mutate-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 342</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">mutate!</span>(<span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">class_section_set</span>)
+              <div id="method-c-mutate-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 739</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">mutate!</span>(<span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-comment"># Merely converting to a list so that we may use the sample method on a set of class_sections</span>
   <span class="ruby-identifier">class_section_set_list</span> = <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">to_a</span>
-  
   <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">map!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">scheduled_class_section</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-constant">Random</span>.<span class="ruby-identifier">rand</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-constant">MUTATION_RATE</span>
       <span class="ruby-identifier">random_new_gene</span> = <span class="ruby-identifier">class_section_set_list</span>.<span class="ruby-identifier">sample</span>
@@ -493,16 +643,34 @@
           </div>
         
         <div class="method">
-          <div class="title method-title" id="method-i-new_generation-21">
+          <div class="title method-title" id="method-c-new_generation-21">
             
               <b>new_generation!</b>(schedule_set, class_section_set)
             
-            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-i-new_generation-21" name="method-i-new_generation-21" class="permalink">Link</a>
+            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-c-new_generation-21" name="method-c-new_generation-21" class="permalink">Link</a>
           </div>
           
           
             <div class="description">
-              
+              <p>Creates a new schedule set/population, using the following steps.  * Select
+a mate for an individual.  * Mate the two individuals (crossover/exchange
+genes).  * Apply random mutation to their resulting new gene sequences.  *
+Add the two individuals to a new population/gene pool.</p>
+
+<p>Returns:</p>
+
+<p>A new population set containing the next generation of
+individuals/schedules.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>schedule_set</code> - The current population of schedules from which
+to create a new generation.</p>
+</li><li>
+<p><code>class_section_set</code> - A pool of class sections from which to
+select random elements and insert into an individuals gene sequence during
+mutation.</p>
+</li></ul>
             </div>
           
           
@@ -516,38 +684,26 @@
               
               <p class="source-link">
                 Source: 
-                <a href="javascript:toggleSource('method-i-new_generation-21_source')" id="l_method-i-new_generation-21_source">show</a>
+                <a href="javascript:toggleSource('method-c-new_generation-21_source')" id="l_method-c-new_generation-21_source">show</a>
                 
               </p>
-              <div id="method-i-new_generation-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 372</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">new_generation!</span>(<span class="ruby-identifier">schedule_set</span>, <span class="ruby-identifier">class_section_set</span>)
-  
+              <div id="method-c-new_generation-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 791</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">new_generation!</span>(<span class="ruby-identifier">schedule_set</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">new_generation</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
-  
   <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">schedule</span><span class="ruby-operator">|</span>
-    <span class="ruby-comment"># Remove the schedule from the population temporarily</span>
-    <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">delete?</span> <span class="ruby-identifier">schedule</span>
-    <span class="ruby-comment"># Select a mate for the schedule (removes mate from the population, if it exists)</span>
-    <span class="ruby-identifier">mate</span> = <span class="ruby-identifier">select_mate!</span>(<span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">schedule_set</span>)
-    <span class="ruby-comment"># If a schedule does not have a mate, it is likely the worst schedule and should be deleted</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">mate</span>.<span class="ruby-identifier">nil?</span>        
-      <span class="ruby-comment"># Breed the two schedules and mutate the children</span>
-      <span class="ruby-identifier">child1</span>, <span class="ruby-identifier">child2</span> = <span class="ruby-identifier">exchange_genes!</span>(<span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">mate</span>)
-      <span class="ruby-identifier">mutate!</span> <span class="ruby-identifier">child1</span>
-      <span class="ruby-identifier">mutate!</span> <span class="ruby-identifier">child2</span>
-    
-      <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">child1</span>.<span class="ruby-identifier">is_valid?</span>
-        <span class="ruby-identifier">child1</span>.<span class="ruby-identifier">reset!</span> <span class="ruby-identifier">class_section_set</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">child2</span>.<span class="ruby-identifier">is_valid?</span>
-        <span class="ruby-identifier">child1</span>.<span class="ruby-identifier">reset!</span> <span class="ruby-identifier">class_section_set</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">child1</span>.<span class="ruby-identifier">evaluate!</span>
-      <span class="ruby-identifier">child2</span>.<span class="ruby-identifier">evaluate!</span>
-    
-      <span class="ruby-identifier">new_generation</span>.<span class="ruby-identifier">add?</span> <span class="ruby-identifier">child1</span>
-      <span class="ruby-identifier">new_generation</span>.<span class="ruby-identifier">add?</span> <span class="ruby-identifier">child2</span>
+    <span class="ruby-comment"># Select a mate for the schedule</span>
+    <span class="ruby-identifier">mate</span> = <span class="ruby-identifier">select_mate</span> <span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">schedule_set</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">mate</span>.<span class="ruby-identifier">nil?</span>
+      
+      <span class="ruby-comment"># Breed the two schedules and mutate them</span>
+      <span class="ruby-identifier">exchange_genes!</span> <span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">mate</span>
+      <span class="ruby-identifier">mutate!</span> <span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">class_section_set</span>
+      <span class="ruby-identifier">mutate!</span> <span class="ruby-identifier">mate</span>, <span class="ruby-identifier">class_section_set</span>
+      
+      <span class="ruby-comment"># Add these children to the gene pool</span>
+      <span class="ruby-identifier">new_generation</span>.<span class="ruby-identifier">add?</span> <span class="ruby-identifier">schedule</span>
+      <span class="ruby-identifier">new_generation</span>.<span class="ruby-identifier">add?</span> <span class="ruby-identifier">mate</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">new_generation</span>
@@ -558,16 +714,30 @@
           </div>
         
         <div class="method">
-          <div class="title method-title" id="method-i-select_mate">
+          <div class="title method-title" id="method-c-purge_and_replace_invalid_schedules-21">
             
-              <b>select_mate</b>(schedule, schedule_set)
+              <b>purge_and_replace_invalid_schedules!</b>(schedule_set, class_section_set)
             
-            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-i-select_mate" name="method-i-select_mate" class="permalink">Link</a>
+            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-c-purge_and_replace_invalid_schedules-21" name="method-c-purge_and_replace_invalid_schedules-21" class="permalink">Link</a>
           </div>
           
           
             <div class="description">
-              
+              <p>Finds invalid schedules in a population and removes them, replacing them
+with random and valid schedules.</p>
+
+<p>Returns:</p>
+
+<p>A set/population of valid schedules.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>schedule_set</code> - The original population of schedules to be
+validated/cleaned.</p>
+</li><li>
+<p><code>class_section_set</code> - The set of class sections from which to
+select random new class sections/genes.</p>
+</li></ul>
             </div>
           
           
@@ -581,23 +751,79 @@
               
               <p class="source-link">
                 Source: 
-                <a href="javascript:toggleSource('method-i-select_mate_source')" id="l_method-i-select_mate_source">show</a>
+                <a href="javascript:toggleSource('method-c-purge_and_replace_invalid_schedules-21_source')" id="l_method-c-purge_and_replace_invalid_schedules-21_source">show</a>
                 
               </p>
-              <div id="method-i-select_mate_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 404</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">select_mate</span>(<span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">schedule_set</span>)   
+              <div id="method-c-purge_and_replace_invalid_schedules-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 894</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">purge_and_replace_invalid_schedules!</span>(<span class="ruby-identifier">schedule_set</span>, <span class="ruby-identifier">class_section_set</span>)
+  <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">schedule</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">is_valid?</span>
+      <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">reset!</span> <span class="ruby-identifier">class_section_set</span>
+      <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">evaluate!</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">schedule_set</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-select_mate">
+            
+              <b>select_mate</b>(schedule, schedule_set)
+            
+            <a href="../../classes/GenScheduleHelper/ScheduleGenerator.html#method-c-select_mate" name="method-c-select_mate" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Selects the next most fit schedule or with some low probability, a random
+schedule from <code>schedule_set</code>.</p>
+
+<p>Returns:</p>
+
+<p>The selected mate from a population/<code>schedule_set</code>.
+<code>nil</code> in the case when no next best mate exists  for
+<code>schedule</code> (that is, <code>schedule</code> is the least fit
+individual of a population).</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>schedule</code> - A schedule for which a mate is being selected.</p>
+</li><li>
+<p><code>schedule_set</code> - The population from which to select a mate.</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-select_mate_source')" id="l_method-c-select_mate_source">show</a>
+                
+              </p>
+              <div id="method-c-select_mate_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 822</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">select_mate</span>(<span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">schedule_set</span>)
   <span class="ruby-comment"># Convert the schedule set to an array simply for using the sample method</span>
   <span class="ruby-identifier">schedule_list</span> = <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">to_a</span>
   <span class="ruby-keyword">if</span> <span class="ruby-constant">Random</span>.<span class="ruby-identifier">rand</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-constant">RANDOM_SELECTION_RATE</span>
     <span class="ruby-identifier">random_mate</span> = <span class="ruby-identifier">schedule_list</span>.<span class="ruby-identifier">sample</span>
-    <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">delete?</span> <span class="ruby-identifier">random_mate</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">random_mate</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">schedule_list</span>.<span class="ruby-identifier">sort!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">aggregate_score</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">aggregate_score</span> }
+    <span class="ruby-identifier">schedule_list</span>.<span class="ruby-identifier">sort!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">aggregate_score</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">aggregate_score</span> }
     <span class="ruby-identifier">schedule_index</span> = <span class="ruby-identifier">schedule_list</span>.<span class="ruby-identifier">index</span> <span class="ruby-identifier">schedule</span>
     <span class="ruby-identifier">mate</span> = <span class="ruby-identifier">schedule_list</span>[<span class="ruby-identifier">schedule_index</span> <span class="ruby-operator">+</span> <span class="ruby-number">1</span>]
-    <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">delete?</span> <span class="ruby-identifier">mate</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">mate</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -605,7 +831,7 @@
             </div>
             
           </div>
-                    </div>
+                        </div>
 
     </div>
   </body>
