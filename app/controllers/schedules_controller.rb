@@ -41,7 +41,7 @@ class SchedulesController < ApplicationController
     render_wizard
   end
 
-  # Updates the score of a schedule taking into account, the user preferences
+  
   def update
     user_session['new_prefs'] ||= Hash.new
 
