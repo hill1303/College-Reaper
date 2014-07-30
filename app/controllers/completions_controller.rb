@@ -23,7 +23,9 @@ class CompletionsController < ApplicationController
   def edit
     @completion = Completion.find(params[:id])
   end
-  # +create+ allows user to create a new Completion table
+
+
+  # Allows user to create new Completion
   def create
     params['completion']['user_id'] = current_user.id
     params['completion']['course_id'] = view_context.autocompleted_course_to_id params['completion']['course_id']
@@ -31,7 +33,8 @@ class CompletionsController < ApplicationController
     redirect_to completion
   end
 
-  # +update+ allows user to change the information and post the data
+
+  # Allows user to update their Completion information
   def update
     completion = Completion.find(params[:id])
     params['completion']['course_id'] = view_context.autocompleted_course_to_id params['completion']['course_id']
