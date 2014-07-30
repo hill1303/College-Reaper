@@ -16,6 +16,7 @@ class Preference < ActiveRecord::Base
   validates :ge_major_lean_weight, presence: true, numericality: true
   validates :time_weight, presence: true, numericality: true
 
+  # Access the preferred courses
   attr_accessor :force_courses
 
   belongs_to :user
