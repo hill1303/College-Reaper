@@ -6,6 +6,7 @@ class SchedulesController < ApplicationController
 
   steps :course_load, :courses, :times, :locations, :generate_schedules
 
+  
   def index
 
   end
@@ -57,6 +58,7 @@ class SchedulesController < ApplicationController
     render_wizard
   end
 
+  # Updates the score of the schedule incorporating the preferences into account
   def update
     user_session['new_prefs'] ||= Hash.new
 
@@ -161,7 +163,7 @@ class SchedulesController < ApplicationController
     redirect_to next_wizard_path
   end
 
-  # The +Tips+ method simply displays text to a user to remind them that having less restrictions will allow the
+  # The +tips+ method simply displays text to a user to remind them that having less restrictions will allow the
   # application to find more optimal schedules for them.
   protected
   def tips
