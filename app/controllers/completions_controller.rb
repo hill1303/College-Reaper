@@ -24,6 +24,8 @@ class CompletionsController < ApplicationController
     @completion = Completion.find(params[:id])
   end
 
+
+  # Allows user to create new Completion
   def create
     params['completion']['user_id'] = current_user.id
     params['completion']['course_id'] = view_context.autocompleted_course_to_id params['completion']['course_id']
@@ -31,6 +33,8 @@ class CompletionsController < ApplicationController
     redirect_to completion
   end
 
+
+  # Allows user to update their Completion information
   def update
     completion = Completion.find(params[:id])
     params['completion']['course_id'] = view_context.autocompleted_course_to_id params['completion']['course_id']
@@ -38,7 +42,7 @@ class CompletionsController < ApplicationController
     redirect_to completion
   end
 
-  # Removes a completion from user history
+  # +destroy+ a completion from user history
   def destroy
     @completion = Completion.find(params[:id])
     @completion.destroy
