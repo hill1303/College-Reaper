@@ -6,8 +6,18 @@ class SchedulesController < ApplicationController
 
   steps :course_load, :courses, :times, :locations, :generate_schedules
 
-  def index
+  DAY_REMAP = {
+                'Sunday' => 'U',
+                'Monday' => 'M',
+                'Tuesday' => 'T',
+                'Wednesday' => 'W',
+                'Thursday' => 'R',
+                'Friday' => 'F',
+                'Saturday' => 'S'
+              }
 
+  def index
+    @schedule = Schedule.where(user_id: current_user.id).last
   end
 
   def show
@@ -96,11 +106,8 @@ class SchedulesController < ApplicationController
   end
 
   def convert_and_clean_up_dates parameter
-    user_session['new_prefs'][parameter] = DateTime.new(user_session['new_prefs'][parameter + '(1i)'].to_i,
-                                                         user_session['new_prefs'][parameter + '(2i)'].to_i,
-                                                         user_session['new_prefs'][parameter + '(3i)'].to_i,
-                                                         user_session['new_prefs'][parameter + '(4i)'].to_i,
-                                                         user_session['new_prefs'][parameter + '(5i)'].to_i)
+    user_session['new_prefs'][parameter] = Time.parse(user_session['new_prefs'][parameter + '(4i)'] + ':' +
+                                                      user_session['new_prefs'][parameter + '(5i)'])
     user_session['new_prefs'].delete_if do |key, value|
       key =~ /#{parameter}\(\di\)/
     end
@@ -114,20 +121,24 @@ class SchedulesController < ApplicationController
     schedules.each do |schedule|
       section_ids = []
       schedule.class_section_set.each { |class_section| section_ids.push class_section.id }
-      sections_sql = 'id IN ('
+      sections_sql = ['id IN (']
       section_ids.size.times do |x|
         if x == (section_ids.size - 1)
-          sections_sql += '?)'
+          sections_sql[0] += '?)'
         else
-          sections_sql += '?, '
+          sections_sql[0] += '?, '
         end
       end
-      section_ids.shift sections_sql
+
+      section_ids.each do |id|
+        sections_sql.push id.to_s
+      end
+
       Schedule.create ({
-          preference: schedule.preference,
+          preference: schedule.preferences,
           score: schedule.aggregate_score,
           user: schedule.preferences.user,
-          sections: Sections.where(section_ids),
+          sections: Section.where(sections_sql),
           sub_scores: {
               time_sub_score: schedule.time_sub_score,
               distance_sub_score: schedule.distance_sub_score,
@@ -152,21 +163,11 @@ class SchedulesController < ApplicationController
   end
 
   def flatten_exclusions
-    day_remap = {
-        'Sunday' => 'U',
-        'Monday' => 'M',
-        'Tuesday' => 'T',
-        'Wednesday' => 'W',
-        'Thursday' => 'R',
-        'Friday' => 'F',
-        'Saturday' => 'S'
-    }
-
     # Invert choices to build the exclusion string
     attendance_string = String.new
     Date::DAYNAMES.each do |day|
       if params['preference']['choices'][day] == '0'
-        attendance_string << day_remap[day]
+        attendance_string << DAY_REMAP[day]
       end
     end
     params['preference'].delete('choices')
