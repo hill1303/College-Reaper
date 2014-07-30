@@ -6,7 +6,7 @@
 #   * +:grade+ is a 2-character string, with a default of 'W' to indicate the mark received by the associated user in
 #     the associated course
 class Completion < ActiveRecord::Base
-  validates :grade, presence: true, length: { is: 2 }
+  validates :grade, presence: true
 
   belongs_to :user
   belongs_to :course

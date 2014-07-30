@@ -27,7 +27,13 @@ courses = Course.create([{
                          {
                             instructional_unit: 'CSE',
                             course_number: '2221',
-                            name: 'Software 1',
+                            name: 'Software I',
+                            credit_hours: 4
+                         },
+                         {
+                            instructional_unit: 'CSE',
+                            course_number: '2231',
+                            name: 'Software II',
                             credit_hours: 4
                          },
                          {
@@ -104,7 +110,7 @@ courses = Course.create([{
                          },
                          {
                            instructional_unit: 'CSE',
-                           course_number: '5901',
+                           course_number: '5911',
                            name: 'Capstone',
                            credit_hours: 4
                         },
@@ -677,6 +683,110 @@ people = Person.create([{
                 }
   ])
 
-RequirementGroup.create([{
-
-  }])
+RequirementGroup.create([
+  {
+    name: 'Major',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'CSE').find_by_course_number('3901'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND (course_number = ? OR course_number = ? OR course_number = ?)', 'CSE', '2231', '2321', '2421'])
+  },
+  {
+    name: 'Major',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'CSE').find_by_course_number('3521'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND  course_number = ?', 'CSE', '2331']) 
+  },
+  {
+    name: 'Major',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'CSE').find_by_course_number('2231'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND  course_number = ?', 'CSE', '2221']) 
+  },
+  {
+    name: 'Major',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'CSE').find_by_course_number('5911'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND  course_number = ?', 'CSE', '3901']) 
+  },
+  {
+    name: 'Major',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'CSE').find_by_course_number('2321'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND  course_number = ?', 'CSE', '2221']) 
+  },
+  {
+    name: 'Major',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'CSE').find_by_course_number('2331'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND  course_number = ?', 'CSE', '2321']) 
+  },
+  {
+    name: 'Major',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'CSE').find_by_course_number('2421'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND (course_number = ? OR course_number = ?)','CSE','2231','2321']) 
+  },
+  {
+    name: 'Major',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'CSE').find_by_course_number('2431'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND course_number = ?','CSE','2421']) 
+  },
+  {
+    name: 'GEC',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'CHEMISTRY').find_by_course_number('1220'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND course_number = ?','CHEMISTRY','1210']) 
+  },
+  {
+    name: 'GEC',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'MATH').find_by_course_number('1152'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND course_number = ?','MATH','1151']) 
+  },
+  {
+    name: 'Major',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'MATH').find_by_course_number('3345'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND course_number = ?','CSE','2321']) 
+  },
+  {
+  name: 'GEC',
+  rule: 'Pre req',
+  owner_id: Course.where(instructional_unit: 'ENGLISH').find_by_course_number('2367'),
+  owner_type: 'Course',
+  courses: Course.where(['instructional_unit = ? AND course_number = ?','ENGLISH','1110']) 
+  },
+  {
+    name: 'GEC',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'ENGLISH').find_by_course_number('3398'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND course_number = ?','ENGLISH','2367']) 
+  },
+  {
+    name: 'GEC',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'SWAHILI').find_by_course_number('1102'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND course_number = ?','SWAHILI','1101']) 
+  },
+  {
+    name: 'GEC',
+    rule: 'Pre req',
+    owner_id: Course.where(instructional_unit: 'SWAHILI').find_by_course_number('1103'),
+    owner_type: 'Course',
+    courses: Course.where(['instructional_unit = ? AND course_number = ?','SWAHILI','1102']) 
+  }
+  ])
