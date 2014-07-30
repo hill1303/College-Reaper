@@ -131,6 +131,8 @@ class SchedulesController < ApplicationController
     redirect_to next_wizard_path
   end
 
+  # The +Tips+ method simply displays text to a user to remind them that having less restrictions will allow the
+  # application to find more optimal schedules for them.
   protected
   def tips
     {
