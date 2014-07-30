@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20140728023845) do
   enable_extension "hstore"
 
   create_table "colleges", force: true do |t|
-    t.string   "name",       default: "", null: false
+    t.text     "name",       default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 20140728023845) do
   end
 
   create_table "terms", force: true do |t|
-    t.string   "name",       default: "",           null: false
+    t.text     "name",       default: "",           null: false
     t.date     "start_date", default: '2014-01-10', null: false
     t.date     "end_date",   default: '2014-04-30', null: false
     t.datetime "created_at"
