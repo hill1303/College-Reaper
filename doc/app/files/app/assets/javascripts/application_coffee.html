@@ -23,7 +23,7 @@
         </h1>
         <ul class="files">
             <li>app/assets/javascripts/application.coffee</li>
-            <li>Last modified: 2014-07-24 16:45:15 -0400</li>
+            <li>Last modified: 2014-07-30 10:10:38 -0400</li>
         </ul>
     </div>
 
@@ -42,11 +42,26 @@ bottom of the # compiled file. # # Read Sprockets <a
 href="../../../README_md.html">README</a> (<a
 href="https://github.com/sstephenson/sprockets#sprockets-directives">github.com/sstephenson/sprockets#sprockets-directives</a>)
 for details # about supported directives. # #= require jquery #= require
-jquery_ujs #= require foundation #= require turbolinks #= require_tree .</p>
+jquery_ujs #= require foundation #= require twitter/typeahead #= require
+leaflet #= require turbolinks #= require_tree .</p>
 
 <p>$ -&gt;</p>
 
-<pre><code>$(document).foundation()
+<pre><code>$(document).foundation(
+  slider:
+    start: 0.0
+    end: 1.0
+    step: 0.01
+)
+
+$(&#39;[data-autocomplete-courses]&#39;).typeahead
+    hint: true
+    highlight: true
+    minLength: 1
+  ,
+    displayKey: &#39;course&#39;
+    source: window.courses.ttAdapter()
+
 return</code></pre>
 
     </div>

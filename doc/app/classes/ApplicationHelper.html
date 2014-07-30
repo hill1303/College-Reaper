@@ -57,6 +57,36 @@ demonstration code.</p>
 
 
   
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-autocompleted_course_to_id">autocompleted_course_to_id</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-bias_slider">bias_slider</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
 
   
 
@@ -75,7 +105,109 @@ demonstration code.</p>
 
 
     <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-autocompleted_course_to_id">
+            
+              <b>autocompleted_course_to_id</b>(course_string)
+            
+            <a href="../classes/ApplicationHelper.html#method-i-autocompleted_course_to_id" name="method-i-autocompleted_course_to_id" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The <a
+href="ApplicationHelper.html#method-i-autocompleted_course_to_id">#autocompleted_course_to_id</a>
+method takes a full course string as an argument which includes the
+instructional unit course number and description of course. It checks to
+ensure that the string is in proper format and breaks it down into its
+three original components to find the associated course within the
+database, which becomes the return value. If a user did not make an entry,
+nil is returned instead.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-autocompleted_course_to_id_source')" id="l_method-i-autocompleted_course_to_id_source">show</a>
+                
+              </p>
+              <div id="method-i-autocompleted_course_to_id_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">autocompleted_course_to_id</span>(<span class="ruby-identifier">course_string</span>)
+  <span class="ruby-identifier">matches</span> = <span class="ruby-identifier">course_string</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/\s\d+\s/</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">matches</span>[<span class="ruby-number">0</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">course_num</span> = <span class="ruby-identifier">matches</span>[<span class="ruby-number">0</span>].<span class="ruby-identifier">strip</span>
+    <span class="ruby-identifier">instr_unit</span> = <span class="ruby-identifier">course_string</span>[<span class="ruby-number">0</span>, <span class="ruby-identifier">matches</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-number">0</span>).<span class="ruby-identifier">first</span>].<span class="ruby-identifier">strip</span>
+    <span class="ruby-identifier">course_str</span> = <span class="ruby-identifier">course_string</span>[<span class="ruby-identifier">matches</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-number">0</span>).<span class="ruby-identifier">last</span> <span class="ruby-operator">+</span> <span class="ruby-number">2</span>, <span class="ruby-identifier">course_string</span>.<span class="ruby-identifier">length</span>].<span class="ruby-identifier">strip</span>
+    <span class="ruby-constant">Course</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">instructional_unit</span><span class="ruby-operator">:</span> <span class="ruby-identifier">instr_unit</span>, <span class="ruby-identifier">course_number</span><span class="ruby-operator">:</span> <span class="ruby-identifier">course_num</span>, <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">course_str</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
               </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-bias_slider">
+            
+              <b>bias_slider</b>(input)
+            
+            <a href="../classes/ApplicationHelper.html#method-i-bias_slider" name="method-i-bias_slider" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The <a href="ApplicationHelper.html#method-i-bias_slider">#bias_slider</a>
+method takes as input the value set on a single slider by a user, ranging
+from 0 to 1. If the input value falls outside of the &#39;jail&#39; range
+(0.45 .. 0.55), the strength of the preference is determined as a
+percentage from the &#39;jail&#39; to its associated polar end.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-bias_slider_source')" id="l_method-i-bias_slider_source">show</a>
+                
+              </p>
+              <div id="method-i-bias_slider_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">bias_slider</span> <span class="ruby-identifier">input</span>
+  <span class="ruby-identifier">input</span> = <span class="ruby-identifier">input</span>.<span class="ruby-identifier">to_f</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">input</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-number">0.45</span>
+    { <span class="ruby-identifier">bias</span><span class="ruby-operator">:</span> <span class="ruby-number">0</span>, <span class="ruby-identifier">strength</span><span class="ruby-operator">:</span> (<span class="ruby-number">1</span><span class="ruby-operator">-</span>(<span class="ruby-identifier">input</span><span class="ruby-operator">/</span><span class="ruby-number">0.45</span>)), <span class="ruby-identifier">value</span><span class="ruby-operator">:</span> <span class="ruby-identifier">input</span>}
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">input</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-number">0.55</span>
+    { <span class="ruby-identifier">bias</span><span class="ruby-operator">:</span> <span class="ruby-number">1</span>, <span class="ruby-identifier">strength</span><span class="ruby-operator">:</span> (<span class="ruby-number">1</span><span class="ruby-operator">-</span>(<span class="ruby-number">1</span><span class="ruby-operator">-</span><span class="ruby-identifier">input</span>)<span class="ruby-operator">/</span><span class="ruby-number">0.45</span>), <span class="ruby-identifier">value</span><span class="ruby-operator">:</span> <span class="ruby-identifier">input</span>}
+  <span class="ruby-keyword">else</span>
+    { <span class="ruby-identifier">bias</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">strength</span><span class="ruby-operator">:</span> <span class="ruby-number">0</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">:</span> <span class="ruby-identifier">input</span>}
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
 
     </div>
   </body>

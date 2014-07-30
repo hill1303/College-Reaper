@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>application.scss</title>
+    <title>autocomplete.scss</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
@@ -19,11 +19,11 @@
     <div class="banner">
         
         <h1>
-            application.scss
+            autocomplete.scss
         </h1>
         <ul class="files">
-            <li>app/assets/stylesheets/application.scss</li>
-            <li>Last modified: 2014-07-30 10:10:38 -0400</li>
+            <li>app/assets/stylesheets/autocomplete.scss</li>
+            <li>Last modified: 2014-07-30 05:19:44 -0400</li>
         </ul>
     </div>
 
@@ -32,30 +32,42 @@
   
     <div class="description">
       
-<pre><code>This is a manifest file that&#39;ll be compiled into application.css, which will include all the files
-listed below.
+<p>@import &#39;foundation_and_overrides&#39;;</p>
 
-Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
-or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+<p>.twitter-typeahead {</p>
 
-You&#39;re free to add application-wide styles to this file and they&#39;ll appear at the bottom of the
-compiled file so the styles you add here take precedence over styles defined in any styles
-defined in the other CSS/SCSS files in this directory. It is generally better to create a new
-file per style scope.</code></pre>
+<pre><code>width: 100%;</code></pre>
 
-<h1 id="label-require+foundation_and_overrides">require foundation_and_overrides</h1>
+<p>}</p>
 
-<h1 id="label-require+leaflet">require leaflet</h1>
+<p>.tt-dropdown-menu {</p>
 
-<pre><code>For Leaflet.js</code></pre>
+<pre><code>width: 100%;
+padding: 8px 0;
+background-color: #fff;
+border: 1px solid $primary-color;
+box-shadow: 0 5px 10px rgba(0,0,0,.2);</code></pre>
 
-<h1 id="label-depend_on_asset+%22layers.png%22">depend_on_asset “layers.png”</h1>
+<p>}</p>
 
-<h1 id="label-depend_on_asset+%22layers-2x.png%22">depend_on_asset “layers-2x.png”</h1>
+<p>.tt-suggestion {</p>
 
-<h1 id="label-require_tree+.">require_tree .</h1>
+<pre><code>padding: 3px 10px;</code></pre>
 
-<h1 id="label-require_self">require_self</h1>
+<p>}</p>
+
+<p>.tt-suggestion.tt-cursor {</p>
+
+<pre><code>color: white;
+background-color: $primary-color;</code></pre>
+
+<p>}</p>
+
+<p>.tt-suggestion p {</p>
+
+<pre><code>margin: 0;</code></pre>
+
+<p>}</p>
 
     </div>
   
