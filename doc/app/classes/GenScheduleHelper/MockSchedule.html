@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>GenScheduleHelper::MockSchedule</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span> 
+            GenScheduleHelper::MockSchedule 
+            
+                <span class="parent">&lt; 
+                    
+                    Object
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/app/helpers/gen_schedule_helper_rb.html">app/helpers/gen_schedule_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>The <a href="MockSchedule.html">MockSchedule</a> class represents a simple
+mock-up of a Schedule&#39;s content for the purpose of generating and
+evaluating Schedules for a <a href="../User.html">User</a> based on
+specified preferences.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-assign_class_section-21">assign_class_section!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-eql-3F">eql?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-evaluate-21">evaluate!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-fill_schedule-21">fill_schedule!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-hash">hash</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-is_valid-3F">is_valid?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-preferences">preferences</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-reset-21">reset!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-safe_assignment-3F">safe_assignment?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-set_class_sections">set_class_sections</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-unassign_class_section-21">unassign_class_section!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">DAYS_OF_THE_WEEK</td>
+            <td>=</td>
+            <td class="attr-value">[&quot;U&quot;, &quot;M&quot;, &quot;T&quot;, &quot;W&quot;, &quot;R&quot;, &quot;F&quot;, &quot;S&quot;]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">RADIUS_OF_EARTH</td>
+            <td>=</td>
+            <td class="attr-value">6371</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">SAME_LOCATION_DISTANCE</td>
+            <td>=</td>
+            <td class="attr-value">0.001</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>aggregate_score</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>class_section_set</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(preferences)
+            
+            <a href="../../classes/GenScheduleHelper/MockSchedule.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Initialize an empty <a href="MockSchedule.html">MockSchedule</a> with a set
+of user preferences.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>preferences</code> - The <code>hstore</code> preferences object that
+corresponds to the users preferences. This value is set at a class level
+and will not change once a <a href="MockSchedule.html">MockSchedule</a> has
+been instantiated.</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">preferences</span>)
+  <span class="ruby-identifier">@@preferences</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">preferences</span>
+  <span class="ruby-ivar">@class_section_set</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@aggregate_score</span> = <span class="ruby-number">0</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-assign_class_section-21">
+            
+              <b>assign_class_section!</b>(class_section)
+            
+            <a href="../../classes/GenScheduleHelper/MockSchedule.html#method-i-assign_class_section-21" name="method-i-assign_class_section-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Adds a class section to the class section set of <code>self</code>.</p>
+
+<p>Returns:</p>
+
+<p>The class section set of <code>self</code> if the class section set does
+not contain <code>class_section</code>. <code>nil</code> is returned if the
+class section set already contains <code>class_section</code>. This mimics
+<code>Set</code>&#39;s <code>add?</code> behavior.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>class_section</code> - The class section to be added to
+<code>self</code>.</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assign_class_section-21_source')" id="l_method-i-assign_class_section-21_source">show</a>
+                
+              </p>
+              <div id="method-i-assign_class_section-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assign_class_section!</span>(<span class="ruby-identifier">class_section</span>)
+  <span class="ruby-ivar">@class_section_set</span>.<span class="ruby-identifier">add?</span> <span class="ruby-identifier">class_section</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-eql-3F">
+            
+              <b>eql?</b>(other_schedule)
+            
+            <a href="../../classes/GenScheduleHelper/MockSchedule.html#method-i-eql-3F" name="method-i-eql-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Overrides Object&#39;s standard <code>eql?</code> method.</p>
+
+<p>Returns:</p>
+
+<p><code>true</code> if the set of class sections in <code>self</code> is
+equal to the class sections found in <code>other_schedule</code>,
+<code>false</code>  otherwise.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>other_schedule</code> - The other schedule against which
+<code>this</code> is being compared for equivalence.</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-eql-3F_source')" id="l_method-i-eql-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-eql-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">eql?</span>(<span class="ruby-identifier">other_schedule</span>)
+  <span class="ruby-ivar">@class_section_set</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other_schedule</span>.<span class="ruby-identifier">class_section_set</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-evaluate-21">
+            
+              <b>evaluate!</b>()
+            
+            <a href="../../classes/GenScheduleHelper/MockSchedule.html#method-i-evaluate-21" name="method-i-evaluate-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Assigns a score of <code>self</code> based on how well +self fits
+preferences (specified by <code>preferences</code>) the following
+heuristics (list may change over time):</p>
+<ul><li>
+<p>Time</p>
+</li><li>
+<p>Distance</p>
+</li><li>
+<p>GE or Major <a href="../Course.html">Course</a> Content</p>
+</li><li>
+<p>Total Credit Hours</p>
+</li></ul>
+
+<p>Returns:</p>
+
+<p>The aggregate score of <code>self</code> from all heuristics.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-evaluate-21_source')" id="l_method-i-evaluate-21_source">show</a>
+                
+              </p>
+              <div id="method-i-evaluate-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">evaluate!</span>
+  <span class="ruby-ivar">@aggregate_score</span> = <span class="ruby-identifier">time_score</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">distance_score</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ge_major_score</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">credit_hour_score</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@aggregate_score</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-fill_schedule-21">
+            
+              <b>fill_schedule!</b>(class_section_set)
+            
+            <a href="../../classes/GenScheduleHelper/MockSchedule.html#method-i-fill_schedule-21" name="method-i-fill_schedule-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Fills <code>self</code> with class sections from a set of class sections. A
+full <a href="MockSchedule.html">MockSchedule</a> is one with the number of
+class sections equal to that specified in <code>preferences</code>.</p>
+
+<p>Notes:</p>
+
+<p>This method makes use of a recursive backtracking algorithm and <em>does
+not necessarily</em> create an optimal schedule.</p>
+
+<p>Returns:</p>
+
+<p><code>true</code> if the schedule was able to be filled using the class
+sections found in the passed <code>class_section_set</code>  and
+<code>false</code> otherwise.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>class_section_set</code> - The set of all possible sections from
+which to create a schedule.</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-fill_schedule-21_source')" id="l_method-i-fill_schedule-21_source">show</a>
+                
+              </p>
+              <div id="method-i-fill_schedule-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">fill_schedule!</span>(<span class="ruby-identifier">class_section_set</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_valid?</span>
+  <span class="ruby-keyword">for</span> <span class="ruby-identifier">class_section</span> <span class="ruby-keyword">in</span> <span class="ruby-identifier">class_section_set</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">safe_assignment?</span> <span class="ruby-identifier">class_section</span>
+      <span class="ruby-identifier">assign_class_section!</span> <span class="ruby-identifier">class_section</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">fill_schedule!</span> <span class="ruby-identifier">class_section_set</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">unassign_class_section!</span> <span class="ruby-identifier">class_section</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-hash">
+            
+              <b>hash</b>()
+            
+            <a href="../../classes/GenScheduleHelper/MockSchedule.html#method-i-hash" name="method-i-hash" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Overrides Object&#39;s standard <code>hash</code> method.</p>
+
+<p>Returns:</p>
+
+<p>A <code>hash</code> representation of the class sections found in
+<code>self</code>.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-hash_source')" id="l_method-i-hash_source">show</a>
+                
+              </p>
+              <div id="method-i-hash_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">hash</span>
+  <span class="ruby-ivar">@class_section_set</span>.<span class="ruby-identifier">hash</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-is_valid-3F">
+            
+              <b>is_valid?</b>()
+            
+            <a href="../../classes/GenScheduleHelper/MockSchedule.html#method-i-is_valid-3F" name="method-i-is_valid-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Checks if <code>self</code> is a valid representation of a <a
+href="../Schedule.html">Schedule</a> based on <code>preferences</code>.</p>
+
+<p>Returns:</p>
+
+<p><code>true</code> if <code>self</code> is a full schedule, has an
+acceptable number of credit hours (as specified in
+<code>preferences</code>),  and contains all explicitly named courses, if
+any (as specified in <code>preferences</code>). <code>false</code> if none
+of these  conditions are met.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-is_valid-3F_source')" id="l_method-i-is_valid-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-is_valid-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">is_valid?</span>
+  <span class="ruby-identifier">is_full?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">acceptable_credit_hours?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">contains_explicit_courses?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-preferences">
+            
+              <b>preferences</b>()
+            
+            <a href="../../classes/GenScheduleHelper/MockSchedule.html#method-i-preferences" name="method-i-preferences" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a reference to the class level <code>hstore</code> preferences
+object that was used to create <code>self</code> and other MockSchedules.</p>
+
+<p>Returns:</p>
+
+<p>An <code>hstore</code> preferences object.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-preferences_source')" id="l_method-i-preferences_source">show</a>
+                
+              </p>
+              <div id="method-i-preferences_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">preferences</span>
+  <span class="ruby-identifier">@@preferences</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reset-21">
+            
+              <b>reset!</b>(class_section_set)
+            
+            <a href="../../classes/GenScheduleHelper/MockSchedule.html#method-i-reset-21" name="method-i-reset-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Resets <code>self</code>&#39;s class section set with a new, random, and
+full class section set.</p>
+
+<p>Returns:</p>
+
+<p>The result of <code>fill_schedule!</code>, <code>true</code> if the
+schedule could be filled using <code>class_section_set</code>, 
+<code>false</code> otherwise.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reset-21_source')" id="l_method-i-reset-21_source">show</a>
+                
+              </p>
+              <div id="method-i-reset-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reset!</span>(<span class="ruby-identifier">class_section_set</span>)
+  <span class="ruby-ivar">@class_section_set</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">fill_schedule!</span> <span class="ruby-identifier">class_section_set</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-safe_assignment-3F">
+            
+              <b>safe_assignment?</b>(class_section)
+            
+            <a href="../../classes/GenScheduleHelper/MockSchedule.html#method-i-safe_assignment-3F" name="method-i-safe_assignment-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Checks if <code>class_section</code> is able to be added to
+<code>self</code> based on the contents of <code>self</code>&#39;s class
+section set.</p>
+
+<p>Returns:</p>
+
+<p><code>true</code> if <code>class_section</code> does not conflict with any
+class sections already present in <code>self</code> (time and  course name)
+and <code>self</code> is not already full.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>class_section</code> - The class section to be verified against the
+contents of <code>self</code>.</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-safe_assignment-3F_source')" id="l_method-i-safe_assignment-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-safe_assignment-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">safe_assignment?</span>(<span class="ruby-identifier">class_section</span>)
+  <span class="ruby-identifier">time_safe?</span> <span class="ruby-identifier">class_section</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">course_safe?</span> <span class="ruby-identifier">class_section</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">is_full?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-set_class_sections">
+            
+              <b>set_class_sections</b>(class_section_set)
+            
+            <a href="../../classes/GenScheduleHelper/MockSchedule.html#method-i-set_class_sections" name="method-i-set_class_sections" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Replaces <code>self</code>&#39;s class section set with that of
+<code>class_section_set</code>. This does <em>not</em> guarantee that
+<code>self</code> will be valid after replacement.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>class_section_set</code> - The class section set that will replace
+<code>self</code>&#39;s class section set.</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-set_class_sections_source')" id="l_method-i-set_class_sections_source">show</a>
+                
+              </p>
+              <div id="method-i-set_class_sections_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">set_class_sections</span>(<span class="ruby-identifier">class_section_set</span>)
+  <span class="ruby-ivar">@class_section_set</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">class_section_set</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-unassign_class_section-21">
+            
+              <b>unassign_class_section!</b>(class_section)
+            
+            <a href="../../classes/GenScheduleHelper/MockSchedule.html#method-i-unassign_class_section-21" name="method-i-unassign_class_section-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Removes a class section from the class section set of <code>self</code>.</p>
+
+<p>Returns:</p>
+
+<p>The class section set of <code>self</code> if the class section set
+contains <code>class_section</code>. <code>nil</code> is returned if the
+class  section set did not contain <code>class_section</code>. This mimics
+<code>Set</code>&#39;s <code>delete?</code> behavior.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>class_section</code> - The class section to be removed from
+<code>self</code>.</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-unassign_class_section-21_source')" id="l_method-i-unassign_class_section-21_source">show</a>
+                
+              </p>
+              <div id="method-i-unassign_class_section-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">unassign_class_section!</span>(<span class="ruby-identifier">class_section</span>)
+  <span class="ruby-ivar">@class_section_set</span>.<span class="ruby-identifier">delete?</span> <span class="ruby-identifier">class_section</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

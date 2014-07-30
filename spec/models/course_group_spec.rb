@@ -10,7 +10,15 @@ describe CourseGroup do
   end
 
   it 'has many :completion_rules (RequirementGroup)' do
-    should have_many(:completion_rules).class_name('RequirementGroup')
+    should have_many(:completion_rules).class_name 'RequirementGroup'
+  end
+
+  it 'has and belongs to many :users' do
+    should have_and_belong_to_many :users
+  end
+
+  it 'has and belongs to many :courses' do
+    should have_and_belong_to_many :courses
   end
 
   context 'attributes' do

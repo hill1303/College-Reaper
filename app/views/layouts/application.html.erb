@@ -12,7 +12,49 @@
   </head>
 
   <body>
+    <header class="row">
+      <div class="medium-3 columns">
+        <h1><a href="<%= user_signed_in? ? user_root_path : '/' %>">CollegeReaper</a></h1>
+      </div>
+      <div class="medium-9 columns">
+        <ul class="right button-group">
+          <% if user_signed_in? %>
+          <li><%= link_to 'Signed in as ' << current_user.email, edit_user_registration_path,
+                          class: 'button secondary disabled' %></li>
+          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'button' %></li>
+          <% else %>
+          <li class="hide-for-small-only"><span class="button secondary disabled">Get started today!</span></li>
+          <li><%= link_to 'Sign in', new_user_session_path, class: 'button' %></li>
+          <li><%= link_to 'Sign up', new_user_registration_path, class: 'button' %></li>
+          <% end %>
+        </ul>
+      </div>
+    </header>
+    <hr />
+    <div class="row">
+      <div class="small-12 columns">
+        <%= display_flash_messages() %>
+      </div>
+    </div>
     <%= yield %>
+    <footer class="row">
+      <div class="medium-12 columns">
+        <hr/>
+        <div class="row">
+          <div class="medium-6 columns">
+            <p>&copy; <%= Date.today.year %> SYN/ACK Group. All rights reserved.</p>
+          </div>
+          <div class="medium-6 columns">
+            <ul class="inline-list right">
+              <li><a href="#">about</a></li>
+              <li><a href="#">terms</a></li>
+              <li><a href="#">privacy</a></li>
+              <li><a href="#">contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
     <%= javascript_include_tag 'application' %>
   </body>
 </html>

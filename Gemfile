@@ -7,6 +7,9 @@ gem 'codeclimate-test-reporter', group: :test, require: nil
 # Needs to be here for the custom doc task
 gem 'rdoc'
 
+# Twitter typeahead for autocomplete
+gem 'twitter-typeahead-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 # Use postgresql as the database for Active Record
@@ -39,6 +42,10 @@ gem 'geocoder'
 gem 'devise', '~> 3.2'
 # And Omniauth for extension of the Devise system
 gem 'omniauth', '~> 1.2.2'
+# Wicked gives a wizard workflow with minimal effort
+gem 'wicked'
+# More goodness from Plataformatec to condense the forms in views
+gem 'simple_form'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc

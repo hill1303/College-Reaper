@@ -1,0 +1,26 @@
+@import 'foundation_and_overrides';
+
+.twitter-typeahead {
+  width: 100%;
+}
+
+.tt-dropdown-menu {
+  width: 100%;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid $primary-color;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 10px;
+}
+
+.tt-suggestion.tt-cursor {
+  color: white;
+  background-color: $primary-color;
+}
+
+.tt-suggestion p {
+  margin: 0;
+}

@@ -1,0 +1,15 @@
+<%= render 'wizard_breadcrumbs' %>
+<div class="row">
+  <div class="medium-8 columns">
+    <%= simple_form_for @preference, url: wizard_path, method: :put do |f| %>
+      <%= f.simple_fields_for :choices do |ff| %>
+      <% @preference.num_courses.to_i.times do |i| %>
+          <%= # noinspection RubyStringKeysInHashInspection
+              ff.input ('course' << i.to_s).to_sym, label: 'Course ' << (i + 1).to_s, input_html: { 'data-autocomplete-courses' => '' } %>
+        <% end %>
+      <% end %>
+      <%= f.submit 'Next >', class: 'button right' %>
+    <% end %>
+  </div>
+  <%= render 'wizard_tips' %>
+</div>

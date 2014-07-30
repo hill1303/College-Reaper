@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
   # Routes to the home page and sets is as default
   root 'public#home'
-  
+
   # Adds routes for Devise on the user model
   devise_for :user
-  
+  get 'schedules' => 'schedules#index', as: :user_root
+
+  get 'auto' => 'autocomplete#auto'
+
+  resources :schedules
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

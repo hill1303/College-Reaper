@@ -1,0 +1,117 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation</title>
+    <!-- Personally Created CSS file -->
+     <link rel="stylesheet" href="stylesheet/size.css" />
+     <!-- Foundation CSS/JS file -->
+    <link rel="stylesheet" href="stylesheet/app.css" />
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <!-- Leaflet CSS/JS file -->
+    <link rel="stylesheet" href="leaflet-0.7.3/leaflet.css" />
+    <script src="leaflet-0.7.3/leaflet.js"></script>
+    <!-- MapQuest Script -->
+    <script src="http://www.mapquestapi.com/sdk/leaflet/v1.0/mq-map.js?key=Fmjtd%7Cluur2001nh%2C2a%3Do5-9a15lr"></script>
+  <script src="http://www.mapquestapi.com/sdk/leaflet/v1.0/mq-routing.js?key=Fmjtd%7Cluur2001nh%2C2a%3Do5-9a15lr"></script>
+  </head>
+  <body>
+    <ul class="example-orbit" data-orbit> 
+      <li> 
+        <div class="orbit-caption"> Schedule One </div> 
+        <div class="row">
+          <div class="large-1 columns" align="center"><h6>Sunday</h6></div>
+          <div class="large-1 columns" align="center"><h6>Monday</h6></div>
+          <div class="large-1 columns" align="center"><h6>Tuesday</h6></div>
+          <div class="large-1 columns" align="center"><h6>Wednesday</h6></div>
+          <div class="large-1 columns" align="center"><h6>Thursday</h6></div>
+          <div class="large-1 columns" align="center"><h6>Friday</h6></div>
+          <div class="large-1 columns" align="center"><h6>Saturday</h6></div>
+      </div>
+      <div class="row">
+        <!-- Sunday -->  
+        <div class="large-1 columns" align="center">&nbsp;</div>
+        <!-- Monday --> 
+          <div class="large-1 columns space" align="center"><span class="label block">CSE 3901<br/>(Lecture/Lab)<br/>12:40PM-1:35PM<br/>Dreese Laboratories 0317</span><span class="label block">CSE 3901<br/>(Lecture/Lab)<br/>12:40PM-1:35PM<br/>Dreese Laboratories 0317</span></div> 
+        <!-- Tuesday -->  
+          <div class="large-1 columns space" align="center"><span class="label block1">CSE 3901<br/>(Lecture/Lab)<br/>12:40PM-1:35PM<br/>Dreese Laboratories 0317</span><span class="label block">CSE 3901<br/>(Lecture/Lab)<br/>12:40PM-1:35PM<br/>Dreese Laboratories 0317</span></div>
+        <!-- Wednesday --> 
+          <div class="large-1 columns space" align="center"><span class="label block">CSE 3901<br/>(Lecture/Lab)<br/>12:40PM-1:35PM<br/>Dreese Laboratories 0317</span><span class="label block">CSE 3901<br/>(Lecture/Lab)<br/>12:40PM-1:35PM<br/>Dreese Laboratories 0317</span></div>
+        <!-- Thursday -->
+          <div class="large-1 columns space" align="center"><span class="label block1">CSE 3901<br/>(Lecture/Lab)<br/>12:40PM-1:35PM<br/>Dreese Laboratories 0317</span><span class="label block">CSE 3901<br/>(Lecture/Lab)<br/>12:40PM-1:35PM<br/>Dreese Laboratories 0317</span></div>
+        <!-- Friday -->  
+          <div class="large-1 columns space" align="center"><span class="label block">CSE 3901<br/>(Lecture/Lab)<br/>12:40PM-1:35PM<br/>Dreese Laboratories 0317</span><span class="label block">CSE 3901<br/>(Lecture/Lab)<br/>12:40PM-1:35PM<br/>Dreese Laboratories 0317</span></div>
+        <!-- Saturday -->  
+          <div class="large-1 columns space" align="center">&nbsp;</div>
+      </div>
+      <!-- Leaflet Code -->
+        <div id="map" style="margin-bottom: 100px; margin-left: auto; margin-right: auto;">
+          <script type="text/javascript">// 
+            
+            var map = L.map('map').setView([39.9833, -82.9833], 13);
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 18
+            }).addTo(map);
+            
+            // L.marker([40.001947, -83.013318]).addTo(map)
+            // .bindPopup('Hey, were in this building!!!!!!!!!!!!!')
+            // .openPopup();
+   
+            // var route = [[40.001984, -83.016046], [40.002572, -83.015247], [40.001653, -83.013383]];
+            // var polyline = L.polyline(route, {color: 'red'}).addTo(map);
+            // map.fitBounds(polyline.getBounds());
+
+            // var route = [[40.001984, -83.016046], [40.002427, -83.012371], [40.001653, -83.013383]];
+            // var polyline = L.polyline(route, {color: 'blue'}).addTo(map);
+            // map.fitBounds(polyline.getBounds());
+
+            // var route = [[40.001984, -83.016046], [40.003162, -83.013221], [40.001653, -83.013383]];
+            // var polyline = L.polyline(route, {color: 'green'}).addTo(map);
+            // map.fitBounds(polyline.getBounds());
+            
+            // '18th avenue columbus oh',
+            //         '2015 neil ave columbus oh'
+            //  var map = L.map('map', {
+            //   layers: MQ.mapLayer(),
+            //   center: [ 39.9833, -82.9833 ],
+            //   zoom: 15
+            // });
+
+            var dir = MQ.routing.directions();
+             
+            dir.route({
+                locations: [
+                    { latLng: { lat: 40.001984, lng: -83.016046 } },
+                    { latLng: { lat: 40.002572, lng: -83.015247 } },
+                    { latLng: { lat: 40.001653, lng: -83.013383 } }
+                    ],
+                    options: {routeType:'pedestrian'}
+            });
+
+            map.addLayer(MQ.routing.routeLayer({
+                directions: dir,
+                fitBounds: true,
+                ribbonOptions: {
+                  ribbonDisplay: { color: '#00FF00', opacity: 0.3 }
+                }
+                }));
+
+          </script>
+        </div>
+    </li>
+      <li class="active"> 
+        
+      </li> 
+      <li> 
+        <img src="../assets/img/examples/launch-orbit.jpg" alt="slide 3" /> 
+        <div class="orbit-caption"> Caption Three. </div> 
+      </li> 
+    </ul>
+    
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/foundation/js/foundation.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

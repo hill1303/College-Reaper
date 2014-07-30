@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="small-3 columns">
+    @preference
+    <pre><%= JSON.pretty_generate JSON.parse @preference.to_json %></pre>
+  </div>
+  <div class="small-5 columns">
+    user_session
+    <pre><%= JSON.pretty_generate JSON.parse user_session.to_json %></pre>
+  </div>
+  <div class="small-4 columns">
+    flash
+    <pre><%= JSON.pretty_generate JSON.parse flash.to_json %></pre>
+  </div>
+</div>
+<div class="row">
+  <div class="medium-12 columns">
+    <ul class="breadcrumbs">
+      <% wizard_steps.collect do |every_step| %>
+        <li class="<%= 'current' if every_step == step %>"><%= link_to ActiveSupport::Inflector.humanize(every_step), wizard_path(every_step) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -17,6 +17,10 @@ describe Course do
     should have_and_belong_to_many :terms
   end
 
+  it 'has and belongs to many :course_groups' do
+    should have_and_belong_to_many :course_groups
+  end
+
   context 'attributes' do
     let :course do
       build :course
@@ -60,7 +64,7 @@ describe Course do
       should validate_presence_of :credit_hours
     end
 
-    it 'the numbericality of :credit_hours to be an integer' do
+    it 'the numericality of :credit_hours to be an integer' do
       should validate_numericality_of(:credit_hours).only_integer
     end
   end

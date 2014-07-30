@@ -19,5 +19,5 @@ class Location < ActiveRecord::Base
 
   has_many :sections
 
-  set_rgeo_factory_for_column(:latlong, RGeo::Geographic.spherical_factory(:srid => 4326))
+  set_rgeo_factory_for_column(:lonlat, RGeo::Geographic.spherical_factory(:srid => 4326))
 end
