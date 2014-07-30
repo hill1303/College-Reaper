@@ -3,7 +3,7 @@
 #
 # Attributes are stored as follows:
 #
-#   * +:name+ is a text that represents the name of the college
+#   * +:name+ is stored as a string that represents the name of the college
 
 class College < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
