@@ -25,16 +25,16 @@ with the website to add their past completed courses, and also to edit or remove
 How to Execute College-Reaper
 -----------------------------
 From a terminal in your Rails development environment, type command:
+```
  RAILS_ENV = development bundle exec rake db:drop db:create db:migrate db:seed
  rails server
+```
+The web page should automatically pop up in your web browser, where you will see local host connected with
+the application. From the home page you are required to create a new account. Once logged in, click
+"Create Schedule" and enter any specific preferences on the next page. The "Next" button from the
+"Walking Distance" page will compute and load your schedule.
 
- Web page should automatically pop up in your web browser, where you will see local host connected with
- the application. From the home page you are required to create a new account. Once logged in, click
- "Create Schedule" and enter any specific preferences on the next page. The "Next" button from the
- "Walking Distance" page will compute and load your schedule.
-
- Please allow some time for schedule to generate, as schedule-generator is computationally expensive.
-
+Please allow some time for schedule to generate, as schedule-generator is computationally expensive.
 
 
 Documentation
@@ -46,8 +46,7 @@ directory, should any exist when the task runs.
 Test Suite
 ----------
 The test suite is written using the RSpec framework, and can be run with the `bundle exec rspec` command.
-Reports on the effectiveness of test suite can be found under
-                            /coverage/index.html
+Reports on the effectiveness of test suite can be found under `/coverage/index.html`
 To test the database models and migrations, FactoryGirl was used to produce test data. After code completion,
 many different possible user scenarios were tested against the system.
 
@@ -56,18 +55,18 @@ Contributions
 All team members participated in the brainstorming and planning that went into designing College-Reaper. Once a
 clearly defined plan was formed, code-writing was broken down in the following ways:
 
-Jim Cavoli- Generated skeleton, implemented schedules_controller and associated views. Overall project manager
- who fairly delegated tasks and helped when needed. Also created User, Person
-
-Ethan Hill- Implemented all methods in gen_schedule_helper module, following a complex scoring and sorting
-algorithm. Worked on schedules_controller.
-
-Gauri Mishra- Autocomplete widget, section/term/college models, specs and migrations. Implemented
-completion_controller and was testing manager. Created db info in seeds.rb.
-
-Elisabeth Holtman- Course, Location, Requirement_Group and Preference models, specs and migrations. Populated
-database with seeds.rb file with Gauri, created bias_slider method, helped implement application_controller.
-
-Dan Carlozzi- Used Foundation framework to create the look and feel of the application using customized
-stylesheets and layout for the schedule. Incorporated Map API and contributed to public_controller.
+  * Jim Cavoli- Generated skeleton, implemented schedules_controller and associated views. Overall project manager
+    who fairly delegated tasks and helped when needed. Also created User, Person
+  
+  * Ethan Hill- Implemented all methods in gen_schedule_helper module, following a complex scoring and sorting
+    algorithm. Worked on schedules_controller.
+  
+  * Gauri Mishra- Autocomplete widget, section/term/college models, specs and migrations. Implemented
+    completion_controller and was testing manager. Created db info in seeds.rb.
+  
+  * Elisabeth Holtman- Course, Location, Requirement_Group and Preference models, specs and migrations. Populated
+    database with seeds.rb file with Gauri, created bias_slider method, helped implement application_controller.
+  
+  * Dan Carlozzi- Used Foundation framework to create the look and feel of the application using customized
+    stylesheets and layout for the schedule. Incorporated Map API and contributed to public_controller.
 
