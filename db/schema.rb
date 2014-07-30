@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140728023845) do
   add_index "colleges", ["name"], :name => "index_colleges_on_name", :unique => true
 
   create_table "completions", force: true do |t|
-    t.text    "grade",     default: "W", null: false
+    t.text    "grade",     default: "I", null: false
     t.integer "user_id"
     t.integer "course_id"
   end
