@@ -1,5 +1,5 @@
 <%= simple_form_for @completion do |f| %>
-  <%= f.input :course, as: :string, input_html: { 'data-autocomplete-courses' =>'' } %>
+  <%= f.input :course_id, as: :string, input_html: { 'data-autocomplete-courses' => '', value: @completion.course.nil? ? '' : @completion.course.instructional_unit + ' ' + @completion.course.course_number + ' - ' + @completion.course.name } %>
   <%= f.input :grade, collection: %w(A A- B+ B B- C+ C C- D+ D D- E) %>
   <%= f.submit 'Save', class: 'button right' %>
 <% end %>

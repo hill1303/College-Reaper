@@ -237,7 +237,7 @@ courses = Course.create([{
                          {
                            instructional_unit: 'PSYCHOLOGY',
                            course_number: '3371',
-                           name: ' Language and the Mind',
+                           name: 'Language and the Mind',
                            credit_hours: 3
                          },
                          {
@@ -479,7 +479,39 @@ people = Person.create([
                      pronoun: 'his',
                      title: 'Dr.',
                      suffix: 'Ph.D.'
-                 }])
+                 },
+                 {
+                  name: 'Meean Feerash',
+                  dob: Date.new(1970, 8, 11),
+                  sex: 'Female',
+                  pronoun: 'her',
+                  title: 'Prof.',
+                  suffix: ''
+                },
+                {
+                  name: 'Thomas Edison',
+                  dob: Date.new(1956, 2, 29),
+                  sex: 'Male',
+                  pronoun: 'him',
+                  title: 'Mr.',
+                  suffix: 'Ph.D.'
+                },
+                {
+                  name: 'Jimmy Neutron',
+                  dob: Date.new(1988, 11, 8),
+                  sex: 'Male',
+                  pronoun: 'him',
+                  title: 'Mr.',
+                  suffix: ''
+                },
+                {
+                  name: 'Aubrey Hawkins',
+                  dob: Date.new(1956, 2, 29),
+                  sex: 'Female',
+                  pronoun: 'her',
+                  title: 'Mrs.',
+                  suffix: ''
+                }])
 
 section_params = Array.new
 
@@ -601,6 +633,7 @@ Completion.create([{
                   {
                       user: user,
                       course: Course.where(instructional_unit: 'BIOLOGY').find_by_course_number('1113'),
+            
                       grade: 'C'
                   },
                   {
@@ -648,40 +681,6 @@ Completion.create([{
                      course: Course.where(instructional_unit: 'CSE').find_by_course_number('3901'),
                      grade: 'E'
                    }])
-
-people = Person.create([{
-                  name: 'Meean Feerash',
-                  dob: Date.new(1970, 8, 11),
-                  sex: 'Female',
-                  pronoun: 'her',
-                  title: 'Prof.',
-                  suffix: ''
-                },
-                {
-                  name: 'Thomas Edison',
-                  dob: Date.new(1956, 2, 29),
-                  sex: 'Male',
-                  pronoun: 'him',
-                  title: 'Mr.',
-                  suffix: 'Ph.D.'
-                },
-                {
-                  name: 'Jimmy Neutron',
-                  dob: Date.new(1988, 11, 8),
-                  sex: 'Male',
-                  pronoun: 'him',
-                  title: 'Mr.',
-                  suffix: ''
-                },
-                {
-                  name: 'Aubrey Hawkins',
-                  dob: Date.new(1956, 2, 29),
-                  sex: 'Female',
-                  pronoun: 'her',
-                  title: 'Mrs.',
-                  suffix: ''
-                }
-  ])
 
 RequirementGroup.create([
   {
