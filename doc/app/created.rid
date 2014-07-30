@@ -1,4 +1,4 @@
-Wed, 30 Jul 2014 11:31:25 -0400
+Wed, 30 Jul 2014 11:34:48 -0400
 ./app/assets/images/20140728_104002.jpg	Wed, 30 Jul 2014 07:08:37 -0400
 ./app/assets/images/20140730_065653.jpg	Wed, 30 Jul 2014 07:12:40 -0400
 ./app/assets/javascripts/application.coffee	Wed, 30 Jul 2014 10:10:38 -0400
@@ -14,7 +14,7 @@ Wed, 30 Jul 2014 11:31:25 -0400
 ./app/helpers/application_helper.rb	Wed, 30 Jul 2014 07:20:38 -0400
 ./app/helpers/autocomplete_helper.rb	Wed, 30 Jul 2014 07:20:38 -0400
 ./app/helpers/flash_helper.rb	Wed, 30 Jul 2014 05:19:44 -0400
-./app/helpers/gen_schedule_helper.rb	Wed, 30 Jul 2014 07:20:38 -0400
+./app/helpers/gen_schedule_helper.rb	Wed, 30 Jul 2014 11:34:35 -0400
 ./app/models/college.rb	Wed, 30 Jul 2014 06:29:38 -0400
 ./app/models/completion.rb	Wed, 30 Jul 2014 06:29:38 -0400
 ./app/models/course.rb	Wed, 30 Jul 2014 05:19:44 -0400
