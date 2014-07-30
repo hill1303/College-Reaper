@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'about' => 'public#about'
   get 'terms' => 'public#terms'
+  get 'privacy' => 'public#privacy'
+  get 'contact' => 'public#contact'
 
   resources :schedules
 
