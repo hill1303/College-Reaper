@@ -21,7 +21,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.where(user_id: current_user.id).last
   end
 
-  # Shows a schedule
+  #Sets preferences for a user and displays the appropriate view
   def show
     @tips = ('<p>' << tips[step].join('</p><p>') << '</p>').html_safe if tips[step]
 
@@ -41,7 +41,7 @@ class SchedulesController < ApplicationController
     render_wizard
   end
 
-  # Updates the score of a schedule taking into account, the user preferences
+  # Updates the score of the algorithm if a user chooses to change their preferences
   def update
     user_session['new_prefs'] ||= Hash.new
 
