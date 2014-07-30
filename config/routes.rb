@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   devise_for :user
   get 'schedules' => 'schedules#index', as: :user_root
 
-  get 'auto' => 'autocomplete#auto'
+  get 'about' => 'public#about'
+  get 'terms' => 'public#terms'
 
   resources :schedules
 
