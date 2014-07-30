@@ -14,6 +14,7 @@
 #= require jquery_ujs
 #= require foundation
 #= require twitter/typeahead
+#= require leaflet
 #= require turbolinks
 #= require_tree .
 
