@@ -121,7 +121,8 @@ module GenScheduleHelper
       is_full? @preferences, @class_section_set and not contains_course_conflict? @class_section_set and 
         acceptable_credit_hours? @preferences, @class_section_set and 
           contains_explicit_courses? @preferences, @class_section_set and 
-            not contains_time_conflict? @class_section_set 
+            not contains_time_conflict? @class_section_set and 
+              contains_acceptable_time_range @preferences, @class_section_set
     end
 
     # Checks if +class_section+ is able to be added to +self+ based on the contents of +self+'s class section set.
@@ -223,7 +224,6 @@ module GenScheduleHelper
       @class_section_set = Set.new class_section_set
     end
     
-    private
 
     # Checks whether two class sections occur on the same day.
     #
@@ -370,6 +370,22 @@ module GenScheduleHelper
       schedule_total.between? credit_min, credit_max
     end
 
+    def contains_acceptable_time_range(preferences, class_section_set)
+      # Get time range from preferences
+      start_time_pref = Time.parse preferences.start_time
+      end_time_pref = Time.parse preferences.end_time
+      
+      class_section_set.each do |class_section|
+        section_time_start = class_section.start_time
+        section_time_end = class_section.end_time
+        unless time_range_contains_other_time_range start_time_pref, end_time_pref, 
+            section_time_start, section_time_end
+          return false
+        end
+      return true
+      end
+    end
+    
     # Checks whether a class section set has the number of courses specified in the user preferences.
     #
     # Returns: 
@@ -385,6 +401,16 @@ module GenScheduleHelper
     end
   
   
+    # Checks if a time (from a time range) begins earlier than another time.
+    # 
+    # Returns:
+    #
+    # 	+true+ if +time+ occurs at the same time or earlier than +other_time+, +false+ otherwise.
+    #
+    # Paramters:
+    # 	
+    # 	* +time+ - The time being compared to another time.
+    # 	* +other_time+ - The other time being compared to the first time.
     def time_earlier_than_other_time(time, other_time)
       hour_diff = time.hour - other_time.hour
       min_diff = time.min - other_time.min
@@ -400,7 +426,17 @@ module GenScheduleHelper
         return true
       end
     end
-    
+   
+    # Checks if a time (from a time range) begins later than another time.
+    # 
+    # Returns:
+    #
+    # 	+true+ if +time+ occurs at the same time or later than +other_time+, +false+ otherwise.
+    #
+    # Paramters:
+    # 	
+    # 	* +time+ - The time being compared to another time.
+    # 	* +other_time+ - The other time being compared to the first time.
     def time_later_than_other_time(time, other_time)
       hour_diff = time.hour - other_time.hour
       min_diff = time.min - other_time.min
@@ -416,12 +452,12 @@ module GenScheduleHelper
         return false
       end
     end
-      
+    
+    # Checks whether a time range (created from the first two parameters) contains another time range
     def time_range_contains_other_time_range(start_time, end_time, other_start_time, other_end_time)
       time_earlier_than_other_time start_time, other_start_time and
         time_later_than_other_time end_time, other_end_time
     end
- 
  
     # Assigns a score for the timing of a class section set. Section sets whose sections time ranges fall within the
     # time range specified in user preferences will score higher than those whose sections do not fall in that range.
@@ -437,8 +473,8 @@ module GenScheduleHelper
     #   * +class_section_set+ - The class section set for which to calculate a score.
     def time_score(preferences, class_section_set)
       # Get time range from preferences
-      start_time_pref = Time.new preferences.start_time
-      end_time_pref = Time.new preferences.end_time
+      start_time_pref = Time.parse preferences.start_time
+      end_time_pref = Time.parse preferences.end_time
       # Get weight of importance for time
       time_pref_weight = preferences.time_weight.to_f
       classes_in_range = 0
@@ -447,7 +483,6 @@ module GenScheduleHelper
         section_time_end = class_section.end_time
         if time_range_contains_other_time_range start_time_pref, end_time_pref, 
             section_time_start, section_time_end
-          classes_in_range += 1
         end
       end
       return time_pref_weight * classes_in_range
@@ -542,7 +577,8 @@ module GenScheduleHelper
       week_total = SAME_LOCATION_DISTANCE
       day_sums.each { |day, sum| week_total += sum }
       # Really this is weight * (1/total_distance). (1/distance) is used to "punish" high and "reward" small distances
-      return (distance_pref_weight / week_total) / DISTANCE_BIAS_FACTOR
+      
+      return distance_pref_weight / week_total.abs
     end
    
     # Counts the number of courses in a class section setthat are considered a general education course (that is, the course is not a 
@@ -721,7 +757,7 @@ module GenScheduleHelper
     MAX_STALE_GENERATIONS = 3
 
     # The maximum number of individuals that are to be generated by way of permutation generation.
-    MAX_POPULATION_SIZE = 500
+    MAX_POPULATION_SIZE = 250
 
     # Randomly replaces class sections/genes in a schedule with class sections/genes from a pool of available 
     # class sections/genes.
@@ -924,6 +960,7 @@ module GenScheduleHelper
           schedule_set.add? schedule
           # Delete the section, preventing generation from possibly starting with that section again
           class_section_set_copy.delete? class_section
+          break if schedule_set == MAX_POPULATION_SIZE
         end
       end
       return schedule_set
@@ -961,7 +998,6 @@ module GenScheduleHelper
           if population_avg_score > best_population_avg_score 
             # Population is the best we have seen, take snapshot
             best_top_individual_score = top_individual_score
-            best_population_avg_score = population_avg_score
             population_snapshot = Set.new population
           end
         else
@@ -972,18 +1008,4 @@ module GenScheduleHelper
       return population_snapshot
     end
   end
-
-  # Sorts a set of schedules based on user preferences in a relative manner.
-  #
-  # Returns:
-  #
-  #   A sorted array of schedules.
-  #
-  # Parameters:
-  #
-  #   * +preferences+ - The user specified preferences from which sorting orders are determined.
-  #   * +schedule_set+ - The set of schedules to be sorted.
-  def self.sort_by_preferences(preferences, schedule_set)
-  end
-
 end
