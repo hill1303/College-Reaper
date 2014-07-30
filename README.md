@@ -32,4 +32,3 @@ Contributions
 All team members contributed in the brainstorming and planning that went into designing College-Reaper. Although
 Ethan Hill
 
-
