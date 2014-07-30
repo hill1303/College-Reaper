@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   resources :schedules, :completions
 
+  get 'about' => 'public#about'
+  get 'terms' => 'public#terms'
+  get 'privacy' => 'public#privacy'
+  get 'contact' => 'public#contact'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
