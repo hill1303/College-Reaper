@@ -24,15 +24,13 @@ class CompletionsController < ApplicationController
     @completion = Completion.find(params[:id])
   end
 
-
-  # Allows user to create new Completion
+  # Allows user to create a new Completion
   def create
     params['completion']['user_id'] = current_user.id
     params['completion']['course_id'] = view_context.autocompleted_course_to_id params['completion']['course_id']
     completion = Completion.create(params['completion'].permit(:course_id, :grade, :user_id))
     redirect_to completion
   end
-
 
   # Allows user to update their Completion information
   def update

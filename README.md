@@ -24,3 +24,12 @@ directory, should any exist when the task runs.
 Test Suite
 ----------
 The test suite is written using the RSpec framework, and can be run with the `bundle exec rspec` command.
+To test the database models and migrations, FactoryGirl was used to produce test data. After code completion,
+many different possible user scenarios were tested against the system.
+
+Contributions
+-------------
+All team members contributed in the brainstorming and planning that went into designing College-Reaper. Although
+Ethan Hill
+
+
