@@ -8,8 +8,9 @@ class PublicController < ApplicationController
   
   # Routes to the home page for PublicController
   def home 
+    
   end
-  
+
   def about
   end
   def terms
