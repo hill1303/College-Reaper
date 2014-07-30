@@ -17,7 +17,7 @@
       <h3 class="medium-8 columns medium-centered">Looks empty...<%= link_to 'Click here to generate a new one!', wizard_path(:course_load) %></h3>
       <% else %>
         <% Date::DAYNAMES.each do |day| %>
-          <% if day != 'Saturday' and day != 'Sunday' and %>
+          <% if day != 'Saturday' and day != 'Sunday' %>
             <div class="medium-2 offset-2 columns space" align="center">
               <%= day %>
               <% @schedule.sections.order(start_time: :asc).each do |section| %>
@@ -53,10 +53,10 @@
         var dir = MQ.routing.directions();
 
         dir.route({
-          locations: [
-           <% @schedule.sections.order(start_time: :asc).each do |section| %>
-            { latLng: { lat: <%= section.location.lonlat.y %>, lng: <%= section.location.lonlat.x %> } },
-           <% end %>
+          location
+           <% @schedule.sections.order(start_time: :asc).each do |section| %>s: [
+            { latLng: { l<%= section.location.lonlat.y %>1984, l<%= section.location.lonlat.x %>6046
+           <% end %> } }
           ],
           options: {routeType:'pedestrian'}
         });
