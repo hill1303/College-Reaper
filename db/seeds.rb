@@ -299,7 +299,7 @@ locations = Location.create([{
                                  city: 'Columbus',
                                  state: 'OH',
                                  zip: '43210',
-                                 latlong: 'POINT(40.002241, -83.015965)'
+                                 latlong: 'POINT(40.002241 -83.015965)'
                              },
                              {
                                  name: 'Caldwell Lab',
@@ -308,7 +308,7 @@ locations = Location.create([{
                                  city: 'Columbus',
                                  state: 'OH',
                                  zip: '43210',
-                                 latlong: 'POINT(40.002471, -83.015145)'
+                                 latlong: 'POINT(40.002471 -83.015145)'
                              },
                              {
                                  name: 'Fontana Lab',
@@ -317,7 +317,7 @@ locations = Location.create([{
                                  city: 'Columbus',
                                  state: 'OH',
                                  zip: '43210',
-                                 latlong: 'POINT(40.003548, -83.012501)'
+                                 latlong: 'POINT(40.003548 -83.012501)'
                              },
                              {
                                  name: 'Jennings Hall',
@@ -326,7 +326,7 @@ locations = Location.create([{
                                  city: 'Columbus',
                                  state: 'OH',
                                  zip: '43210',
-                                 latlong: 'POINT(39.996793, -83.015366)'
+                                 latlong: 'POINT(39.996793 -83.015366)'
                              },
                              {
                                  name: 'Bolz Hall',
@@ -335,7 +335,7 @@ locations = Location.create([{
                                  city: 'Columbus',
                                  state: 'OH',
                                  zip: '43210',
-                                 latlong: 'POINT(40.002992, -83.015160)'
+                                 latlong: 'POINT(40.002992 -83.015160)'
                              },
                              {
                                  name: 'Knowlton Hall',
@@ -344,7 +344,7 @@ locations = Location.create([{
                                  city: 'Columbus',
                                  state: 'OH',
                                  zip: '43210',
-                                 latlong: 'POINT(40.003621, -83.016619)'
+                                 latlong: 'POINT(40.003621 -83.016619)'
                              },
                              {
                                  name: 'Smith Lab',
@@ -353,7 +353,7 @@ locations = Location.create([{
                                  city: 'Columbus',
                                  state: 'OH',
                                  zip: '43210',
-                                 latlong: 'POINT(40.002679, -83.013223)'
+                                 latlong: 'POINT(40.002679 -83.013223)'
                              },
                              {
                                  name: 'Mathematics Tower  ',
@@ -362,7 +362,7 @@ locations = Location.create([{
                                  city: 'Columbus',
                                  state: 'OH',
                                  zip: '43210',
-                                 latlong: 'POINT(40.001575, -83.014064)'
+                                 latlong: 'POINT(40.001575 -83.014064)'
                              },
                              {
                                  name: 'University Hall',
@@ -371,8 +371,46 @@ locations = Location.create([{
                                  city: 'Columbus',
                                  state: 'OH',
                                  zip: '43210',
-                                 latlong: 'POINT(40.000479, -83.014178)'
-                             }])
+                                 latlong: 'POINT(40.000479 -83.014178)'
+                             },
+                             {
+                                 name: 'Postle Hall',
+                                 street1: '305 W 12th Ave',
+                                 street2: nil,
+                                 city: 'Columbus',
+                                 state: 'OH',
+                                 zip: '43210',
+                                 latlong: 'POINT(39.996288 -83.016292)'
+                             },
+                             {
+                                 name: 'Drake Performance and Event Center',
+                                 street1: '1849 Cannon Dr',
+                                 street2: nil,
+                                 city: 'Columbus',
+                                 state: 'OH',
+                                 zip: '43210',
+                                 latlong: 'POINT(39.999296 -83.022918)'
+                             },
+                             {
+                                 name: 'Enarson Classrooms Building',
+                                 street1: '2009 Millikin Rd',
+                                 street2: nil,
+                                 city: 'Columbus',
+                                 state: 'OH',
+                                 zip: '43210',
+                                 latlong: 'POINT(40.002272 -83.016105)'
+                             },
+                             {
+                                 name: 'Kottman Hall',
+                                 street1: '2021 Coffey Rd',
+                                 street2: nil,
+                                 city: 'Columbus',
+                                 state: 'OH',
+                                 zip: '43210',
+                                 latlong: 'POINT(40.002649 -83.026523)'
+                             },
+
+                             ])
 
 people = Person.create([
                   {
@@ -640,3 +678,7 @@ people = Person.create([{
                   suffix: ''
                 }
   ])
+
+RequirementGroup.create([{
+
+  }])
