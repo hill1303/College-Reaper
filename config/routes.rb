@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   devise_for :user
   get 'schedules' => 'schedules#index', as: :user_root
 
+  get 'auto' => 'autocomplete#auto'
+
   resources :schedules
 
   # The priority is based upon order of creation: first created -> highest priority.

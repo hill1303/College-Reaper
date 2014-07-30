@@ -1,0 +1,13 @@
+# Make the AutocompleteHelper available
+#noinspection
+<% environment.context_class.instance_eval { include AutocompleteHelper } %>
+
+# Instantiate the bloodhound suggestion engine
+window.courses = new Bloodhound(
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('course')
+  queryTokenizer: Bloodhound.tokenizers.whitespace
+  local: <%= courses_for_autocomplete.to_json.gsub /\"course\":/, 'course:' %>
+)
+
+# Initialize the bloodhound suggestion engine
+window.courses.initialize()
