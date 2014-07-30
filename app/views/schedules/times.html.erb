@@ -1,0 +1,44 @@
+<%= render 'wizard_breadcrumbs' %>
+<div class="row">
+  <div class="medium-8 columns">
+    <h2>Time Restrictions</h2>
+    <p>If you have any days that you don't want to take classes, or if you only want courses at certain times of day, you can tell us here.</p>
+    <%= simple_form_for @preference, url: wizard_path, method: :put do |f| %>
+      <%= f.simple_fields_for :choices do |ff| %>
+        <p>We will generate your schedule using only the selected (blue) days indicated below. Any days that are off (grayed out) will not have any classes!</p>
+        <div class="row">
+          <div class="medium-6 columns">
+            <% Date::DAYNAMES.each do |day| %>
+              <%= day.to_s %>
+              <div class="switch">
+                <%= # noinspection RubyStringKeysInHashInspection
+                    ff.input (day).to_sym, label: day.to_s, as: :boolean, boolean_style: :inline, input_html: { checked: true } %>
+              </div>
+            <% end %>
+          </div>
+          <div class="medium-6 columns">
+            <p>If you have any preference that your classes not start too early or get out too late, you can adjust the window that we will schedule classes into below.</p>
+            <div class="row">
+              <%= (f.input(:start_time, as: :time, default: Time.parse('6:00'), input_html: { class: 'medium-6 columns' })).gsub(/:/, '').html_safe %>
+            </div>
+            <div class="row">
+              <%= (f.input(:end_time, as: :time, default: Time.parse('21:00'), input_html: { class: 'medium-6 columns' })).gsub(/:/, '').html_safe %>
+            </div>
+            <br />
+            <p>How important is it to you that we make your classes fit within this time window?</p>
+            <br />
+            <span class="left">Not Important</span>
+            <span class="right">Very Important</span>
+            <div class="range-slider" data-slider>
+              <span class="range-slider-handle"></span>
+              <span class="range-slider-active-segment"></span>
+              <%= hidden_field_tag 'preference[time_weight]', 0.5 %>
+            </div>
+          </div>
+        </div>
+        <%= f.submit 'Next >', class: 'button right' %>
+      <% end %>
+    <% end %>
+  </div>
+  <%= render 'wizard_tips' %>
+</div>

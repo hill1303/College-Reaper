@@ -1,0 +1,17 @@
+<%= render 'wizard_breadcrumbs' %>
+<div class="row">
+  <div class="medium-8 columns">
+    <h2>Course Requirements</h2>
+    <p>Tell us what courses you absolutely <strong>have</strong> to get in your schedule this semester, and we'll make them fit. You can enter up to your term total of <%= user_session['new_prefs']['num_courses'] %> courses, but feel free to leave as many fields blank as you like.</p>
+    <%= simple_form_for @preference, url: wizard_path, method: :put do |f| %>
+      <%= f.simple_fields_for :choices do |ff| %>
+      <% @preference.num_courses.to_i.times do |i| %>
+          <%= # noinspection RubyStringKeysInHashInspection
+              ff.input ('course' << i.to_s).to_sym, label: 'Course ' << (i + 1).to_s, input_html: { 'data-autocomplete-courses' => '' } %>
+        <% end %>
+      <% end %>
+      <%= f.submit 'Next >', class: 'button right' %>
+    <% end %>
+  </div>
+  <%= render 'wizard_tips' %>
+</div>

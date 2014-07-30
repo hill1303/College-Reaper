@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="medium-8 columns">
+    <p>
+     <strong>Completion:</strong>
+     <%= String.new << @completion.id << ' '<< @completion.grade%>
+
+    </p>
+    
+    <%= link_to 'Edit', edit_completion_path(@completion) %> |
+    <%= link_to 'Back', completions_path %>
+  </div>
+</div>

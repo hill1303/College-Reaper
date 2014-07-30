@@ -31,15 +31,25 @@
 #           * +:unlock_token+ the token that must be presented to re-enable the ability to sign in
 #           * +:locked_at+ records when the account reached the maximum number of failures and was locked out
 class User < ActiveRecord::Base
-  # Include (all) default devise modules. Others available are:
+  # Include (all) default devise modules.
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable, :omniauthable
 
   validates :uuid, uniqueness: true, presence: true
+  validates :email, uniqueness: true, presence: true
+  validates :password, presence: true
+  validates :password_confirmation, presence: true
 
-  has_many :preferences
+  has_many :preferences, dependent: :delete_all
   belongs_to :person
-  has_many :completions
+  has_many :completions, dependent: :delete_all
   has_many :courses, through: :completions
-  has_many :schedules
+  has_many :schedules, dependent: :delete_all
+  has_and_belongs_to_many :course_groups
+
+  # Allow the user to manage their own Person record from the user account forms
+  accepts_nested_attributes_for :person, limit: 1, update_only: true
+
+  # Destroy the Person record(s) (plural just in case) when the User is destroyed
+  before_destroy { |record| Person.destroy_all 'user_id = ' << record.id }
 end

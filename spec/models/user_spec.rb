@@ -10,19 +10,23 @@ describe User do
   end
 
   it 'has many :completions' do
-    should have_many(:completions)
+    should have_many :completions
   end
 
   it 'has many :courses through :completions' do
-    should have_many(:courses).through(:completions)
+    should have_many(:courses).through :completions
   end
 
   it 'has many :preferences' do
-    should have_many(:preferences)
+    should have_many :preferences
   end
 
   it 'has many :schedules' do
-    should have_many(:schedules)
+    should have_many :schedules
+  end
+
+  it 'has and belongs to many :course_groups' do
+    should have_and_belong_to_many :courses
   end
 
   context 'attributes' do

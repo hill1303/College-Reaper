@@ -13,9 +13,24 @@
 #= require jquery
 #= require jquery_ujs
 #= require foundation
+#= require twitter/typeahead
 #= require turbolinks
 #= require_tree .
 
 $ ->
-  $(document).foundation()
+  $(document).foundation(
+    slider:
+      start: 0.0
+      end: 1.0
+      step: 0.01
+  )
+
+  $('[data-autocomplete-courses]').typeahead
+      hint: true
+      highlight: true
+      minLength: 1
+    ,
+      displayKey: 'course'
+      source: window.courses.ttAdapter()
+
   return

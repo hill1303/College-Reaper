@@ -56,12 +56,8 @@ describe Person do
       should validate_presence_of :dob
     end
 
-    it 'the presence of :sex attribute' do
-      should validate_presence_of :sex
-    end
-
     it 'the presence of :pronoun attribute' do
       should validate_presence_of :pronoun
     end
-  end  
+  end
 end

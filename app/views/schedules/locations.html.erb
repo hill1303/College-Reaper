@@ -1,0 +1,19 @@
+<%= render 'wizard_breadcrumbs' %>
+<div class="row">
+  <div class="medium-8 columns">
+    <h2>Walking Distance</h2>
+    <p>We'll automatically try to schedule your classes as close together as possible. To better select your personal best schedule, tell us how important it is to you that your classes be near each other.</p>
+    <%= simple_form_for @preference, url: wizard_path, method: :put do |f| %>
+      <br />
+      <span class="left">Not Important</span>
+      <span class="right">Very Important</span>
+      <div class="range-slider" data-slider>
+        <span class="range-slider-handle"></span>
+        <span class="range-slider-active-segment"></span>
+        <%= hidden_field_tag 'preference[distance_weight]', 0.5 %>
+      </div>
+      <%= f.submit 'Next >', class: 'button right' %>
+    <% end %>
+  </div>
+  <%= render 'wizard_tips' %>
+</div>

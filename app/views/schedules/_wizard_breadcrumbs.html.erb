@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="medium-12 columns">
+    <ul class="breadcrumbs">
+      <% wizard_steps.collect do |every_step| %>
+        <li class="<%= 'current' if every_step == step %>"><%= link_to ActiveSupport::Inflector.humanize(every_step), wizard_path(every_step) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
