@@ -27,5 +27,12 @@ class Section < ActiveRecord::Base
   belongs_to :person
   belongs_to :location
   belongs_to :term
-  
+
+  def cached_course
+    Course.cached_find(course_id)
+  end
+
+  def cached_location
+    Rails.fetch([self, location]) { location }
+  end
 end

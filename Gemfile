@@ -7,8 +7,6 @@ gem 'codeclimate-test-reporter', group: :test, require: nil
 # Needs to be here for the custom doc task
 gem 'rdoc'
 
-# Twitter typeahead for autocomplete
-gem 'twitter-typeahead-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
@@ -17,6 +15,8 @@ gem 'pg'
 # Let there be PostGIS
 gem 'rgeo'
 gem 'activerecord-postgis-adapter'
+# And memcahced to make things faaaaast
+gem 'dalli'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -32,6 +32,8 @@ gem 'jquery-rails'
 gem 'foundation-rails', '~> 5.0'
 # Add Font Awesome icons to the CSS available
 gem 'font-awesome-sass'
+# Twitter typeahead for autocomplete
+gem 'twitter-typeahead-rails'
 # Leaflet.js for maps
 gem 'leaflet-rails', '~> 0.7.3'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

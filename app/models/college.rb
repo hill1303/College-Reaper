@@ -9,4 +9,8 @@ class College < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   
   has_many :course_groups
+
+  def cached_course_groups
+    Rails.cache.fetch([self, course_groups]) { course_groups.to_a }
+  end
 end

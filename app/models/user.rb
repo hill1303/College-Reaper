@@ -52,4 +52,8 @@ class User < ActiveRecord::Base
 
   # Destroy the Person record(s) (plural just in case) when the User is destroyed
   before_destroy { |record| Person.destroy_all 'user_id = ' << record.id }
+
+  def cached_course_groups
+    Rails.cache.fetch([self, course_groups]) { course_groups.to_a }
+  end
 end

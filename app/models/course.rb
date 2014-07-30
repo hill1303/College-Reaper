@@ -17,4 +17,14 @@ class Course < ActiveRecord::Base
   has_many :pre_requisites, class_name: 'RequirementGroup', as: :owner
   has_and_belongs_to_many :terms
   has_and_belongs_to_many :course_groups
+
+  after_commit :flush_cache
+
+  def self.cached_find id
+    Rails.cache.fetch([id, name], expires_in: 1.hour) { find id }
+  end
+
+  def flush_cache
+    Rails.cache.delete([self.class.name, id])
+  end
 end

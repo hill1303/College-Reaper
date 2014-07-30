@@ -22,4 +22,8 @@ class Preference < ActiveRecord::Base
   belongs_to :user
   belongs_to :schedule
   belongs_to :term
+
+  def cached_user
+    Rails.cache.fetch([self, user]) { user }
+  end
 end

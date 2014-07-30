@@ -308,7 +308,7 @@ module GenScheduleHelper
     #  * +class_section_set+ - A set of class sections, likely belonging to a schedule.
     def total_credit_hours_of(class_section_set)
       total_credit_hours = 0
-      class_section_set.each { |class_section| total_credit_hours += class_section.course.credit_hours }
+      class_section_set.each { |class_section| total_credit_hours += class_section.cached_course.credit_hours }
       return total_credit_hours
     end
 
@@ -346,7 +346,7 @@ module GenScheduleHelper
       named_courses = get_named_courses_from preferences
       scheduled_courses = Set.new
       class_section_set.each do |class_section|
-        scheduled_courses.add class_section.course.id
+        scheduled_courses.add class_section.cached_course.id
       end
       return named_courses.subset? scheduled_courses
     end
@@ -522,8 +522,8 @@ module GenScheduleHelper
       distance = 0
       # Calculate distance by class_section pairs in sorted list
         (sorted_class_sections_on_day.size - 1).times do |i|
-          location = sorted_class_sections_on_day[i].location
-          other_location = sorted_class_sections_on_day[i+1].location
+          location = sorted_class_sections_on_day[i].cached_location
+          other_location = sorted_class_sections_on_day[i+1].cached_location
           distance += calculate_distance location, other_location
         end
     end
@@ -595,10 +595,10 @@ module GenScheduleHelper
     def count_ge_courses(preferences, class_section_set)
       num_ge_classes = 0
       # sum of classes that come from gen course group
-      preferences.user.course_groups.where(college_independent: false).each do |major|
-        major.college.course_groups.where(college_global: true).each do |course_group|
+      preferences.cached_user.cached_course_groups.where(college_independent: false).each do |major|
+        major.cached_college.cached_course_groups.where(college_global: true).each do |course_group|
           class_section_set.each do |class_section|
-            if course_group.courses.include? class_section.course
+            if course_group.cached_courses.include? class_section.cached_course
               num_ge_classes += 1
             end
           end
@@ -621,9 +621,9 @@ module GenScheduleHelper
     def count_major_courses(preferences, class_section_set)
       num_major_classes = 0
       # sum of classes that come from major course group
-      preferences.user.course_groups.where(college_global: false).each do |course_group|
+      preferences.cached_user.cached_course_groups.where(college_global: false).each do |course_group|
         class_section_set.each do |class_section|
-          if course_group.courses.include? class_section.course
+          if course_group.cached_courses.include? class_section.cached_course
             num_major_classes += 1
           end
         end

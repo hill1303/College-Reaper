@@ -15,4 +15,12 @@ class CourseGroup < ActiveRecord::Base
   has_and_belongs_to_many :courses
 
   has_many :completion_rules, class_name: 'RequirementGroup', as: :owner
+
+  def cached_courses
+    Rails.cache.fetch([self, courses]) { courses.to_a }
+  end
+
+  def cached_college
+    Rails.cache.fetch([self, college]) { college }
+  end
 end
