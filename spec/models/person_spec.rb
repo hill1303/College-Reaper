@@ -56,27 +56,8 @@ describe Person do
       should validate_presence_of :dob
     end
 
-    it 'the presence of :sex attribute' do
-      should validate_presence_of :sex
-    end
-
     it 'the presence of :pronoun attribute' do
       should validate_presence_of :pronoun
-    end
-
-    it 'the acceptance of valid sexes' do
-      should validate_inclusion_of(:sex).
-                 in_array(%w(Male Female Neither))
-    end
-
-    it 'the acceptance of valid titles' do
-      should validate_inclusion_of(:title).
-                 in_array(%w(Mr. Mrs. Ms. Dr. Rev. Fr. Prof. Hon. Ofc.))
-    end
-
-    it 'the acceptance of valid suffixes' do
-      should validate_inclusion_of(:suffix).
-                 in_array(%w(Jr. Sr. D.V.M. M.D. D.O. Pharm.D. Ph.D. LL.D. Eng.D. J.D. Ed.D. Esq. III IV V))
     end
   end
 end

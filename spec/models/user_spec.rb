@@ -26,7 +26,7 @@ describe User do
   end
 
   it 'has and belongs to many :course_groups' do
-    should have_and_belong_to_many :users
+    should have_and_belong_to_many :courses
   end
 
   context 'attributes' do
