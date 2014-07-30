@@ -23,9 +23,10 @@
         <ul class="right button-group">
           <% if user_signed_in? %>
           <li><%= link_to current_user.email, edit_user_registration_path,
-                          class: 'button secondary disabled' %></li>
-          <li><%= link_to 'Start your schedule!', 'schedules/course_load', class: 'button' %></li>
-          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'button' %></li>
+                          class: 'button secondary small disabled' %></li>
+          <li><%= link_to 'Start your schedule!', '/schedules/course_load', class: 'button small', data: { no_turbolink: true }  %></li>
+          <li><%= link_to 'Completed Courses', completions_path, class: 'button small' %></li>
+          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'button small' %></li>
           <% else %>
           <li class="hide-for-small-only"><span class="button secondary disabled">Get started today!</span></li>
           <li><%= link_to 'Sign in', new_user_session_path, class: 'button' %></li>

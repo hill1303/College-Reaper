@@ -4,7 +4,7 @@
     <h2>Course Load</h2>
     <p>Let's start with some basics about your semester.</p>
     <%= simple_form_for @preference, url: wizard_path, method: :put do |f| %>
-      <%= f.input :num_courses, label: 'How many classes would you like to take this semester (total)?', collection: 1..15  %>
+      <%= f.input :num_courses, label: 'How many classes would you like to take this semester (total)?', collection: 1..5  %>
       <%= f.input :force_courses, as: :boolean, label: 'I need to specify certain course numbers that I <strong>must</strong> take'.html_safe, boolean_style: :inline %>
       <%= f.input :waitlist, as: :boolean, label: 'I want my schedule to <strong>include</strong> waitlist-only courses'.html_safe, boolean_style: :inline %>
       <div class="row">

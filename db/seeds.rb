@@ -515,9 +515,9 @@ people = Person.create([
 
 section_params = Array.new
 
-300.times do |i|
+100.times do |i|
   time_delta = 60 * rand(60..120)
-  repeat_patterns = %w(MWF TR TWRF F WF MW M T W R MTWR)
+  repeat_patterns = %w(MWF TR TWRF WF MW MTWR)
 
   section_params.push({
       room: '10' << i.to_s,

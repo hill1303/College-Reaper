@@ -14,7 +14,7 @@
       }
       if @schedule.nil?
       %>
-      <h3 class="medium-8 columns medium-centered">Looks empty...<%= link_to 'Click here to generate a new one!', wizard_path(:course_load) %></h3>
+      <h3 class="medium-8 columns medium-centered">Looks empty...<%= link_to 'Click here to generate a new one!', wizard_path(:course_load), data: { no_turbolink: true }  %></h3>
       <% else %>
         <% Date::DAYNAMES.each do |day| %>
           <% if day != 'Saturday' and day != 'Sunday' %>
@@ -26,6 +26,8 @@
                     <%= section.course.instructional_unit + ' ' + section.course.course_number %>
                     <br/>
                     <%= section.location.name + ' ' + section.room %>
+                    <br/>
+                    <%= section.start_time.strftime('%H:%M') + ' - ' + section.end_time.strftime('%H:%M') %>
                     <br />
                     <%= section.person.name %>
                   </span>
@@ -50,24 +52,34 @@
           maxZoom: 18
         }).addTo(map);
 
-        var dir = MQ.routing.directions();
+        <% Date::DAYNAMES.each do |day| %>
+        <% @schedule.sections.order(start_time: :asc).each do |section| %>
+        <% unless section.rpt_pattern.index(day_remap[day]).nil? %>
+          var dir<%= day %> = MQ.routing.directions();
+          dir<%= day %>.route({
+            locations: [
+            <%= location_coords = Array.new
+             @schedule.sections.order(start_time: :asc).each do |next_section|
+                unless next_section.rpt_pattern.index(day_remap[day]).nil?
+              location_coords.push "{ latLng: { lng:#{section.location.lonlat.y}, lat:#{section.location.lonlat.x} } }"
+              end
+              end
+              location_coords.join(",")
+              %>
+            ],
+            options: {routeType:'pedestrian'}
+          });
 
-        dir.route({
-          location
-           <% @schedule.sections.order(start_time: :asc).each do |section| %>s: [
-            { latLng: { l<%= section.location.lonlat.y %>1984, l<%= section.location.lonlat.x %>6046
-           <% end %> } }
-          ],
-          options: {routeType:'pedestrian'}
-        });
-
-        map.addLayer(MQ.routing.routeLayer({
-          directions: dir,
-          fitBounds: true,
-          ribbonOptions: {
-            ribbonDisplay: { color: '#00FF00', opacity: 0.3 }
-          }
-        }));
+          map.addLayer(MQ.routing.routeLayer({
+            directions: dir<%= day %>,
+            fitBounds: true,
+            ribbonOptions: {
+              ribbonDisplay: { color: '#00FF00', opacity: 0.5 }
+            }
+          }));
+        <% end %>
+        <% end %>
+        <% end %>
       </script>
     </div>
   </div>

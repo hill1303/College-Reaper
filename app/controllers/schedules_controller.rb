@@ -124,6 +124,10 @@ class SchedulesController < ApplicationController
     preference = Preference.where(user_id: current_user.id).last
     section_set = Section.all.to_set
     schedules = GenScheduleHelper::ScheduleGenerator.evolve_schedules preference, section_set
+    schedules = schedules.to_a.sort do |x,y|
+      x.aggregate_score <=> y.aggregate_score
+    end
+
     # Save the schedules to the database
     schedules.each do |schedule|
       section_ids = []
