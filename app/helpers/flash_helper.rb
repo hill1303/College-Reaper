@@ -60,7 +60,7 @@ module FlashHelper
 
     flash.inject '' do |message, (key, value)|
       message += content_tag(:div, { data: { alert: '' }, class: 'alert-box ' << (keys[key.to_sym] || :standard).to_s << ' radius' }) do
-        (value + link_to('&times;'.html_safe, '#', class: :close)).html_safe
+        (value.to_s + link_to('&times;'.html_safe, '#', class: :close)).html_safe
       end
     end.html_safe
   end

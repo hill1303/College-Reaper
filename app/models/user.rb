@@ -50,6 +50,6 @@ class User < ActiveRecord::Base
   # Allow the user to manage their own Person record from the user account forms
   accepts_nested_attributes_for :person, limit: 1, update_only: true
 
-  # Destroy the Person record(s) (plurarl just in case) when the User is destroyed
+  # Destroy the Person record(s) (plural just in case) when the User is destroyed
   before_destroy { |record| Person.destroy_all 'user_id = ' << record.id }
 end

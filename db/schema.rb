@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20140728023845) do
 
   create_table "locations", force: true do |t|
     t.text     "name"
-    t.spatial  "latlong",    limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.spatial  "lonlat",     limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.text     "street1"
     t.text     "street2"
     t.text     "city"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20140728023845) do
     t.integer  "section_id"
   end
 
-  add_index "locations", ["latlong"], :name => "index_locations_on_latlong", :spatial => true
+  add_index "locations", ["lonlat"], :name => "index_locations_on_lonlat", :spatial => true
 
   create_table "people", force: true do |t|
     t.text     "name",       default: "",           null: false

@@ -10,10 +10,6 @@ class SchedulesController < ApplicationController
   end
 
   def show
-
-    unless params[:force_courses].to_i.zero?
-      flash[:alert] = 'Courses forced'
-    end
     @tips = ('<li>' << tips[step].join('</li><li>') << '</li>').html_safe if tips[step]
 
     case step
@@ -27,10 +23,6 @@ class SchedulesController < ApplicationController
 
   def update
     user_session[:new_prefs] ||= Hash.new
-
-    unless params[:force_courses].to_i.zero?
-      flash[:alert] = 'Courses forced'
-    end
 
     case step
       when :generate_schedules
