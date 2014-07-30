@@ -10,6 +10,7 @@ class SchedulesController < ApplicationController
 
   end
 
+  #Sets preferences for a user and displays the appropriate view
   def show
     @tips = ('<p>' << tips[step].join('</p><p>') << '</p>').html_safe if tips[step]
 
@@ -27,6 +28,7 @@ class SchedulesController < ApplicationController
     render_wizard
   end
 
+  #updates the score of the algorithm if a user chooses to change their preferences
   def update
     user_session['new_prefs'] ||= Hash.new
 

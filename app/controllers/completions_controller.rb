@@ -24,10 +24,12 @@ class CompletionsController < ApplicationController
     @completion = Completion.find(params[:id])
   end
 
+  # Create allows a user to store a new completion in the database
   def create
     @completion = Completion.new(params[:id])
   end
 
+  # Updates existing completion in database
   def update
     @completion = Completion.find(params[:id])
     respond_to do |format|
