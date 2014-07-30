@@ -21,6 +21,36 @@ class SchedulesController < ApplicationController
         unless user_session['new_prefs']['force_courses'] == '1'
           skip_step
         end
+      when :generate_schedules
+        preference = Preference.where(user_id: current_user.id).last
+        section_set = Sections.all.to_set
+        schedules = GenScheduleHelper::ScheduleGenerator.evolve_schedules preference, sections
+        # Save the schedules to the database
+        schedules.each do |schedule|
+          section_ids = [] 
+          schedule.class_section_set.each { |class_section| section_ids.push class_section.id }         
+          sections_sql = 'id IN ('
+          section_ids.size.times do |x| 
+            if x == (section_ids.size - 1)
+              sections_sql += '?)'
+            else
+              sections_sql += '?, '
+            end
+          end
+          section_ids.shift sections_sql
+          Schedule.create ({
+            preference: schedule.preference,
+            score: schedule.aggregate_score,
+            user: schedule.preferences.user,
+            sections: Sections.where(section_ids),
+            sub_scores: {
+              time_sub_score: schedule.time_sub_score,
+              distance_sub_score: schedule.distance_sub_score,
+              ge_major_sub_score: schedule.ge_major_sub_score,
+              credit_hour_sub_score: schedule.credit_hour_sub_score
+            }
+          })
+        end
       else
     end
     @preference = Preference.new choices: user_session['new_prefs'], user: current_user
