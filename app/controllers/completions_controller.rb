@@ -1,3 +1,8 @@
+# The completion controller is a basic RESTful controller that allow a logged-in user to edit the completed
+# courses in their associated +completions+ table. They may add, remove and update courses and their associated
+# grades. The controller also uses the autocomplete feature to aid the process of adding new courses to
+# their history in a user-friendly manner.
+
 class CompletionsController < ApplicationController
   def index
     @completions = Completion.where(user_id: current_user.id)
