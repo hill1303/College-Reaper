@@ -8,20 +8,20 @@ module GenScheduleHelper
     DAYS_OF_THE_WEEK = ["U", "M", "T", "W", "R", "F", "S"]
     RADIUS_OF_EARTH = 6371
     SAME_LOCATION_DISTANCE = 0.001
+    DISTANCE_BIAS_FACTOR = 100
 
     attr_reader :class_section_set
     attr_reader :aggregate_score
 
-    @@preferences = nil
+    @preferences = nil
 
     # Initialize an empty MockSchedule with a set of user preferences.
     #
     # Parameters:
     #
-    #   * +preferences+ - The +hstore+ preferences object that corresponds to the users preferences. This value is set
-    # at a class level and will not change once a MockSchedule has been instantiated.
+    #   * +preferences+ - The +hstore+ preferences object that corresponds to the users preferences.
     def initialize(preferences)
-      @@preferences ||= preferences
+      @preferences = preferences
       @class_section_set = Set.new
       @aggregate_score = 0
       @time_score = 0
@@ -58,14 +58,13 @@ module GenScheduleHelper
       [@aggregate_score, @time_score, @distance_score, @ge_major_score, @credit_hour_score].join(', ').to_s
     end
 
-    # Returns a reference to the class level +hstore+ preferences object that was used to create +self+ and other
-    # MockSchedules.
+    # Returns a reference to the class level +hstore+ preferences object that was used to create +self+.
     #
     # Returns:
     #
-    # An +hstore+ preferences object.
+    #   An +hstore+ preferences object.
     def preferences
-      @@preferences
+      @preferences
     end
 
     # Adds a class section to the class section set of +self+.
@@ -91,7 +90,7 @@ module GenScheduleHelper
     #
     # Parameters:
     #
-    # * +class_section+ - The class section to be removed from +self+.
+    #   * +class_section+ - The class section to be removed from +self+.
     def unassign_class_section!(class_section)
       @class_section_set.delete? class_section
     end
@@ -104,8 +103,10 @@ module GenScheduleHelper
     #   and contains all explicitly named courses, if any (as specified in +preferences+). +false+ if none of these
     #   conditions are met.
     def is_valid?
-      is_full? and not contains_course_conflict? and acceptable_credit_hours? and contains_explicit_courses? and not 
-        contains_time_conflict? 
+      is_full? @preferences, @class_section_set and not contains_course_conflict? @class_section_set and 
+        acceptable_credit_hours? @preferences, @class_section_set and 
+          contains_explicit_courses? @preferences, @class_section_set and 
+            not contains_time_conflict? @class_section_set 
     end
 
     # Checks if +class_section+ is able to be added to +self+ based on the contents of +self+'s class section set.
@@ -119,7 +120,8 @@ module GenScheduleHelper
     #
     #   * +class_section+ - The class section to be verified against the contents of +self+.
     def safe_assignment?(class_section)
-      time_safe? class_section and course_safe? class_section and not is_full?
+      time_safe? @class_section_set, class_section and course_safe? @class_section_set, class_section and 
+        not is_full? @preferences, @class_section_set
     end
 
     # Fills +self+ with class sections from a set of class sections. A full MockSchedule is one with the number of
@@ -138,8 +140,12 @@ module GenScheduleHelper
     #
     #   * +class_section_set+ - The set of all possible sections from which to create a schedule.
     def fill_schedule!(class_section_set)
-      return true if is_valid?
+      if is_valid?
+        evaluate!
+        return true
+      end
       class_section_set.each do |class_section|
+        # NOTE: the class section below is an instance variable, and is NOT the same set as the parameter passed in
         if safe_assignment? class_section
           assign_class_section! class_section
           if fill_schedule! class_section_set
@@ -164,10 +170,10 @@ module GenScheduleHelper
     #
     #   The aggregate score of +self+ from all heuristics.
     def evaluate!
-      @time_score = time_score
-      @distance_score = distance_score
-      @ge_major_score = ge_major_score
-      @credit_hour_score = credit_hour_score
+      @time_score = time_score @preferences, @class_section_set
+      @distance_score = distance_score @preferences, @class_section_set
+      @ge_major_score = ge_major_score @preferences, @class_section_set
+      @credit_hour_score = credit_hour_score @preferences, @class_section_set
       
       @aggregate_score = @time_score + @distance_score + @ge_major_score + @credit_hour_score
     end
@@ -179,9 +185,9 @@ module GenScheduleHelper
     #   The result of +fill_schedule!+, +true+ if the schedule could be filled using +class_section_set+,
     #   +false+ otherwise.
     def reset!(class_section_set)
-      @aggregate_score = 0
       @class_section_set = Set.new
-      fill_schedule! class_section_set
+      section_shuffle = class_section_set.to_a.shuffle
+      fill_schedule! section_shuffle.to_set
     end
 
     # Replaces +self+'s class section set with that of +class_section_set+. This does _not_ guarantee that +self+ will be valid after
@@ -191,77 +197,93 @@ module GenScheduleHelper
     #
     #   * +class_section_set+ - The class section set that will replace +self+'s class section set.
     def set_class_sections(class_section_set)
-      @class_section_set = Set.new(class_section_set)
+      @class_section_set = Set.new class_section_set
+    end
+    
+    private
+    
+    def share_day?(class_section, other_class_section)
+      # Substring hand-waving, check if the repeat pattern of a section has any matching days with the other sections
+      class_section.rpt_pattern.scan(/./).any? { |day| other_class_section.rpt_pattern.include? day }
+    end
+    
+    def course_times_overlap?(class_section, other_class_section)
+      if class_section.start_time > other_class_section.end_time or
+          class_section.end_time < other_class_section.start_time
+        return false
+      else
+        return true
+      end
     end
 
-    private
-
-    def time_safe?(class_section)
-      # Substring hand-waving, check if the repeat pattern of a section has any matching days with the other sections
-      @class_section_set.each do |scheduled_class_section|
-        if scheduled_class_section.rpt_pattern.each_char { |day| class_section.rpt_pattern.include? day }
+    def time_safe?(class_section_set, class_section)
+      class_section_set.each do |scheduled_class_section|
+        return false if scheduled_class_section.id == class_section.id
+        if share_day? scheduled_class_section, class_section
           # Now check for time conflicts, ie not non-conflicting times
-          unless scheduled_class_section.start_time > class_section.end_time or
-              scheduled_class_section.end_time < class_section.start_time
-            return false
-          end
+          return false if course_times_overlap? scheduled_class_section, class_section
         end
       end
       return true
     end
 
-    def course_safe?(class_section)
-      @class_section_set.each do |scheduled_class_section|
+    def course_safe?(class_section_set, class_section)
+      class_section_set.each do |scheduled_class_section|
         return false if scheduled_class_section.course_id == class_section.course_id
       end
       return true
     end
 
-    def total_credit_hours
+    def total_credit_hours_of(class_section_set)
       total_credit_hours = 0
-      @class_section_set.each { |class_section| total_credit_hours += class_section.course.credit_hours }
+      class_section_set.each { |class_section| total_credit_hours += class_section.course.credit_hours }
       return total_credit_hours
     end
 
-    def contains_explicit_courses?
-      # Get set of explicitly named courses
+    def get_named_courses_from(preferences)
       named_courses = Set.new
-      @@preferences.choices.keys.each do |key|
-        if key.to_s.match(/course[0-9]+/)
-          named_courses.add(@@preferences.choices[key])
+      preferences.choices.keys.each do |key|
+        if key.to_s.match(/course[0-9]+/) 
+          named_courses.add preferences.choices[key] 
         end
       end
+      return named_courses
+    end
+
+    def contains_explicit_courses?(preferences, class_section_set)
+      # Get set of explicitly named courses
+      named_courses = get_named_courses_from preferences
       scheduled_courses = Set.new
-      @class_section_set.each do |class_section|
-        scheduled_courses.add(class_section.course)
+      class_section_set.each do |class_section|
+        scheduled_courses.add class_section.course 
       end
       return named_courses.subset? scheduled_courses
     end
 
-    def acceptable_credit_hours?
-      schedule_total = total_credit_hours
+    def acceptable_credit_hours?(preferences, class_section_set)
+      schedule_total = total_credit_hours_of class_section_set
       # Get credit hour range from prefs
-      credit_min = @@preferences.credit_min.to_i
-      credit_max = @@preferences.credit_max.to_i
-
-      schedule_total.between?(credit_min, credit_max)
+      credit_min = preferences.credit_min.to_i
+      credit_max = preferences.credit_max.to_i
+      schedule_total.between? credit_min, credit_max
     end
 
-    def is_full?
-      return @class_section_set.size == @@preferences.num_courses.to_i
+    def is_full?(preferences, class_section_set)
+      return class_section_set.size == preferences.num_courses.to_i
     end
-
-    def time_score
+  
+    def time_score(preferences, class_section_set)
       # Get time range from preferences
-      start_time_pref = @@preferences.start_time
-      end_time_pref = @@preferences.end_time
+      start_time_pref = (Time.new preferences.start_time).utc.strftime( "%H%M%S%N" )
+      end_time_pref = (Time.new preferences.end_time).utc.strftime( "%H%M%S%N" )
       # Get weight of importance for time
-      time_pref_weight = @@preferences.time_weight.to_f
-
+      time_pref_weight = preferences.time_weight.to_f
       classes_in_range = 0
-      @class_section_set.each do |class_section|
-        if (start_time_pref <= class_section.start_time) and
-            (end_time_pref >= class_section.end_time)
+      class_section_set.each do |class_section|
+        class_start_time = class_section.start_time.utc.strftime( "%H%M%S%N" )
+        class_end_time = class_section.end_time.utc.strftime( "%H%M%S%N" )
+        if (start_time_pref <= class_start_time) and
+            (end_time_pref >= class_end_time)
           classes_in_range += 1
         end
       end
@@ -279,79 +301,99 @@ module GenScheduleHelper
         return SAME_LOCATION_DISTANCE
       end
     end
+    
+    def total_distance_of(class_sections_on_day)
+      distance = 0
+      # Calculate distance by class_section pairs in sorted list
+        (class_sections_on_day.size - 1).times do |i|
+          location = class_sections_on_day[i].location
+          other_location = class_sections_on_day[i+1].location
+          distance += calculate_distance location, other_location
+        end
+    end
 
-    def distance_score
+    def sorted_classes_on(day, class_section_set)
+      # Find all class_sections that occur on day
+      classes_on_day = class_section_set.select { |class_section| class_section.rpt_pattern.include? day }
+      # Sort list of classes by time
+      classes_on_day.to_a.sort! do |class_section, other_class_section|
+        class_section.start_time <=> other_class_section.start_time
+      end
+    end
+  
+    def distance_score(preferences, class_section_set)
       # Get weight of importance for distance
-      distance_pref_weight = @@preferences.distance_weight.to_f
-
+      distance_pref_weight = preferences.distance_weight.to_f
       day_sums = Hash.new(0)
       DAYS_OF_THE_WEEK.each do |day|
-      # Find all class_sections that occur on day
-        classes_on_day = @class_section_set.select { |class_section| class_section.rpt_pattern.include? day }
-        # Sort list of classes by time
-        classes_on_day = classes_on_day.to_a.sort! do |class_section, other_class_section|
-          class_section.start_time <=> other_class_section.start_time
-        end
-        # Calculate distance by class_section pairs in sorted list
-        (classes_on_day.size - 1).times do |i|
-          location = classes_on_day[i].location
-          other_location = classes_on_day[i+1].location
-          # Assign distance score sum to day in day_sums
-          day_sums[day] += calculate_distance(location, other_location)
-        end
+        classes_on_day = sorted_classes_on day, class_section_set
+        day_sums[day] = total_distance_of classes_on_day
       end
       # Sum the total distance traveled in the whole week
       week_total = SAME_LOCATION_DISTANCE
       day_sums.each { |day, sum| week_total += sum }
       # Really this is weight * (1/total_distance). (1/distance) is used to "punish" high and "reward" small distances
-      return distance_pref_weight / week_total
+      return (distance_pref_weight / week_total) / DISTANCE_BIAS_FACTOR
     end
-
-    def ge_major_score
-      ge_major_pref_weight = @@preferences.ge_major_lean_weight.to_f
-      ge_major_pref_lean = @@preferences.ge_major_lean.downcase
-
-      classes_in_pref = 0
-      if ge_major_pref_lean == 'ge'
-        # sum of classes that come from gen course group
-        @@preferences.user.course_groups.where(college_independent: false).each do |major|
-          major.college.course_groups.where(college_global: true).each do |course_group|
-            @class_section_set.each do |class_section|
-              if course_group.courses.include? class_section.course
-                classes_in_pref += 1
-              end
-            end
-          end
-        end
-      elsif ge_major_pref_lean == 'major'
-        # sum of classes that come from major course group
-        @@preferences.user.course_groups.where(college_global: false).each do |course_group|
-          @class_section_set.each do |class_section|
+    
+    def count_ge_courses(preferences, class_section_set)
+      num_ge_classes = 0
+      # sum of classes that come from gen course group
+      preferences.user.course_groups.where(college_independent: false).each do |major|
+        major.college.course_groups.where(college_global: true).each do |course_group|
+          class_section_set.each do |class_section|
             if course_group.courses.include? class_section.course
-              classes_in_pref += 1
+              num_ge_classes += 1
             end
           end
         end
       end
+      return num_ge_classes
+    end
+    
+    def count_major_courses(preferences, class_section_set)
+      num_major_classes = 0
+      # sum of classes that come from major course group
+      preferences.user.course_groups.where(college_global: false).each do |course_group|
+        class_section_set.each do |class_section|
+          if course_group.courses.include? class_section.course
+            num_major_classes += 1
+          end
+        end
+      end
+      return num_major_classes
+    end
+    
+    def ge_major_score(preferences, class_section_set)
+      ge_major_pref_weight = preferences.ge_major_lean_weight.to_f
+      ge_major_pref_lean = preferences.ge_major_lean.downcase
+      if ge_major_pref_lean == 'ge'
+        classes_in_pref = count_ge_courses preferences, class_section_set
+        
+      elsif ge_major_pref_lean == 'major'
+        classes_in_pref = count_major_courses preferences, class_section_set
+      else
+        classes_in_pref = 0
+      end
       return ge_major_pref_weight * classes_in_pref
     end
 
-    def credit_hour_score
-      schedule_credit_hours = total_credit_hours
-      credit_pref_weight = @@preferences.credit_lean_weight.to_f
-      credit_pref_lean = @@preferences.credit_lean.downcase
+    def credit_hour_score(preferences, class_section_set)
+      schedule_credit_hours = total_credit_hours_of class_section_set
+      credit_pref_weight = preferences.credit_lean_weight.to_f
+      credit_pref_lean = preferences.credit_lean.downcase
       if credit_pref_lean == 'low'
-        return credit_pref_weight / ((schedule_credit_hours - @@preferences.credit_min.to_i).abs + 1)
+        return credit_pref_weight / ((schedule_credit_hours - preferences.credit_min.to_i).abs + 1)
       elsif credit_pref_lean == 'high'
-        return credit_pref_weight / ((schedule_credit_hours - @@preferences.credit_max.to_i).abs + 1)
+        return credit_pref_weight / ((schedule_credit_hours - preferences.credit_max.to_i).abs + 1)
       else
         return 0
       end
     end
     
-    def contains_course_conflict?
-      @class_section_set.each do |scheduled_class_section|
-        @class_section_set.each do |class_section|
+    def contains_course_conflict?(class_section_set)
+      class_section_set.each do |scheduled_class_section|
+        class_section_set.each do |class_section|
           if scheduled_class_section != class_section
             return true if scheduled_class_section.course_id == class_section.course_id
           end
@@ -360,32 +402,27 @@ module GenScheduleHelper
       return false
     end
     
-    def contains_time_conflict?
-      # Substring hand-waving, check if the repeat pattern of a section has any matching days with the other sections
-      @class_section_set.each do |scheduled_class_section|
-        @class_section_set.each do |class_section|
-          if scheduled_class_section.id != class_section.id 
-            if scheduled_class_section.rpt_pattern.each_char { |day| class_section.rpt_pattern.include? day }
-              # Now check for time conflicts, ie not non-conflicting times
-              unless scheduled_class_section.start_time > class_section.end_time or
-                scheduled_class_section.end_time < class_section.start_time
-                return true
-              end
-            end
+    def contains_time_conflict?(class_section_set)
+      class_section_set.each do |scheduled_class_section|
+        class_section_set.each do |class_section|
+          if share_day?(scheduled_class_section, class_section) and 
+              not scheduled_class_section.id == class_section.id
+            # Now check for time conflicts, ie not non-conflicting times
+            return true if course_times_overlap? scheduled_class_section, class_section
           end
         end
       end
       return false
     end
-    
   end
 
+  
   class ScheduleGenerator
 
     MUTATION_RATE = 0.02
     RANDOM_SELECTION_RATE = 0.10
-    MAX_STALE_GENERATIONS = 4
-    MAX_POPULATION_SIZE = 1000
+    MAX_STALE_GENERATIONS = 3
+    MAX_POPULATION_SIZE = 500
     
     def mutate!(schedule, class_section_set)
       # Merely converting to a list so that we may use the sample method on a set of class_sections
@@ -401,45 +438,35 @@ module GenScheduleHelper
     end
 
     def exchange_genes!(schedule, other_schedule)
+      # Get a random number of genes to swap
       num_genes_to_swap = (1...schedule.preferences.num_courses.to_i).to_a.sample
-
       schedule_swap = schedule.class_section_set.to_a.sample num_genes_to_swap
       other_schedule_swap = other_schedule.class_section_set.to_a.sample num_genes_to_swap
-
       # Remove the genes to be swapped from their original gene sequence...
       schedule.class_section_set.subtract schedule_swap
       other_schedule.class_section_set.subtract other_schedule_swap
-
       # ...and insert them into the other gene sequence
       schedule.class_section_set.merge other_schedule_swap
       other_schedule.class_section_set.merge schedule_swap 
-
       return schedule, other_schedule
     end
 
     def new_generation!(schedule_set, class_section_set)
-
       new_generation = Set.new
+    
       schedule_set.each do |schedule|
-        # Select a mate for the schedule (removes mate from the population, if it exists)
+        # Select a mate for the schedule
         mate = select_mate schedule, schedule_set
-        if not mate.nil?
-          # Breed the two schedules and mutate the children
-          child1, child2 = exchange_genes! schedule, mate
-          mutate! child1, class_section_set
-          mutate! child2, class_section_set
-
-          if not child1.is_valid?
-            child1.reset! class_section_set
-            end
-          if not child2.is_valid?
-            child1.reset! class_section_set
-          end
-          child1.evaluate!
-          child2.evaluate!
-
-          new_generation.add? child1
-          new_generation.add? child2
+        unless mate.nil?
+          
+          # Breed the two schedules and mutate them
+          exchange_genes! schedule, mate
+          mutate! schedule, class_section_set
+          mutate! mate, class_section_set
+          
+          # Add these children to the gene pool
+          new_generation.add? schedule
+          new_generation.add? mate
         end
       end
       return new_generation
@@ -462,24 +489,19 @@ module GenScheduleHelper
     def evaluate_population(schedule_set)
       schedule_list = schedule_set.to_a
       schedule_list.sort! { |a,b| b.aggregate_score <=> a.aggregate_score }
-     
       top_individual_score = schedule_list.first.aggregate_score
-
       score_sum = 0
       schedule_set.each { |schedule| score_sum += schedule.aggregate_score }
-      
       avg = score_sum / schedule_set.size
-      #puts [schedule_set.size, avg, score_sum].join(', ')
       return top_individual_score, avg
     end
 
-    def generate_schedules_easy(class_section_set, preferences)
+    def generate_schedules_easy(preferences, class_section_set)
       schedules = Set.new
       class_section_list = class_section_set.to_a
+      # Create a set of valid possible schedules with a cap set to prevent long computation time
       class_section_list.combination preferences.num_courses.to_i do |possible_schedule|
-        
         schedule = MockSchedule.new(preferences)
-        
         schedule.set_class_sections possible_schedule
         
         if schedule.is_valid?
@@ -491,47 +513,61 @@ module GenScheduleHelper
       return schedules
     end
     
-    def generate_schedules(class_section_set, preferences)
-      class_section_set_copy = Set.new(class_section_set)
-
+    def purge_and_replace_invalid_schedules!(schedule_set, class_section_set)
+      schedule_set.each do |schedule|
+        unless schedule.is_valid?
+          schedule.reset! class_section_set
+          schedule.evaluate!
+        end
+      end
+      return schedule_set
+    end
+    
+    def generate_schedules(preferences, class_section_set)
       schedule_set = Set.new
-
+      # Make a copy of the class section set so that we can delete visited class sections
+      class_section_set_copy = Set.new(class_section_set)
       class_section_set_copy.each do |class_section|
         schedule = MockSchedule.new preferences
         schedule.fill_schedule! class_section_set_copy
-        schedule.evaluate!
-        if schedule.is_valid? 
+        if schedule.is_valid?
+          schedule.evaluate!
           schedule_set.add? schedule
+          # Delete the section, preventing generation from possibly starting with that section again
           class_section_set_copy.delete? class_section
         end
       end
       return schedule_set
     end
 
-    def evolve_schedules(class_section_set, preferences)
-
+    def evolve_schedules(preferences, class_section_set)
       convergence_tracker = 0
       best_top_individual_score = 0
       best_population_avg_score = 0
-
+      
       population_snapshot = Set.new
-      population = generate_schedules_easy class_section_set, preferences
-
+      population = generate_schedules preferences, class_section_set
       while convergence_tracker < MAX_STALE_GENERATIONS
-        new_generation = new_generation! population, class_section_set
+        population_copy = Set.new population
+        # Progress the population through a generation and rank the population
+        population = new_generation! population_copy, class_section_set
+        purge_and_replace_invalid_schedules! population, class_section_set
         
-        top_individual_score, population_avg_score = evaluate_population new_generation
+        top_individual_score, population_avg_score = evaluate_population population
 
+        # Check for population improvement
         if top_individual_score > best_top_individual_score
           # There was a change in the best individual, reset convergence tracker
           convergence_tracker = 0
-          if population_avg_score > best_top_individual_score
+          if top_individual_score > best_top_individual_score
             # Population is the best we have seen, take snapshot
+            puts [population.size, top_individual_score, population_avg_score].join(', ')
             best_top_individual_score = top_individual_score
             best_population_avg_score = population_avg_score
-            population_snapshot = Set.new new_generation
+            population_snapshot = Set.new population
           end
         else
+          # No improvement was observed, mark for potential convergence
           convergence_tracker += 1
         end
       end
