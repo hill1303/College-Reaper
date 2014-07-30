@@ -99,6 +99,7 @@ class SchedulesController < ApplicationController
     }
   end
 
+  # Adds the bias to the preferences
   def bias_param(parameter, low, high)
     bias_hash = view_context.bias_slider params['preference'][parameter + '_weight']
     if bias_hash[:bias].nil?
@@ -109,6 +110,7 @@ class SchedulesController < ApplicationController
     end
   end
 
+  # Converts dates into formats that can be used by the database
   def convert_and_clean_up_dates parameter
     user_session['new_prefs'][parameter] = Time.parse(user_session['new_prefs'][parameter + '(4i)'] + ':' +
                                                       user_session['new_prefs'][parameter + '(5i)'])
@@ -117,6 +119,7 @@ class SchedulesController < ApplicationController
     end
   end
 
+  # Runs the schedules
   def run_schedules
     preference = Preference.where(user_id: current_user.id).last
     section_set = Section.all.to_set
@@ -153,6 +156,7 @@ class SchedulesController < ApplicationController
     end
   end
 
+  # Formats courses
   def flatten_courses
     params['preference']['choices'].each_key do |key|
       if key[0,6] == 'course' and not params['preference']['choices'][key.to_s].empty?
@@ -166,6 +170,7 @@ class SchedulesController < ApplicationController
     end
   end
 
+  # Formats Exclusions
   def flatten_exclusions
     # Invert choices to build the exclusion string
     attendance_string = String.new
