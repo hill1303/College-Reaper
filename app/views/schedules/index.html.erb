@@ -1,6 +1,6 @@
-<div>
-  <h2>Your Schedule</h2>
-    <div>
+<div class="row">
+  <div class="medium-12 columns">
+    <h2>Your Schedule</h2>
       <% # noinspection RubyStringKeysInHashInspection
          day_map = {
           'Sunday' => { code: 'U', color: '#000000'},
@@ -15,30 +15,30 @@
       %>
       <h3 class="medium-8 columns medium-centered">Looks empty...<%= link_to 'Click here to generate a new one!', wizard_path(:course_load), data: { no_turbolink: true }  %></h3>
       <% else %>
-        <table>
+        <table width="100%">
           <thead>
             <tr>
               <% Date::DAYNAMES.each do |day| %>
-                <th width="150"><%= day %></th>
+                <th><%= day %></th>
               <%end%>
             </tr>
           </thead>
           <tbody>
-            <% Date::DAYNAMES.each do |day| %>
-              <% if day != 'Saturday' and day != 'Sunday' %>
-                <% @schedule.sections.order(start_time: :asc).each do |section| %>
-                  <% unless section.rpt_pattern.index(day_remap[day]).nil? %>
-                    <tr>
-                      <td width="150"><%= section.course.instructional_unit + ' ' + section.course.course_number %><br>
-                      <%= section.location.name + ' ' + section.room %><br>
-                      <%= section.start_time.strftime('%H:%M') + ' - ' + section.end_time.strftime('%H:%M') %><br>
-                      <%= section.person.name %></td>
-                    </tr>
+            <% @schedule.sections.order(start_time: :asc).each do |section| %>
+              <tr>
+                <% Date::DAYNAMES.each do |day| %>
+                  <% if section.rpt_pattern.index(day_map[day][:code]).nil? %>
+                      <td></td>
+                  <% else %>
+                      <td>
+                        <%= section.course.instructional_unit + ' ' + section.course.course_number %><br>
+                        <%= section.location.name + ' ' + section.room %><br>
+                        <%= section.start_time.strftime('%H:%M') + ' - ' + section.end_time.strftime('%H:%M') %><br>
+                        <%= section.person.name %>
+                      </td>
                   <% end %>
                 <% end %>
-              <% else %>
-                <tr></tr>
-              <% end %>
+              </tr>
             <% end %>
           </tbody>
         </table>
@@ -48,45 +48,59 @@
 <% unless @schedule.nil? %>
   <div class="row">
     <div class="medium-12 columns">
-      <div id="map"></div>
-      <script type="text/javascript">
-        map = L.map('map').setView([39.999505, -83.012658], 15);
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-          maxZoom: 18
-        }).addTo(map);
-
+      <div class="tabs-content">
         <% Date::DAYNAMES.each do |day| %>
-          var dir_<%= day.downcase %> = MQ.routing.directions();
-
-
-          dir_<%= day.downcase %>.route({
-            locations: [
-            <%= location_coords = Array.new
-             @schedule.sections.order(start_time: :asc).each do |section|
-                unless section.rpt_pattern.index(day_map[day][:code]).nil?
-                  location_coords.push "{ latLng: { lng:#{section.location.lonlat.y}, lat:#{section.location.lonlat.x} } }"
-                 end
-              end
-              location_coords.join(',')
-              %>
-            ],
-            options: {routeType:'pedestrian'}
-          });
-
-          <%= day.downcase %>_route = MQ.routing.routeLayer({
-            directions: dir_<%= day.downcase %>,
-            fitBounds: true,
-            ribbonOptions: {
-              ribbonDisplay: { color: '<%= day_map[day][:color] %>', opacity: 0.5 }
-            }
-          });
+          <div class="leaflet-map-large content<%= day == 'Monday' ? ' active' : '' %>" id="<%= day.downcase %>-map-panel">
+          </div>
         <% end %>
-
-        function mapToggle(day_route) {
-          map.addLayer(day_route);
-        }
-      </script>
+      </div>
     </div>
+  </div>
+  <div class="row">
+    <div class="medium-12 columns">
+      <ul class="tabs" data-tab id="map-tabs">
+        <% Date::DAYNAMES.each do |day| %>
+          <li class="tab-title<%= day == 'Monday' ? ' active' : '' %>"><a href="#<%= day.downcase %>-map-panel"><%= day %></a></li>
+        <% end %>
+      </ul>
+    </div>
+    <script type="text/javascript">
+      <% Date::DAYNAMES.each do |day| %>
+      <%= day.downcase %>_map = L.map('<%= day.downcase %>-map-panel').setView([39.999505, -83.012658], 15);
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18
+      }).addTo(<%= day.downcase %>_map);
+
+      var <%= day.downcase %>_dir = MQ.routing.directions();
+
+
+      <%= day.downcase %>_dir.route({
+        locations: [
+          <%= location_coords = Array.new
+           @schedule.sections.order(start_time: :asc).each do |section|
+              unless section.rpt_pattern.index(day_map[day][:code]).nil?
+                location_coords.push "{ latLng: { lng:#{section.location.lonlat.y}, lat:#{section.location.lonlat.x} } }"
+               end
+            end
+            location_coords.join(',')
+            %>
+        ],
+        options: {routeType:'pedestrian'}
+      });
+
+      <%= day.downcase %>_map.addLayer(MQ.routing.routeLayer({
+        directions: <%= day.downcase %>_dir,
+        fitBounds: true,
+        ribbonOptions: {
+          ribbonDisplay: { color: '<%= day_map[day][:color] %>', opacity: 0.5 }
+        }
+      }));
+
+      $('#map-tabs').on('toggled', function (event, tab) {
+        $(window).resize();
+      });
+      <% end %>
+    </script>
   </div>
 <% end %>

@@ -19,3 +19,15 @@
  *= require_tree .
  *= require_self
  */
+
+.leaflet-map-small {
+  min-height: 100px;
+}
+
+.leaflet-map-medium {
+  min-height: 300px;
+}
+
+.leaflet-map-large {
+  min-height: 500px;
+}

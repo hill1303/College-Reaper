@@ -477,7 +477,7 @@ people = Person.create([
                      suffix: 'Ph.D.'
                  },
                  {
-                  name: 'Meean Feerash',
+                  name: 'Reed Wright',
                   dob: Date.new(1970, 8, 11),
                   sex: 'Female',
                   pronoun: 'her',
