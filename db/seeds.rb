@@ -533,9 +533,9 @@ section_params = Array.new
 end
 
 Section.create([{
-                    room: '280' << i.to_s,
-                    start_time: Time.parse("08:00:00") + time_delta,
-                    end_time: Time.parse("08:55:00") + time_delta,
+                    room: '280',
+                    start_time: Time.parse("08:00:00"),
+                    end_time: Time.parse("08:55:00"),
                     rpt_pattern: 'TWRF',
                     open: true,
                     course_seats: 40,
@@ -548,9 +548,9 @@ Section.create([{
                     location: Location.find_by_name('Caldwell Lab')
                 },
                 {
-                    room: '280' << i.to_s,
-                    start_time: Time.parse("11:30:00") + time_delta,
-                    end_time: Time.parse("12:25:00") + time_delta,
+                    room: '280',
+                    start_time: Time.parse("11:30:00"),
+                    end_time: Time.parse("12:25:00"),
                     rpt_pattern: 'TWRF',
                     open: true,
                     course_seats: 40,
@@ -563,9 +563,9 @@ Section.create([{
                     location: Location.find_by_name('Dreese Lab')
                 },
                 {
-                    room: '280' << i.to_s,
-                    start_time: Time.parse("15:00:00") + time_delta,
-                    end_time: Time.parse("15:55:00") + time_delta,
+                    room: '280',
+                    start_time: Time.parse("15:00:00"),
+                    end_time: Time.parse("15:55:00"),
                     rpt_pattern: 'TWRF',
                     open: true,
                     course_seats: 40,
@@ -578,9 +578,9 @@ Section.create([{
                     location: Location.find_by_name('Caldwell Lab')
                 },
                 {
-                    room: '280' << i.to_s,
-                    start_time: Time.parse("17:20:00") + time_delta,
-                    end_time: Time.parse("18:15:00") + time_delta,
+                    room: '280',
+                    start_time: Time.parse("17:20:00"),
+                    end_time: Time.parse("18:15:00"),
                     rpt_pattern: 'TWRF',
                     open: true,
                     course_seats: 40,
@@ -593,9 +593,9 @@ Section.create([{
                     location: Location.find_by_name('Dreese Lab')
                 },
                 {
-                    room: '357' << i.to_s,
-                    start_time: Time.parse("08:00:00") + time_delta,
-                    end_time: Time.parse("08:55:00") + time_delta,
+                    room: '357',
+                    start_time: Time.parse("08:00:00"),
+                    end_time: Time.parse("08:55:00"),
                     rpt_pattern: 'TWRF',
                     open: true,
                     course_seats: 40,
@@ -608,9 +608,9 @@ Section.create([{
                     location: Location.find_by_name('Caldwell Lab')
                 },
                 {
-                    room: '357' << i.to_s,
-                    start_time: Time.parse("10:20:00") + time_delta,
-                    end_time: Time.parse("11:15:00") + time_delta,
+                    room: '357',
+                    start_time: Time.parse("10:20:00"),
+                    end_time: Time.parse("11:15:00"),
                     rpt_pattern: 'TWRF',
                     open: true,
                     course_seats: 40,
@@ -623,9 +623,9 @@ Section.create([{
                     location: Location.find_by_name('Caldwell Lab')
                 },
                 {
-                    room: '357' << i.to_s,
-                    start_time: Time.parse("13:50:00") + time_delta,
-                    end_time: Time.parse("14:45:00") + time_delta,
+                    room: '357',
+                    start_time: Time.parse("13:50:00"),
+                    end_time: Time.parse("14:45:00"),
                     rpt_pattern: 'TWRF',
                     open: true,
                     course_seats: 40,
@@ -638,9 +638,9 @@ Section.create([{
                     location: Location.find_by_name('Dreese Lab')
                 },
                 {
-                    room: '357' << i.to_s,
-                    start_time: Time.parse("16:10:00") + time_delta,
-                    end_time: Time.parse("17:05:00") + time_delta,
+                    room: '357',
+                    start_time: Time.parse("16:10:00"),
+                    end_time: Time.parse("17:05:00"),
                     rpt_pattern: 'TWRF',
                     open: true,
                     course_seats: 40,
@@ -653,9 +653,9 @@ Section.create([{
                     location: Location.find_by_name('Dreese Lab')
                 },
                 {
-                    room: '369' << i.to_s,
-                    start_time: Time.parse("09:10:00") + time_delta,
-                    end_time: Time.parse("10:05:00") + time_delta,
+                    room: '369',
+                    start_time: Time.parse("09:10:00"),
+                    end_time: Time.parse("10:05:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
@@ -668,9 +668,9 @@ Section.create([{
                     location: Location.find_by_name('Caldwell Lab')
                 },
                 {
-                    room: '369' << i.to_s,
-                    start_time: Time.parse("12:40:00") + time_delta,
-                    end_time: Time.parse("13:35:00") + time_delta,
+                    room: '369',
+                    start_time: Time.parse("12:40:00"),
+                    end_time: Time.parse("13:35:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
@@ -683,9 +683,9 @@ Section.create([{
                     location: Location.find_by_name('Caldwell Lab')
                 },
                 {
-                    room: '369' << i.to_s,
-                    start_time: Time.parse("15:00:00") + time_delta,
-                    end_time: Time.parse("15:55:00") + time_delta,
+                    room: '369',
+                    start_time: Time.parse("15:00:00"),
+                    end_time: Time.parse("15:55:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
@@ -698,9 +698,9 @@ Section.create([{
                     location: Location.find_by_name('Dreese Lab')
                 },
                 {
-                    room: '357' << i.to_s,
-                    start_time: Time.parse("19:00:00") + time_delta,
-                    end_time: Time.parse("20:20:00") + time_delta,
+                    room: '357',
+                    start_time: Time.parse("19:00:00"),
+                    end_time: Time.parse("20:20:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
@@ -713,9 +713,9 @@ Section.create([{
                     location: Location.find_by_name('Caldwell Lab')
                 },
                 {
-                    room: '264' << i.to_s,
-                    start_time: Time.parse("09:10:00") + time_delta,
-                    end_time: Time.parse("10:05:00") + time_delta,
+                    room: '264',
+                    start_time: Time.parse("09:10:00"),
+                    end_time: Time.parse("10:05:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -728,9 +728,9 @@ Section.create([{
                     location: Location.find_by_name('Caldwell Lab')
                 },
                 {
-                    room: '264' << i.to_s,
-                    start_time: Time.parse("12:40:00") + time_delta,
-                    end_time: Time.parse("13:35:00") + time_delta,
+                    room: '264',
+                    start_time: Time.parse("12:40:00"),
+                    end_time: Time.parse("13:35:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
@@ -743,9 +743,9 @@ Section.create([{
                     location: Location.find_by_name('Caldwell Lab')
                 },
                 {
-                    room: '305' << i.to_s,
-                    start_time: Time.parse("13:50:00") + time_delta,
-                    end_time: Time.parse("14:45:00") + time_delta,
+                    room: '305',
+                    start_time: Time.parse("13:50:00"),
+                    end_time: Time.parse("14:45:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
@@ -758,9 +758,9 @@ Section.create([{
                     location: Location.find_by_name('Caldwell Lab')
                 },
                 {
-                    room: '305' << i.to_s,
-                    start_time: Time.parse("11:30:00") + time_delta,
-                    end_time: Time.parse("12:25:00") + time_delta,
+                    room: '305',
+                    start_time: Time.parse("11:30:00"),
+                    end_time: Time.parse("12:25:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
@@ -773,9 +773,9 @@ Section.create([{
                     location: Location.find_by_name('Caldwell Lab')
                 },
                 {
-                    room: '369' << i.to_s,
-                    start_time: Time.parse("08:00:00") + time_delta,
-                    end_time: Time.parse("10:05:00") + time_delta,
+                    room: '369',
+                    start_time: Time.parse("08:00:00"),
+                    end_time: Time.parse("10:05:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -788,9 +788,9 @@ Section.create([{
                     location: Location.find_by_name('Dreese Lab')
                 },
                 {
-                    room: '198' << i.to_s,
-                    start_time: Time.parse("09:10:00") + time_delta,
-                    end_time: Time.parse("10:05:00") + time_delta,
+                    room: '198',
+                    start_time: Time.parse("09:10:00"),
+                    end_time: Time.parse("10:05:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
@@ -803,9 +803,9 @@ Section.create([{
                     location: Location.find_by_name('Dreese Lab')
                 },
                 {
-                    room: '40' << i.to_s,
-                    start_time: Time.parse("15:00:00") + time_delta,
-                    end_time: Time.parse("17:05:00") + time_delta,
+                    room: '40',
+                    start_time: Time.parse("15:00:00"),
+                    end_time: Time.parse("17:05:00"),
                     rpt_pattern: 'WF',
                     open: true,
                     course_seats: 40,
@@ -818,9 +818,9 @@ Section.create([{
                     location: Location.find_by_name('Dreese Lab')
                 },
                 {
-                    room: '80' << i.to_s,
-                    start_time: Time.parse("16:10:00") + time_delta,
-                    end_time: Time.parse("18:15:00") + time_delta,
+                    room: '80',
+                    start_time: Time.parse("16:10:00"),
+                    end_time: Time.parse("18:15:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -833,9 +833,9 @@ Section.create([{
                     location: Location.find_by_name('Dreese Lab')
                 },
                 {
-                    room: '10' << i.to_s,
-                    start_time: Time.parse("14:20:00") + time_delta,
-                    end_time: Time.parse("15:40:00") + time_delta,
+                    room: '10',
+                    start_time: Time.parse("14:20:00"),
+                    end_time: Time.parse("15:40:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -848,9 +848,9 @@ Section.create([{
                     location: Location.find_by_name('Bolz Hall')
                 },
                 {
-                    room: '198' << i.to_s,
-                    start_time: Time.parse("09:35:00") + time_delta,
-                    end_time: Time.parse("10:55:00") + time_delta,
+                    room: '198',
+                    start_time: Time.parse("09:35:00"),
+                    end_time: Time.parse("10:55:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -863,9 +863,9 @@ Section.create([{
                     location: Location.find_by_name('Bolz Hall')
                 },
                 {
-                    room: '305' << i.to_s,
-                    start_time: Time.parse("12:45:00") + time_delta,
-                    end_time: Time.parse("14:05:00") + time_delta,
+                    room: '305',
+                    start_time: Time.parse("12:45:00"),
+                    end_time: Time.parse("14:05:00"),
                     rpt_pattern: 'WF',
                     open: true,
                     course_seats: 40,
@@ -878,9 +878,9 @@ Section.create([{
                     location: Location.find_by_name('Dreese Lab')
                 },
                 {
-                    room: '480' << i.to_s,
-                    start_time: Time.parse("11:10:00") + time_delta,
-                    end_time: Time.parse("12:30:00") + time_delta,
+                    room: '480',
+                    start_time: Time.parse("11:10:00"),
+                    end_time: Time.parse("12:30:00"),
                     rpt_pattern: 'MW',
                     open: true,
                     course_seats: 40,
@@ -894,9 +894,9 @@ Section.create([{
                 },
 
                 {
-                    room: '305' << i.to_s,
-                    start_time: Time.parse("08:00:00") + time_delta,
-                    end_time: Time.parse("09:20:00") + time_delta,
+                    room: '305',
+                    start_time: Time.parse("08:00:00"),
+                    end_time: Time.parse("09:20:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -909,9 +909,9 @@ Section.create([{
                     location: Location.find_by_name('Bolz Hall')
                 },
                 {
-                    room: '317' << i.to_s,
-                    start_time: Time.parse("16:30:00") + time_delta,
-                    end_time: Time.parse("17:50:00") + time_delta,
+                    room: '317',
+                    start_time: Time.parse("16:30:00"),
+                    end_time: Time.parse("17:50:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -924,9 +924,9 @@ Section.create([{
                     location: Location.find_by_name('Enarson Classrooms Building')
                 },
                 {
-                    room: '226' << i.to_s,
-                    start_time: Time.parse("14:20:00") + time_delta,
-                    end_time: Time.parse("15:40:00") + time_delta,
+                    room: '226',
+                    start_time: Time.parse("14:20:00"),
+                    end_time: Time.parse("15:40:00"),
                     rpt_pattern: 'WF',
                     open: true,
                     course_seats: 40,
@@ -939,9 +939,9 @@ Section.create([{
                     location: Location.find_by_name('Dreese Lab')
                 },
                 {
-                    room: '480' << i.to_s,
-                    start_time: Time.parse("11:10:00") + time_delta,
-                    end_time: Time.parse("12:30:00") + time_delta,
+                    room: '480',
+                    start_time: Time.parse("11:10:00"),
+                    end_time: Time.parse("12:30:00"),
                     rpt_pattern: 'MW',
                     open: true,
                     course_seats: 40,
@@ -954,9 +954,9 @@ Section.create([{
                     location: Location.find_by_name('Caldwell Lab')
                 },
                 {
-                    room: '225' << i.to_s,
-                    start_time: Time.parse("11:10:00") + time_delta,
-                    end_time: Time.parse("12:30:00") + time_delta,
+                    room: '225',
+                    start_time: Time.parse("11:10:00"),
+                    end_time: Time.parse("12:30:00"),
                     rpt_pattern: 'WR',
                     open: true,
                     course_seats: 40,
@@ -969,9 +969,9 @@ Section.create([{
                     location: Location.find_by_name('Mathematics Tower')
                 },
                 {
-                    room: '155' << i.to_s,
-                    start_time: Time.parse("09:35:00") + time_delta,
-                    end_time: Time.parse("10:50:00") + time_delta,
+                    room: '155',
+                    start_time: Time.parse("09:35:00"),
+                    end_time: Time.parse("10:50:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -984,9 +984,9 @@ Section.create([{
                     location: Location.find_by_name('University Hall')
                 },
                 {
-                    room: '369' << i.to_s,
-                    start_time: Time.parse("09:35:00") + time_delta,
-                    end_time: Time.parse("10:55:00") + time_delta,
+                    room: '369',
+                    start_time: Time.parse("09:35:00"),
+                    end_time: Time.parse("10:55:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -999,9 +999,9 @@ Section.create([{
                     location: Location.find_by_name('Mathematics Tower')
                 },
                 {
-                    room: '416' << i.to_s,
-                    start_time: Time.parse("17:35:00") + time_delta,
-                    end_time: Time.parse("20:30:00") + time_delta,
+                    room: '416',
+                    start_time: Time.parse("17:35:00"),
+                    end_time: Time.parse("20:30:00"),
                     rpt_pattern: 'W',
                     open: true,
                     course_seats: 40,
@@ -1014,9 +1014,9 @@ Section.create([{
                     location: Location.find_by_name('University Hall')
                 },
                 {
-                    room: '211' << i.to_s,
-                    start_time: Time.parse("10:20:00") + time_delta,
-                    end_time: Time.parse("11:15:00") + time_delta,
+                    room: '211',
+                    start_time: Time.parse("10:20:00"),
+                    end_time: Time.parse("11:15:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
@@ -1029,9 +1029,9 @@ Section.create([{
                     location: Location.find_by_name('Mathematics Tower')
                 },
                 {
-                    room: '330' << i.to_s,
-                    start_time: Time.parse("09:35:00") + time_delta,
-                    end_time: Time.parse("10:50:00") + time_delta,
+                    room: '330',
+                    start_time: Time.parse("09:35:00"),
+                    end_time: Time.parse("10:50:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -1044,9 +1044,9 @@ Section.create([{
                     location: Location.find_by_name('Mathematics Tower')
                 },
                 {
-                    room: '180' << i.to_s,
-                    start_time: Time.parse("08:00:00") + time_delta,
-                    end_time: Time.parse("08:55:00") + time_delta,
+                    room: '180',
+                    start_time: Time.parse("08:00:00"),
+                    end_time: Time.parse("08:55:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -1059,9 +1059,9 @@ Section.create([{
                     location: Location.find_by_name('Mathematics Tower')
                 },
                 {
-                    room: '170' << i.to_s,
-                    start_time: Time.parse("13:50:00") + time_delta,
-                    end_time: Time.parse("14:45:00") + time_delta,
+                    room: '170',
+                    start_time: Time.parse("13:50:00"),
+                    end_time: Time.parse("14:45:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -1074,9 +1074,9 @@ Section.create([{
                      location: Location.find_by_name('Mathematics Tower')
                 },
                 {
-                    room: '209' << i.to_s,
-                    start_time: Time.parse("10:20:00") + time_delta,
-                    end_time: Time.parse("11:15:00") + time_delta,
+                    room: '209',
+                    start_time: Time.parse("10:20:00"),
+                    end_time: Time.parse("11:15:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
@@ -1089,9 +1089,9 @@ Section.create([{
                     location: Location.find_by_name('Jennings Hall')
                 },
                 {
-                    room: '130' << i.to_s,
-                    start_time: Time.parse("13:50:00") + time_delta,
-                    end_time: Time.parse("14:45:00") + time_delta,
+                    room: '130',
+                    start_time: Time.parse("13:50:00"),
+                    end_time: Time.parse("14:45:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
@@ -1104,9 +1104,9 @@ Section.create([{
                     location: Location.find_by_name('Mathematics Tower')
                 },
                 {
-                    room: '354' << i.to_s,
-                    start_time: Time.parse("15:55:00") + time_delta,
-                    end_time: Time.parse("17:15:00") + time_delta,
+                    room: '354',
+                    start_time: Time.parse("15:55:00"),
+                    end_time: Time.parse("17:15:00"),
                     rpt_pattern: 'TR',
                     open: true,
                     course_seats: 40,
@@ -1119,9 +1119,9 @@ Section.create([{
                     location: Location.find_by_name('Hagerty Hall')
                 },
                 {
-                    room: '354' << i.to_s,
-                    start_time: Time.parse("10:20:00") + time_delta,
-                    end_time: Time.parse("11:15:00") + time_delta,
+                    room: '354',
+                    start_time: Time.parse("10:20:00"),
+                    end_time: Time.parse("11:15:00"),
                     rpt_pattern: 'WRF',
                     open: true,
                     course_seats: 40,
@@ -1134,9 +1134,9 @@ Section.create([{
                     location: Location.find_by_name('Postle Hall')
                 },
                 {
-                    room: '224' << i.to_s,
-                    start_time: Time.parse("10:20:00") + time_delta,
-                    end_time: Time.parse("12:15:00") + time_delta,
+                    room: '224',
+                    start_time: Time.parse("10:20:00"),
+                    end_time: Time.parse("12:15:00"),
                     rpt_pattern: 'MW',
                     open: true,
                     course_seats: 40,
@@ -1149,9 +1149,9 @@ Section.create([{
                     location: Location.find_by_name('Smith Lab')
                 },
                 {
-                    room: '224' << i.to_s,
-                    start_time: Time.parse("15:55:00") + time_delta,
-                    end_time: Time.parse("17:15:00") + time_delta,
+                    room: '224',
+                    start_time: Time.parse("15:55:00"),
+                    end_time: Time.parse("17:15:00"),
                     rpt_pattern: 'MW',
                     open: true,
                     course_seats: 40,
@@ -1164,9 +1164,9 @@ Section.create([{
                     location: Location.find_by_name('Smith Lab')
                 },
                 {
-                    room: '367' << i.to_s,
-                    start_time: Time.parse("10:05:00") + time_delta,
-                    end_time: Time.parse("11:55:00") + time_delta,
+                    room: '367',
+                    start_time: Time.parse("10:05:00"),
+                    end_time: Time.parse("11:55:00"),
                     rpt_pattern: 'TWR',
                     open: true,
                     course_seats: 40,
@@ -1179,9 +1179,9 @@ Section.create([{
                     location: Location.find_by_name('Hagerty Hall')
                 },
                 {
-                    room: '367' << i.to_s,
-                    start_time: Time.parse("12:05:00") + time_delta,
-                    end_time: Time.parse("13:55:00") + time_delta,
+                    room: '367',
+                    start_time: Time.parse("12:05:00"),
+                    end_time: Time.parse("13:55:00"),
                     rpt_pattern: 'TWR',
                     open: true,
                     course_seats: 40,
@@ -1194,9 +1194,9 @@ Section.create([{
                     location: Location.find_by_name('Hagerty Hall')
                 },
                 {
-                    room: '100' << i.to_s,
-                    start_time: Time.parse("08:00:00") + time_delta,
-                    end_time: Time.parse("08:55:00") + time_delta,
+                    room: '100',
+                    start_time: Time.parse("08:00:00"),
+                    end_time: Time.parse("08:55:00"),
                     rpt_pattern: 'TWR',
                     open: true,
                     course_seats: 40,
@@ -1209,9 +1209,9 @@ Section.create([{
                     location: Location.find_by_name('Kottman Hall')
                 },
                 {
-                    room: '100' << i.to_s,
-                    start_time: Time.parse("13:00:00") + time_delta,
-                    end_time: Time.parse("14:55:00") + time_delta,
+                    room: '100',
+                    start_time: Time.parse("13:00:00"),
+                    end_time: Time.parse("14:55:00"),
                     rpt_pattern: 'MTWRF',
                     open: true,
                     course_seats: 40,
@@ -1224,9 +1224,9 @@ Section.create([{
                     location: Location.find_by_name('Kottman Hall')
                 },
                 {
-                    room: '100' << i.to_s,
-                    start_time: Time.parse("17:00:00") + time_delta,
-                    end_time: Time.parse("17:55:00") + time_delta,
+                    room: '100',
+                    start_time: Time.parse("17:00:00"),
+                    end_time: Time.parse("17:55:00"),
                     rpt_pattern: 'MTWRF',
                     open: true,
                     course_seats: 40,
@@ -1239,9 +1239,9 @@ Section.create([{
                     location: Location.find_by_name('Kottman Hall')
                 },
                 {
-                    room: '120' << i.to_s,
-                    start_time: Time.parse("13:30:00") + time_delta,
-                    end_time: Time.parse("14:25:00") + time_delta,
+                    room: '120',
+                    start_time: Time.parse("13:30:00"),
+                    end_time: Time.parse("14:25:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
@@ -1254,9 +1254,9 @@ Section.create([{
                     location: Location.find_by_name('University Hall')
                 },
                 {
-                    room: '120' << i.to_s,
-                    start_time: Time.parse("10:30:00") + time_delta,
-                    end_time: Time.parse("11:25:00") + time_delta,
+                    room: '120',
+                    start_time: Time.parse("10:30:00"),
+                    end_time: Time.parse("11:25:00"),
                     rpt_pattern: 'MWF',
                     open: true,
                     course_seats: 40,
