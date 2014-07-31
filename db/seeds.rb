@@ -1340,7 +1340,9 @@ Schedule.create([
                     score: 0,
                     sub_scores: Hash.new,
                     user: user,
-                    sections: Section.where(['id IN (?, ?, ?, ?)', Section.find_by id: ])
+                    :sections => Section.where(['id IN (?, ?, ?, ?)', Section.course.find_by_name('Software I'),
+                                                Section.course.find_by_name('Foundations 1'), Section.course.find_by_name('Writing I'),
+                                                Section.course.find_by_name('Calculus I')]),
                     term: term
                 ])
 
