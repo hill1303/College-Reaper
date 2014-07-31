@@ -1109,7 +1109,7 @@ module GenScheduleHelper
     #   * +class_section_set+ - A set of available class sections from which schedules can be generated.
     def self.filter_by_preferred_days preferences, class_section_set
       class_section_set.delete_if do |class_section|
-        preferences.exclude_day_pattern.scan(/./).any? { |day| class_section.rpt_pattern.include? day }
+        preferences.exclude_day_pattern.to_s.scan(/./).any? { |day| class_section.rpt_pattern.include? day }
       end
     end
   end
