@@ -1340,6 +1340,7 @@ Schedule.create([
                     score: 0,
                     sub_scores: Hash.new,
                     user: user,
+                    sections: Section.where(['id IN (?, ?, ?, ?)', Section.find_by id: ])
                     term: term
                 ])
 
