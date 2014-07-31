@@ -79,6 +79,18 @@ controller.</p>
           </ul>
         </dd>
       
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-next_term">next_term</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
     </dl>
   
 
@@ -100,6 +112,48 @@ controller.</p>
 
     <!-- Methods -->
         
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-next_term">
+            
+              <b>next_term</b>()
+            
+            <a href="../classes/ApplicationController.html#method-i-next_term" name="method-i-next_term" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Gets the term with the first forthcoming start date</p>
+
+<p>Returns:  * A <a href="Term.html">Term</a> which is the next one to begin
+in the calendar</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-next_term_source')" id="l_method-i-next_term_source">show</a>
+                
+              </p>
+              <div id="method-i-next_term_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">next_term</span>
+  <span class="ruby-constant">Term</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&#39;start_date &gt; ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>]).<span class="ruby-identifier">order</span>(<span class="ruby-identifier">start_date</span><span class="ruby-operator">:</span> <span class="ruby-value">:asc</span>).<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
       <div class="sectiontitle">Instance Protected methods</div>
       
         <div class="method">
@@ -135,7 +189,7 @@ href="Person.html">Person</a> and such. All of the params in the array
                 
               </p>
               <div id="method-i-configure_permitted_parameters_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 20</span>
+                <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">configure_permitted_parameters</span>
   <span class="ruby-identifier">actions</span> = [<span class="ruby-value">:sign_up</span>, <span class="ruby-value">:account_update</span>]
   <span class="ruby-identifier">params</span> = [<span class="ruby-value">:name</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:suffix</span>, <span class="ruby-value">:dob</span>, <span class="ruby-value">:sex</span>, <span class="ruby-value">:gender</span>, <span class="ruby-value">:pronoun</span>, <span class="ruby-value">:uuid</span>]

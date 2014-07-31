@@ -23,7 +23,7 @@
         </h1>
         <ul class="files">
             <li>app/assets/stylesheets/application.scss</li>
-            <li>Last modified: 2014-07-30 19:52:15 -0400</li>
+            <li>Last modified: 2014-07-31 04:55:56 -0400</li>
         </ul>
     </div>
 
@@ -32,32 +32,44 @@
   
     <div class="description">
       
-<pre><code>This is a manifest file that&#39;ll be compiled into application.css, which will include all the files
-listed below.
+<pre><code> This is a manifest file that&#39;ll be compiled into application.css, which will include all the files
+ listed below.
 
-Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
-or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
 
-You&#39;re free to add application-wide styles to this file and they&#39;ll appear at the bottom of the
-compiled file so the styles you add here take precedence over styles defined in any styles
-defined in the other CSS/SCSS files in this directory. It is generally better to create a new
-file per style scope.</code></pre>
+ You&#39;re free to add application-wide styles to this file and they&#39;ll appear at the bottom of the
+ compiled file so the styles you add here take precedence over styles defined in any styles
+ defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ file per style scope.
 
-<h1 id="label-require+foundation_and_overrides">require foundation_and_overrides</h1>
+= require foundation_and_overrides
+= require font-awesome
+= require leaflet
+ For Leaflet.js
+= depend_on_asset &quot;layers.png&quot;
+= depend_on_asset &quot;layers-2x.png&quot;
+= require_tree .
+= require_self
+</code></pre>
 
-<h1 id="label-require+font-awesome">require font-awesome</h1>
+<p>.leaflet-map-small {</p>
 
-<h1 id="label-require+leaflet">require leaflet</h1>
+<pre><code>min-height: 100px;</code></pre>
 
-<pre><code>For Leaflet.js</code></pre>
+<p>}</p>
 
-<h1 id="label-depend_on_asset+%22layers.png%22">depend_on_asset “layers.png”</h1>
+<p>.leaflet-map-medium {</p>
 
-<h1 id="label-depend_on_asset+%22layers-2x.png%22">depend_on_asset “layers-2x.png”</h1>
+<pre><code>min-height: 300px;</code></pre>
 
-<h1 id="label-require_tree+.">require_tree .</h1>
+<p>}</p>
 
-<h1 id="label-require_self">require_self</h1>
+<p>.leaflet-map-large {</p>
+
+<pre><code>min-height: 500px;</code></pre>
+
+<p>}</p>
 
     </div>
   

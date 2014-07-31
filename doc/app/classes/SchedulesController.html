@@ -304,9 +304,6 @@ href="SchedulesController.html">SchedulesController</a></p>
       <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user_session</span>[<span class="ruby-string">&#39;new_prefs&#39;</span>][<span class="ruby-string">&#39;force_courses&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;1&#39;</span>
         <span class="ruby-identifier">skip_step</span>
       <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-value">:generate_schedules</span>
-      <span class="ruby-identifier">run_schedules</span>
-    <span class="ruby-keyword">else</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-ivar">@preference</span> = <span class="ruby-constant">Preference</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">choices</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_session</span>[<span class="ruby-string">&#39;new_prefs&#39;</span>], <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>
   <span class="ruby-identifier">render_wizard</span>
@@ -345,7 +342,7 @@ preferences</p>
                 
               </p>
               <div id="method-i-update_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 45</span>
+                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">update</span>
   <span class="ruby-identifier">user_session</span>[<span class="ruby-string">&#39;new_prefs&#39;</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
 
@@ -377,6 +374,9 @@ preferences</p>
 
       <span class="ruby-comment"># Save to the database</span>
       <span class="ruby-identifier">pref</span> = <span class="ruby-constant">Preference</span>.<span class="ruby-identifier">create</span> <span class="ruby-identifier">choices</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_session</span>[<span class="ruby-string">&#39;new_prefs&#39;</span>], <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>
+
+      <span class="ruby-comment"># Generate schedules</span>
+      <span class="ruby-identifier">run_schedules</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">user_session</span>[<span class="ruby-string">&#39;new_prefs&#39;</span>].<span class="ruby-identifier">merge!</span> <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;preference&#39;</span>]
   <span class="ruby-keyword">end</span>
@@ -386,7 +386,9 @@ preferences</p>
     <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">next_wizard_path</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">flash</span>[<span class="ruby-value">:alert</span>]
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">next_wizard_path</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -423,7 +425,7 @@ preferences</p>
                 
               </p>
               <div id="method-i-bias_param_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 103</span>
+                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">bias_param</span>(<span class="ruby-identifier">parameter</span>, <span class="ruby-identifier">low</span>, <span class="ruby-identifier">high</span>)
   <span class="ruby-identifier">bias_hash</span> = <span class="ruby-identifier">view_context</span>.<span class="ruby-identifier">bias_slider</span> <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;preference&#39;</span>][<span class="ruby-identifier">parameter</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;_weight&#39;</span>]
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">bias_hash</span>[<span class="ruby-value">:bias</span>].<span class="ruby-identifier">nil?</span>
@@ -466,7 +468,7 @@ preferences</p>
                 
               </p>
               <div id="method-i-convert_and_clean_up_dates_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 114</span>
+                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">convert_and_clean_up_dates</span> <span class="ruby-identifier">parameter</span>
   <span class="ruby-identifier">user_session</span>[<span class="ruby-string">&#39;new_prefs&#39;</span>][<span class="ruby-identifier">parameter</span>] = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">user_session</span>[<span class="ruby-string">&#39;new_prefs&#39;</span>][<span class="ruby-identifier">parameter</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;(4i)&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;:&#39;</span> <span class="ruby-operator">+</span>
                                                     <span class="ruby-identifier">user_session</span>[<span class="ruby-string">&#39;new_prefs&#39;</span>][<span class="ruby-identifier">parameter</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;(5i)&#39;</span>])
@@ -507,7 +509,7 @@ preferences</p>
                 
               </p>
               <div id="method-i-flatten_courses_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 164</span>
+                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 185</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">flatten_courses</span>
   <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;preference&#39;</span>][<span class="ruby-string">&#39;choices&#39;</span>].<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>[<span class="ruby-number">0</span>,<span class="ruby-number">6</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;course&#39;</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;preference&#39;</span>][<span class="ruby-string">&#39;choices&#39;</span>][<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>].<span class="ruby-identifier">empty?</span>
@@ -553,7 +555,7 @@ preferences</p>
                 
               </p>
               <div id="method-i-flatten_exclusions_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 178</span>
+                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">flatten_exclusions</span>
   <span class="ruby-comment"># Invert choices to build the exclusion string</span>
   <span class="ruby-identifier">attendance_string</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>
@@ -598,11 +600,19 @@ preferences</p>
                 
               </p>
               <div id="method-i-run_schedules_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 123</span>
+                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">run_schedules</span>
   <span class="ruby-identifier">preference</span> = <span class="ruby-constant">Preference</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">last</span>
   <span class="ruby-identifier">section_set</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">to_set</span>
-  <span class="ruby-identifier">schedules</span> = <span class="ruby-constant">GenScheduleHelper</span><span class="ruby-operator">::</span><span class="ruby-constant">ScheduleGenerator</span>.<span class="ruby-identifier">evolve_schedules</span> <span class="ruby-identifier">preference</span>, <span class="ruby-identifier">section_set</span>
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">schedules</span> = <span class="ruby-constant">GenScheduleHelper</span><span class="ruby-operator">::</span><span class="ruby-constant">ScheduleGenerator</span>.<span class="ruby-identifier">evolve_schedules</span> <span class="ruby-identifier">preference</span>, <span class="ruby-identifier">section_set</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&#39;Sorry, but your preferences were too constrained - we couldn\t generate any valid schedules.&#39;</span> <span class="ruby-operator">&lt;&lt;</span>
+                    <span class="ruby-string">&#39; Please adjust your choices to include more options and try again.&#39;</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">wizard_path</span> <span class="ruby-value">:course_load</span>
+  <span class="ruby-keyword">end</span>
+
   <span class="ruby-identifier">schedules</span> = <span class="ruby-identifier">schedules</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">x</span>.<span class="ruby-identifier">aggregate_score</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">aggregate_score</span>
   <span class="ruby-keyword">end</span>
@@ -627,14 +637,15 @@ preferences</p>
     <span class="ruby-constant">Schedule</span>.<span class="ruby-identifier">create</span> ({
         <span class="ruby-identifier">preference</span><span class="ruby-operator">:</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">preferences</span>,
         <span class="ruby-identifier">score</span><span class="ruby-operator">:</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">aggregate_score</span>,
-        <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">user</span>,
+        <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>,
         <span class="ruby-identifier">sections</span><span class="ruby-operator">:</span> <span class="ruby-constant">Section</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">sections_sql</span>),
         <span class="ruby-identifier">sub_scores</span><span class="ruby-operator">:</span> {
             <span class="ruby-identifier">time_sub_score</span><span class="ruby-operator">:</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">time_sub_score</span>,
             <span class="ruby-identifier">distance_sub_score</span><span class="ruby-operator">:</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">distance_sub_score</span>,
             <span class="ruby-identifier">ge_major_sub_score</span><span class="ruby-operator">:</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">ge_major_sub_score</span>,
             <span class="ruby-identifier">credit_hour_sub_score</span><span class="ruby-operator">:</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">credit_hour_sub_score</span>
-        }
+        },
+        <span class="ruby-identifier">term</span><span class="ruby-operator">:</span> <span class="ruby-identifier">next_term</span>
     })
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -673,13 +684,23 @@ optimal schedules for them.</p>
                 
               </p>
               <div id="method-i-tips_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 92</span>
+                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">tips</span>
   {
+    <span class="ruby-identifier">course_load</span><span class="ruby-operator">:</span> [
+        <span class="ruby-string">&#39;The fewer classes you want in your schedule, the easier it is to schedule, and to pace yourself!&#39;</span>,
+        <span class="ruby-string">&#39;Use lower settings for credit hours and the total number of courses to increase your choices.&#39;</span>
+    ],
     <span class="ruby-identifier">courses</span><span class="ruby-operator">:</span> [
         <span class="ruby-string">&#39;Leaving more blank fields will result in more possible schedules.&#39;</span>,
         <span class="ruby-string">&#39;Having more possible schedules means we can find the best fit for you more easily.&#39;</span>,
         <span class="ruby-string">&#39;If you include a lot of courses here, you will also raise the odds that no valid schedule will exist.&#39;</span>
+    ],
+    <span class="ruby-identifier">times</span><span class="ruby-operator">:</span> [
+        <span class="ruby-string">&#39;The more days you\ll let us schedule, the better the chances of finding a great match.&#39;</span>
+    ],
+    <span class="ruby-identifier">locations</span><span class="ruby-operator">:</span> [
+        <span class="ruby-string">&#39;We calculate distance as the distance between your classes, from first to last, just like you\d walk.&#39;</span>
     ]
   }
 <span class="ruby-keyword">end</span></pre>
