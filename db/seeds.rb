@@ -511,30 +511,28 @@ people = Person.create([
 
 section_params = Array.new
 
-# Uncomment this if you hate your processor!
-# Or are benchmarking or something....
-# 100.times do |i|
-#   time_delta = 60 * rand(60..120)
-#   repeat_patterns = %w(MWF TR TWRF WF MW MTWR)
+100.times do |i|
+  time_delta = 60 * rand(60..120)
+  repeat_patterns = %w(MWF TR TWRF WF MW MTWR)
 
-#   section_params.push({
-#       room: '10' << i.to_s,
-#       start_time: Time.parse("08:00:00") + time_delta,
-#       end_time: Time.parse("14:00:00") + time_delta,
-#       rpt_pattern: repeat_patterns.sample,
-#       open: true,
-#       course_seats: 40,
-#       wait_seats: 0,
-#       seat_max: 100,
-#       wait_max: 999,
-#       person: people.sample,
-#       term: term,
-#       course: courses.sample,
-#       location: locations.sample
-#   })
-# end
+  section_params.push({
+      room: '10' << i.to_s,
+      start_time: Time.parse("08:00:00") + time_delta,
+      end_time: Time.parse("14:00:00") + time_delta,
+      rpt_pattern: repeat_patterns.sample,
+      open: true,
+      course_seats: 40,
+      wait_seats: 0,
+      seat_max: 100,
+      wait_max: 999,
+      person: people.sample,
+      term: term,
+      course: courses.sample,
+      location: locations.sample
+  })
+end
 
-# Section.create(section_params)
+Section.create(section_params)
 
 Section.create([{
                     room: '280',

@@ -13,6 +13,14 @@ class ApplicationController < ActionController::Base
   # Modifies the set of permitted parameters to certain Devise actions, if we're about to call a Devise controller
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  # Gets the term with the first forthcoming start date
+  #
+  # Returns:
+  #   * A Term which is the next one to begin in the calendar
+  def next_term
+    Term.where(['start_date > ?', Date.today]).order(start_date: :asc).first
+  end
+
   protected
   # Add parameters to the list of allowed params on the appropriate Devise controllers in order to facilitate them
   # accepting nested attributes for Person and such. All of the params in the array `params` are added to each of the

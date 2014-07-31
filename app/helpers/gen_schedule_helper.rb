@@ -32,19 +32,19 @@ module GenScheduleHelper
     attr_reader :preferences
 
     # The total score of +self+ across all heuristics.
-    attr_reader :aggregate_score
+    attr_accessor :aggregate_score
     
     # The time heuristic sub_score 
-    attr_reader :time_sub_score
+    attr_accessor :time_sub_score
     
     # The distance heuristic sub_score
-    attr_reader :distance_sub_score
+    attr_accessor :distance_sub_score
     
     # The ge major heuristic sub_score
-    attr_reader :ge_major_sub_score
+    attr_accessor :ge_major_sub_score
     
     # The credit hour heuristic sub_score
-    attr_reader :credit_hour_sub_score
+    attr_accessor :credit_hour_sub_score
 
     # Initialize an empty MockSchedule with a set of user preferences.
     #
@@ -161,7 +161,6 @@ module GenScheduleHelper
     #   * +class_section_set+ - The set of all possible sections from which to create a schedule.
     def fill_schedule!(class_section_set)
       if is_valid?
-        evaluate!
         return true
       end
       class_section_set.each do |class_section|
@@ -191,11 +190,22 @@ module GenScheduleHelper
     #   The aggregate score of +self+ from all heuristics.
     def evaluate!
       @time_sub_score = time_score @preferences, @class_section_set
-      @distance_sub_score = distance_score @preferences, @class_section_set
+      @distance_sub_score = distance_score @class_section_set
       @ge_major_sub_score = ge_major_score @preferences, @class_section_set
       @credit_hour_sub_score = credit_hour_score @preferences, @class_section_set
-      
-      @aggregate_score = @time_sub_score + @distance_sub_score + @ge_major_sub_score + @credit_hour_sub_score
+
+      @aggregate_score = @time_sub_score +
+                          @distance_sub_score +
+                          @ge_major_sub_score +
+                          @credit_hour_sub_score
+    end
+
+    # Gets all of the sub scores at once
+    #
+    # Returns:
+    #   * A hash of the sub scores of the schedule
+    def sub_scores
+      { time: @time_sub_score, distance: @distance_sub_score, ge_major: @ge_major_sub_score, credit_hour: @credit_hour_sub_score }
     end
 
     # Resets +self+'s class section set with a new, random, and full class section set. Reset also evaluates +self+.
@@ -206,7 +216,7 @@ module GenScheduleHelper
     #   +false+ otherwise.
     #
     # Parameters:
-    #   
+    #
     #   * +class_section_set+ - The set of sections available to fill a schedule with.
     def reset!(class_section_set)
       @class_section_set = Set.new
@@ -218,7 +228,7 @@ module GenScheduleHelper
     # replacement.
     #
     # Returns:
-    #   
+    #
     #   The class section set that was assigned to +self+.
     #
     # Parameters:
@@ -227,16 +237,16 @@ module GenScheduleHelper
     def set_class_sections(class_section_set)
       @class_section_set = Set.new class_section_set
     end
-    
+
 
     # Checks whether two class sections occur on the same day.
     #
     # Returns:
-    #   
+    #
     #   +true+ if +class_section+ occurs on the same day as +other_class_section+, +false+ otherwise.
     #
     # Parameters:
-    # 
+    #
     #   * +class_section+ - A class section to check against another section.
     #   * +other_class_section+ - The other class section that is being checked against by a section.
     #
@@ -244,7 +254,7 @@ module GenScheduleHelper
       # Substring hand-waving, check if the repeat pattern of a section has any matching days with the other sections
       class_section.rpt_pattern.scan(/./).any? { |day| other_class_section.rpt_pattern.include? day }
     end
-   
+
     # Checks if two class sections belong to the same course.
     #
     # Returns:
@@ -283,13 +293,13 @@ module GenScheduleHelper
       end
       return true
     end
-    
+
     # Checks whether adding a class section would cause a set to contain class sections belonging to the same course.
     # NOTE: This does not actually _add_ the course to the section set.
     #
     # Returns:
     #
-    #   +true+ if adding +class_section+ to +class_section_set+ does not cause the set to contain two sections of the same course, 
+    #   +true+ if adding +class_section+ to +class_section_set+ does not cause the set to contain two sections of the same course,
     #   +false+ otherwise.
     #
     #   * +class_section_set+ - A set of class sections to check against, likely belonging to a schedule.
@@ -304,11 +314,11 @@ module GenScheduleHelper
     # Totals the number of credit hours of the class sections in a class section set.
     #
     # Returns:
-    #   
+    #
     #   The total number of credit hours of the class sections in +class_section_set+.
     #
     # Paramters:
-    #   
+    #
     #  * +class_section_set+ - A set of class sections, likely belonging to a schedule.
     def total_credit_hours_of(class_section_set)
       total_credit_hours = 0
@@ -323,13 +333,13 @@ module GenScheduleHelper
     #   A set of courses explicitly named in preferences.
     #
     # Parameters:
-    #   
+    #
     #  * +preferences+ - The user preferences object from which to pull named courses.
     def get_named_courses_from(preferences)
       named_courses = Set.new
       preferences.choices.keys.each do |key|
-        if key.to_s.match(/course[0-9]+/) 
-          named_courses.add preferences.choices[key] 
+        if key.to_s.match(/course[0-9]+/)
+          named_courses.add preferences.choices[key]
         end
       end
       return named_courses
@@ -338,7 +348,7 @@ module GenScheduleHelper
     # Checks whether a class section set contains a subset consisting of the explicitly named courses in user preferences.
     #
     # Returns:
-    #   
+    #
     #   +true+ if +class_section_set+ contains the explicitly named courses found in +preferences+, +false+ otherwise.
     #
     # Parameters:
@@ -361,7 +371,7 @@ module GenScheduleHelper
     # Returns:
     #
     #   +true+ if the total number of credit hours falls within the range specified in +preferences+, +false+ otherwise.
-    #   
+    #
     # Parameters:
     #
     #   * +preferences+ - The user preferences containing a credit hour range.
@@ -378,21 +388,21 @@ module GenScheduleHelper
       # Get time range from preferences
       start_time_pref = Time.parse preferences.start_time
       end_time_pref = Time.parse preferences.end_time
-      
+
       class_section_set.each do |class_section|
         section_time_start = class_section.start_time
         section_time_end = class_section.end_time
-        unless time_range_contains_other_time_range start_time_pref, end_time_pref, 
+        unless time_range_contains_other_time_range start_time_pref, end_time_pref,
             section_time_start, section_time_end
           return false
         end
       return true
       end
     end
-    
+
     # Checks whether a class section set has the number of courses specified in the user preferences.
     #
-    # Returns: 
+    # Returns:
     #
     #   +true if +class_section_set+ contains the number of courses specified in +preferences+, +false+ otherwise.
     #
@@ -403,10 +413,10 @@ module GenScheduleHelper
     def is_full?(preferences, class_section_set)
       return class_section_set.size == preferences.num_courses.to_i
     end
-  
-  
+
+
     # Checks if a time (from a time range) begins earlier than another time.
-    # 
+    #
     # Returns:
     #
     #   +true+ if +time+ occurs at the same time or earlier than +other_time+, +false+ otherwise.
@@ -430,9 +440,9 @@ module GenScheduleHelper
         return true
       end
     end
-   
+
     # Checks if a time (from a time range) begins later than another time.
-    # 
+    #
     # Returns:
     #
     #   +true+ if +time+ occurs at the same time or later than +other_time+, +false+ otherwise.
@@ -456,18 +466,18 @@ module GenScheduleHelper
         return false
       end
     end
-    
+
     # Checks whether a time range (created from the first two parameters) contains another time range
     def time_range_contains_other_time_range(start_time, end_time, other_start_time, other_end_time)
       time_earlier_than_other_time start_time, other_start_time and
         time_later_than_other_time end_time, other_end_time
     end
- 
+
     # Assigns a score for the timing of a class section set. Section sets whose sections time ranges fall within the
     # time range specified in user preferences will score higher than those whose sections do not fall in that range.
     #
     # Returns:
-    #   
+    #
     #   A variable score of zero or greater that corresponds to +class_section_set+'s adherence to a time range specified
     #   in +preferences+.
     #
@@ -480,16 +490,15 @@ module GenScheduleHelper
       start_time_pref = Time.parse preferences.start_time
       end_time_pref = Time.parse preferences.end_time
       # Get weight of importance for time
-      time_pref_weight = preferences.time_weight.to_f
       classes_in_range = 0
       class_section_set.each do |class_section|
         section_time_start = class_section.start_time
         section_time_end = class_section.end_time
-        if time_range_contains_other_time_range start_time_pref, end_time_pref, 
+        if time_range_contains_other_time_range start_time_pref, end_time_pref,
             section_time_start, section_time_end
         end
       end
-      return time_pref_weight * classes_in_range
+      return classes_in_range
     end
 
     # Calculates the distance between two locations, based on Equirectangular approximation distance.
@@ -499,7 +508,7 @@ module GenScheduleHelper
     #   The distance between +location+ and +other_location+.
     #
     # Parameters:
-    #  
+    #
     #  * +location+ - A location point, from which a distance to another point will be calculated.
     #  * +other_location+ - Another location point, from which a distance to another point will be calculated.
     def calculate_distance(location, other_location)
@@ -512,7 +521,7 @@ module GenScheduleHelper
         return SAME_LOCATION_DISTANCE
       end
     end
-   
+
     # Calculates the total travel distance approximation between class sections on a particular day.
     #
     # Returns:
@@ -557,21 +566,20 @@ module GenScheduleHelper
         class_section.start_time <=> other_class_section.start_time
       end
     end
- 
-    # Assigns a score for the approximate walking distance total of a class section set. Section sets whose approximate total 
+
+    # Assigns a score for the approximate walking distance total of a class section set. Section sets whose approximate total
     # walking distances are low correspond to higher scores as compared to those whose total distances are higher.
     #
     # Returns:
-    #   
+    #
     #   A variable score of zero or greater that corresponds to +class_section_set+'s total walking distance approximation.
     #
     # Parameters:
     #
     #   * +preferences+ - The user preferences containing a weight of importance for travel distance.
     #   * +class_section_set+ - The class section set for which to calculate a score.
-    def distance_score(preferences, class_section_set)
+    def distance_score(class_section_set)
       # Get weight of importance for distance
-      distance_pref_weight = preferences.distance_weight.to_f
       day_sums = Hash.new(0)
       DAYS_OF_THE_WEEK.each do |day|
         classes_on_day = sorted_classes_on day, class_section_set
@@ -581,11 +589,11 @@ module GenScheduleHelper
       week_total = SAME_LOCATION_DISTANCE
       day_sums.each { |day, sum| week_total += sum }
       # Really this is weight * (1/total_distance). (1/distance) is used to "punish" high and "reward" small distances
-      
-      return distance_pref_weight / week_total.abs
+
+      return 1 / week_total.abs
     end
-   
-    # Counts the number of courses in a class section setthat are considered a general education course (that is, the course is not a 
+
+    # Counts the number of courses in a class section setthat are considered a general education course (that is, the course is not a
     # major or minor course).
     #
     # Returns:
@@ -595,7 +603,7 @@ module GenScheduleHelper
     # Parameters:
     #
     #   * +preferences+ - The user preference used in retrieving course groups to which a user belongs.
-    #   * +class_section_set+ - A set of class sections, likely belonging to a schedule. 
+    #   * +class_section_set+ - A set of class sections, likely belonging to a schedule.
     def count_ge_courses(preferences, class_section_set)
       num_ge_classes = 0
       # sum of classes that come from gen course group
@@ -610,8 +618,8 @@ module GenScheduleHelper
       end
       return num_ge_classes
     end
-    
-    # Counts the number of courses in a class section setthat are considered a major course (that is, the course is not a general 
+
+    # Counts the number of courses in a class section setthat are considered a major course (that is, the course is not a general
     # education course).
     #
     # Returns:
@@ -635,57 +643,55 @@ module GenScheduleHelper
       return num_major_classes
     end
 
-    # Assigns a score for the number of courses that fall in a user specified course group category (either major or general education). 
+    # Assigns a score for the number of courses that fall in a user specified course group category (either major or general education).
     # Section sets which contain more courses in the course group category preference correspond to higher scores.
     #
     # Returns:
-    #   
-    #   A variable score of zero or greater that corresponds to how many class sections in +class_section_set+ belong to the user 
+    #
+    #   A variable score of zero or greater that corresponds to how many class sections in +class_section_set+ belong to the user
     #   specified category.
     #
     # Parameters:
     #
     #   * +preferences+ - The user preferences containing a course group category preference.
-    #   * +class_section_set+ - The class section set for which to calculate a score. 
+    #   * +class_section_set+ - The class section set for which to calculate a score.
     def ge_major_score(preferences, class_section_set)
-      ge_major_pref_weight = preferences.ge_major_lean_weight.to_f
       ge_major_pref_lean = preferences.ge_major_lean.downcase
       if ge_major_pref_lean == 'ge'
         classes_in_pref = count_ge_courses preferences, class_section_set
-        
       elsif ge_major_pref_lean == 'major'
         classes_in_pref = count_major_courses preferences, class_section_set
       else
         classes_in_pref = 0
       end
-      return ge_major_pref_weight * classes_in_pref
+      classes_in_pref
     end
-    
-    # Assigns a score for the total number of credit hours in a class section set and how close that total is to the user specified credit 
+
+    # Assigns a score for the total number of credit hours in a class section set and how close that total is to the user specified credit
     # hour max/min preference. Section sets whose total credit hours are closer to the specified credit hour max/min score higher.
     #
     # Returns:
-    #   
+    #
     #   A variable score of zero or greater that corresponds to +class_section_set+'s total credit hour proximity to the credit hour
     #   max/min specified in +preferences+.
     #
     # Parameters:
     #
     #   * +preferences+ - The user preferences containing a credit hour max/min preference.
-    #   * +class_section_set+ - The class section set for which to calculate a score. 
+    #   * +class_section_set+ - The class section set for which to calculate a score.
     def credit_hour_score(preferences, class_section_set)
       schedule_credit_hours = total_credit_hours_of class_section_set
-      credit_pref_weight = preferences.credit_lean_weight.to_f
       credit_pref_lean = preferences.credit_lean.downcase
       if credit_pref_lean == 'low'
-        return credit_pref_weight / ((schedule_credit_hours - preferences.credit_min.to_i).abs + 1)
+        return 1 / ((schedule_credit_hours - preferences.credit_min.to_i).abs + 1)
       elsif credit_pref_lean == 'high'
-        return credit_pref_weight / ((schedule_credit_hours - preferences.credit_max.to_i).abs + 1)
+        return 1 / ((schedule_credit_hours - preferences.credit_max.to_i).abs + 1)
       else
-        return 0
+        midpoint = (preferences.credit_max.to_i - preferences.credit_min.to_i) / 2
+        return 1 / ((schedule_credit_hours - midpoint).abs + 1)
       end
     end
-   
+
     # Checks whether a class section set contains any sections with duplicate course ids.
     #
     # Returns:
@@ -704,7 +710,7 @@ module GenScheduleHelper
       end
       return false
     end
-     
+
     # Checks whether a class section set contains any class sections whose times overlap.
     #
     # Returns:
@@ -716,7 +722,7 @@ module GenScheduleHelper
     def contains_time_conflict?(class_section_set)
       class_section_set.each do |scheduled_class_section|
         class_section_set.each do |class_section|
-          if share_day?(scheduled_class_section, class_section) and 
+          if share_day?(scheduled_class_section, class_section) and
               not scheduled_class_section.id == class_section.id
             # Now check for time conflicts, ie not non-conflicting times
             return true if course_times_overlap? scheduled_class_section, class_section
@@ -729,14 +735,14 @@ module GenScheduleHelper
 
   # This ScheduleGenerator class provides some general methods for generating sets of schedules based on user preferences
   # and a set of class sections that are available from which to make schedules.
-  # 
+  #
   # NOTES: Behind the scenes, a genetic algorithm is employed which attempts to approach the NP-Complete problem of creating
   # all possible schedule permutations from a set of class sections and provides an approximation of an optimal schedule based
-  # on preferences. Because of this, some of the methods available to the schedule generators consider schedules in a  genetic 
+  # on preferences. Because of this, some of the methods available to the schedule generators consider schedules in a  genetic
   # paradigm rather than strictly as schedules/classes. Notably, the documentation will have the following vocabulary.
-  #   * Individual: a single entity that exists as part of a population. As it pertains to this class, an individual is a 
+  #   * Individual: a single entity that exists as part of a population. As it pertains to this class, an individual is a
   #     schedule.
-  #   * Mutation: altering a genetic sequence to contain new, possibly unseen genes. As it pertains to this class, a 
+  #   * Mutation: altering a genetic sequence to contain new, possibly unseen genes. As it pertains to this class, a
   #     schedule's class section set gets altered to possibly contain new, random class sections.
   #   * Mate Selection: individuals select mates that are close in fitness to themselves, but have a low probability of
   #     selecting a random mate from a gene pool. As it pertains to this class, a mate is a schedule whose aggregate score
@@ -766,12 +772,12 @@ module GenScheduleHelper
     # The number of worker threads amongst which the task of filling the initial set of schedules will be distributed
     SCHEDULE_GENERATOR_THREADS = 6
 
-    # Randomly replaces class sections/genes in a schedule with class sections/genes from a pool of available 
+    # Randomly replaces class sections/genes in a schedule with class sections/genes from a pool of available
     # class sections/genes.
     #
     # Returns:
-    #   
-    #   The resulting +class_section_set+ (gene sequence) of a schedule after being mutated with random new 
+    #
+    #   The resulting +class_section_set+ (gene sequence) of a schedule after being mutated with random new
     #   class sections/genes.
     #
     # Parameters:
@@ -795,11 +801,11 @@ module GenScheduleHelper
     # breeding of the two schedules.
     #
     # Returns:
-    #   
+    #
     #   The two schedules that result from swapping over random class sections/genes.
     #
     # Parameters:
-    #   
+    #
     #   * +schedule+ - One of the schedules to be mated with another schedule.
     #   * +other_schedule+ - The other schedule to be mated with another schedule.
     def self.exchange_genes!(schedule, other_schedule)
@@ -812,7 +818,7 @@ module GenScheduleHelper
       other_schedule.class_section_set.subtract other_schedule_swap
       # ...and insert them into the other gene sequence
       schedule.class_section_set.merge other_schedule_swap
-      other_schedule.class_section_set.merge schedule_swap 
+      other_schedule.class_section_set.merge schedule_swap
       return schedule, other_schedule
     end
 
@@ -823,7 +829,7 @@ module GenScheduleHelper
     #   * Add the two individuals to a new population/gene pool.
     #
     # Returns:
-    #   
+    #
     #   A new population set containing the next generation of individuals/schedules.
     #
     # Parameters:
@@ -841,7 +847,7 @@ module GenScheduleHelper
           exchange_genes! schedule, mate
           mutate! schedule, class_section_set
           mutate! mate, class_section_set
-          
+
           # Add these children to the gene pool
           new_generation.add? schedule
           new_generation.add? mate
@@ -885,13 +891,64 @@ module GenScheduleHelper
     # Parameters:
     #
     #   * +schedule_set+ - The population of schedules to be evaluated.
-    def self.evaluate_population(schedule_set)
+    def self.evaluate_population(preferences, schedule_set)
+      # This calculates top individual (raw) score and the average score
+      score_sum = 0
+      score_ranges =  {  time: { min: 1.0/0, max: -1.0/0 },
+                         distance: { min: 1.0/0, max: -1.0/0 },
+                         ge_major: { min: 1.0/0, max: -1.0/0 },
+                         credit_hour: { min: 1.0/0, max: -1.0/0 }
+                      }
+
+      schedule_set.each do |schedule|
+        schedule.evaluate!
+
+        schedule.sub_scores.each do |key, value|
+          if value < score_ranges[key][:min]
+            score_ranges[key][:min] = value
+          end
+
+          if value > score_ranges[key][:max]
+            score_ranges[key][:max] = value
+          end
+        end
+      end
+
+      schedule_set.each do |schedule|
+        schedule.time_sub_score = preferences.time_weight.to_f * (
+        (schedule.time_sub_score - score_ranges[:time][:min]) /
+            ((score_ranges[:time][:max] - score_ranges[:time][:min]) + 1)
+        )
+
+        schedule.distance_sub_score = preferences.distance_weight.to_f * (
+        (schedule.distance_sub_score - score_ranges[:distance][:min]) /
+            ((score_ranges[:distance][:max] - score_ranges[:distance][:min]) + 1)
+        )
+
+        schedule.ge_major_sub_score = preferences.ge_major_lean_weight.to_f * (
+        (schedule.ge_major_sub_score - score_ranges[:ge_major][:min]) /
+            ((score_ranges[:ge_major][:max] - score_ranges[:ge_major][:min]) + 1)
+        )
+
+        schedule.credit_hour_sub_score = preferences.credit_lean_weight.to_f * (
+        (schedule.credit_hour_sub_score - score_ranges[:credit_hour][:min]) /
+            ((score_ranges[:credit_hour][:max] - score_ranges[:credit_hour][:min]) + 1)
+        )
+
+        schedule.aggregate_score = schedule.time_sub_score +
+                                    schedule.distance_sub_score +
+                                    schedule.ge_major_sub_score +
+                                    schedule.credit_hour_sub_score
+
+        score_sum += schedule.aggregate_score
+      end
+
+      avg = score_sum / schedule_set.size
+
       schedule_list = schedule_set.to_a
       schedule_list.sort! { |a,b| b.aggregate_score <=> a.aggregate_score }
       top_individual_score = schedule_list.first.aggregate_score
-      score_sum = 0
-      schedule_set.each { |schedule| score_sum += schedule.aggregate_score }
-      avg = score_sum / schedule_set.size
+
       return top_individual_score, avg
     end
 
@@ -900,7 +957,7 @@ module GenScheduleHelper
     # by a total population size constant.
     #
     # Returns:
-    #   
+    #
     #   A set of random, valid schedules.
     #
     # Parameters:
@@ -927,7 +984,7 @@ module GenScheduleHelper
     # Finds invalid schedules in a population and removes them, replacing them with random and valid schedules.
     #
     # Returns:
-    #   
+    #
     #   A set/population of valid schedules.
     #
     # Parameters:
@@ -938,19 +995,18 @@ module GenScheduleHelper
       schedule_set.each do |schedule|
         unless schedule.is_valid?
           schedule.reset! class_section_set
-          schedule.evaluate!
         end
       end
       return schedule_set
     end
-   
+
     # Generates a limited set of random, valid schedules from a set of available class sections. It is multithreaded,
     # and spawns +SCHEDULE_GENERATOR_THREADS+ number of workers. Each worker is autonomous within their own subsets of
     # the universe of all possible sections to generate schedules within their subsets alone.
     # NOTE: This does _NOT_ generate the set of all _possible_ schedules.
     #
     # Returns:
-    #     
+    #
     #  A set of random, valid schedules.
     #
     # Parameters:
@@ -958,6 +1014,8 @@ module GenScheduleHelper
     #   * +preferences+ - A collection of user specified preferences.
     #   * +class_section_set + - The set of class sections available from which to generate schedules.
     def self.generate_schedules(preferences, class_section_set)
+      filter_by_preferred_days preferences, class_section_set
+
       schedule_set = Set.new
       class_section_array = class_section_set.to_a
 
@@ -996,14 +1054,14 @@ module GenScheduleHelper
       return schedule_set
     end
 
-    # Generates a set of somewhat optimal schedules from specified user preferences and a set of available class sections 
+    # Generates a set of somewhat optimal schedules from specified user preferences and a set of available class sections
     # using a genetic algorithm.
     #
     # Returns:
     #
     #   A set of schedules.
     #
-    # Parameters: 
+    # Parameters:
     #
     #   * +preferences+ - A collection of user specified preferences that help shape the set of schedules generated.
     #   * +class_section_set+ - A set of available class sections from which schedules can be generated.
@@ -1011,9 +1069,9 @@ module GenScheduleHelper
       convergence_tracker = 0
       best_top_individual_score = 0
       best_population_avg_score = 0
-      
-      population_snapshot = Set.new
+
       population = generate_schedules preferences, class_section_set
+      population_snapshot = Set.new population
 
       while convergence_tracker < MAX_STALE_GENERATIONS
         population_copy = Set.new population
@@ -1025,12 +1083,12 @@ module GenScheduleHelper
           throw Exception.new 'Zero population'
         end
 
-        top_individual_score, population_avg_score = evaluate_population population
+        top_individual_score, population_avg_score = evaluate_population preferences, population
         # Check for population improvement
         if top_individual_score > best_top_individual_score
           # There was a change in the best individual, reset convergence tracker
           convergence_tracker = 0
-          if population_avg_score > best_population_avg_score 
+          if population_avg_score > best_population_avg_score
             # Population is the best we have seen, take snapshot
             best_top_individual_score = top_individual_score
             population_snapshot = Set.new population
@@ -1041,6 +1099,18 @@ module GenScheduleHelper
         end
       end
       return population_snapshot
+    end
+
+    # Removes from class_section_set any sections which fall on a day included in the user's exclude_day_pattern string.
+    #
+    # Parameters:
+    #
+    #   * +preferences+ - A collection of user specified preferences that help shape the set of schedules generated.
+    #   * +class_section_set+ - A set of available class sections from which schedules can be generated.
+    def self.filter_by_preferred_days preferences, class_section_set
+      class_section_set.delete_if do |class_section|
+        preferences.exclude_day_pattern.scan(/./).any? { |day| class_section.rpt_pattern.include? day }
+      end
     end
   end
 end

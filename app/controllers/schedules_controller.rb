@@ -101,6 +101,12 @@ class SchedulesController < ApplicationController
           'Leaving more blank fields will result in more possible schedules.',
           'Having more possible schedules means we can find the best fit for you more easily.',
           'If you include a lot of courses here, you will also raise the odds that no valid schedule will exist.'
+      ],
+      times: [
+          'The more days you\'ll let us schedule, the better the chances of finding a great match.'
+      ],
+      locations: [
+          'We calculate distance as the distance between your classes, from first to last, just like you\'d walk.'
       ]
     }
   end
@@ -169,7 +175,8 @@ class SchedulesController < ApplicationController
               distance_sub_score: schedule.distance_sub_score,
               ge_major_sub_score: schedule.ge_major_sub_score,
               credit_hour_sub_score: schedule.credit_hour_sub_score
-          }
+          },
+          term: next_term
       })
     end
   end
