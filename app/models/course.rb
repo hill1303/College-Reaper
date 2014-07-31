@@ -20,10 +20,17 @@ class Course < ActiveRecord::Base
 
   after_commit :flush_cache
 
+  # Finds and caches the resulting Course using the cache to limit future database queries
+  #
+  # Returns:
+  #
+  #   * Cached Course with the given `id`
   def self.cached_find id
     Rails.cache.fetch([id, name], expires_in: 1.hour) { find id }
   end
 
+  # Removes the designated Course from the cache when called, intended to be called by the `after_commit` action in
+  # order to maintain the freshness of the cache after objects are touched.
   def flush_cache
     Rails.cache.delete([self.class.name, id])
   end

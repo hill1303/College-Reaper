@@ -53,6 +53,11 @@ class User < ActiveRecord::Base
   # Destroy the Person record(s) (plural just in case) when the User is destroyed
   before_destroy { |record| Person.destroy_all 'user_id = ' << record.id }
 
+  # Accessor for the associated CourseGroups of a User using the cache to limit database queries
+  #
+  # Returns:
+  #
+  #   * Cached array of CourseGroup associated with a given User instance
   def cached_course_groups
     Rails.cache.fetch([self, course_groups]) { course_groups.to_a }
   end

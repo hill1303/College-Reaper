@@ -10,6 +10,11 @@ class College < ActiveRecord::Base
   
   has_many :course_groups
 
+  # Accessor for the associated CourseGroups of a College using the cache to limit database queries
+  #
+  # Returns:
+  #
+  #   * Cached array of CourseGroup associated with a given College instance
   def cached_course_groups
     Rails.cache.fetch([self, course_groups]) { course_groups.to_a }
   end

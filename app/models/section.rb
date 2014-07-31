@@ -28,10 +28,20 @@ class Section < ActiveRecord::Base
   belongs_to :location
   belongs_to :term
 
+  # Accessor for the associated Course of a Section using the cache to limit database queries
+  #
+  # Returns:
+  #
+  #   * Cached Course associated with a given Section instance
   def cached_course
     Course.cached_find(course_id)
   end
 
+  # Accessor for the associated Location of a Section using the cache to limit database queries
+  #
+  # Returns:
+  #
+  #   * Cached Location associated with a given Section instance
   def cached_location
     Rails.fetch([self, location]) { location }
   end

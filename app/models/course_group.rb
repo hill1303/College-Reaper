@@ -16,10 +16,20 @@ class CourseGroup < ActiveRecord::Base
 
   has_many :completion_rules, class_name: 'RequirementGroup', as: :owner
 
+  # Accessor for the associated courses of a CourseGroup using the cache to limit database queries
+  #
+  # Returns:
+  #
+  #   * Cached array of Course associated with a given CourseGroup instance
   def cached_courses
     Rails.cache.fetch([self, courses]) { courses.to_a }
   end
 
+  # Accessor for the associated College of a CourseGroup using the cache to limit database queries
+  #
+  # Returns:
+  #
+  #   * Cached College associated with a given CourseGroup instance
   def cached_college
     Rails.cache.fetch([self, college]) { college }
   end

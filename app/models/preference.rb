@@ -23,6 +23,11 @@ class Preference < ActiveRecord::Base
   belongs_to :schedule
   belongs_to :term
 
+  # Accessor for the associated User of a Preference using the cache to limit database queries
+  #
+  # Returns:
+  #
+  #   * Cached User associated with a given Preference instance
   def cached_user
     Rails.cache.fetch([self, user]) { user }
   end
