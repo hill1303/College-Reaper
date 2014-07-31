@@ -248,6 +248,19 @@ permutation generation.</p></td>
             </tr>
           
         
+          <tr valign='top'>
+            <td class="attr-name">SCHEDULE_GENERATOR_THREADS</td>
+            <td>=</td>
+            <td class="attr-value">6</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>The number of worker threads amongst which the task of filling the initial
+set of schedules will be distributed</p></td>
+            </tr>
+          
+        
       </table>
     
 
@@ -298,7 +311,7 @@ overall average fitness of <code>schedule_set</code>.</p>
                 
               </p>
               <div id="method-c-evaluate_population_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 882</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 889</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">evaluate_population</span>(<span class="ruby-identifier">schedule_set</span>)
   <span class="ruby-identifier">schedule_list</span> = <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">to_a</span>
   <span class="ruby-identifier">schedule_list</span>.<span class="ruby-identifier">sort!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">aggregate_score</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">aggregate_score</span> }
@@ -356,7 +369,7 @@ which schedules can be generated.</p>
                 
               </p>
               <div id="method-c-evolve_schedules_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 980</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 1011</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">evolve_schedules</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">convergence_tracker</span> = <span class="ruby-number">0</span>
   <span class="ruby-identifier">best_top_individual_score</span> = <span class="ruby-number">0</span>
@@ -435,7 +448,7 @@ schedule.</p>
                 
               </p>
               <div id="method-c-exchange_genes-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 798</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 805</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">exchange_genes!</span>(<span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">other_schedule</span>)
   <span class="ruby-comment"># Get a random number of genes to swap</span>
   <span class="ruby-identifier">num_genes_to_swap</span> = (<span class="ruby-number">1</span><span class="ruby-operator">...</span><span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">num_courses</span>.<span class="ruby-identifier">to_i</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sample</span>
@@ -496,7 +509,7 @@ and from which to generate a schedule.</p>
                 
               </p>
               <div id="method-c-generate_permutations_of_schedules_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 904</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 911</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">generate_permutations_of_schedules</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">schedules</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">class_section_list</span> = <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">to_a</span>
@@ -504,7 +517,7 @@ and from which to generate a schedule.</p>
   <span class="ruby-identifier">class_section_list</span>.<span class="ruby-identifier">combination</span> <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">num_courses</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">possible_schedule</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">schedule</span> = <span class="ruby-constant">MockSchedule</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">preferences</span>)
     <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">class_section_set</span> = <span class="ruby-identifier">possible_schedule</span>
-    
+
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">is_valid?</span>
       <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">evaluate!</span>
       <span class="ruby-identifier">schedules</span>.<span class="ruby-identifier">add?</span> <span class="ruby-identifier">schedule</span>
@@ -529,8 +542,11 @@ and from which to generate a schedule.</p>
           
             <div class="description">
               <p>Generates a limited set of random, valid schedules from a set of available
-class sections. NOTE: This does not generate the set of all
-<em>possible</em> schedules.</p>
+class sections. It is multithreaded, and spawns
+<code>SCHEDULE_GENERATOR_THREADS</code> number of workers. Each worker is
+autonomous within their own subsets of the universe of all possible
+sections to generate schedules within their subsets alone. NOTE: This does
+<em>NOT</em> generate the set of all <em>possible</em> schedules.</p>
 
 <p>Returns:</p>
 
@@ -560,22 +576,43 @@ generate schedules.</p>
                 
               </p>
               <div id="method-c-generate_schedules_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 951</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 961</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">generate_schedules</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">schedule_set</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-comment"># Make a copy of the class section set so that we can delete visited class sections</span>
-  <span class="ruby-identifier">class_section_set_copy</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">class_section_set</span>)
-  <span class="ruby-identifier">class_section_set_copy</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">class_section</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">schedule</span> = <span class="ruby-constant">MockSchedule</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">preferences</span>
-    <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">fill_schedule!</span> <span class="ruby-identifier">class_section_set_copy</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">is_valid?</span>
-      <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">evaluate!</span>
-      <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">add?</span> <span class="ruby-identifier">schedule</span>
-      <span class="ruby-comment"># Delete the section, preventing generation from possibly starting with that section again</span>
-      <span class="ruby-identifier">class_section_set_copy</span>.<span class="ruby-identifier">delete?</span> <span class="ruby-identifier">class_section</span>
-      <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">schedule_set</span> <span class="ruby-operator">==</span> <span class="ruby-constant">MAX_POPULATION_SIZE</span>
-    <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">class_section_array</span> = <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">to_a</span>
+
+  <span class="ruby-comment"># Throw some threads out to do this fast...super tedious task, this is. The mutex protects schedule_set from</span>
+  <span class="ruby-comment"># synchronization errors.</span>
+  <span class="ruby-identifier">threads</span> = []
+  <span class="ruby-identifier">mutex</span> = <span class="ruby-constant">Mutex</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-constant">SCHEDULE_GENERATOR_THREADS</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">thread_start</span> = (<span class="ruby-identifier">i</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">class_section_array</span>.<span class="ruby-identifier">size</span>) <span class="ruby-operator">/</span> <span class="ruby-constant">SCHEDULE_GENERATOR_THREADS</span>
+    <span class="ruby-identifier">thread_end</span> = ((<span class="ruby-identifier">i</span> <span class="ruby-operator">+</span> <span class="ruby-number">1</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">class_section_array</span>.<span class="ruby-identifier">size</span>) <span class="ruby-operator">/</span> <span class="ruby-constant">SCHEDULE_GENERATOR_THREADS</span>
+
+    <span class="ruby-identifier">threads</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span> {
+      <span class="ruby-identifier">working_set</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">class_section_array</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-identifier">thread_start</span><span class="ruby-operator">..</span><span class="ruby-identifier">thread_end</span>))
+
+      <span class="ruby-identifier">working_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">class_section</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">schedule</span> = <span class="ruby-constant">MockSchedule</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">preferences</span>
+        <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">fill_schedule!</span> <span class="ruby-identifier">working_set</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">is_valid?</span>
+          <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">evaluate!</span>
+          <span class="ruby-comment"># Mutex-controlled, synchronized add</span>
+          <span class="ruby-identifier">mutex</span>.<span class="ruby-identifier">synchronize</span> {
+            <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">add?</span> <span class="ruby-identifier">schedule</span>
+          }
+          <span class="ruby-comment"># Delete the section from the working set, preventing generation from starting with that section again</span>
+          <span class="ruby-identifier">working_set</span>.<span class="ruby-identifier">delete?</span> <span class="ruby-identifier">class_section</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    }
   <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Make sure everyone finishes playing in their sandbox</span>
+  <span class="ruby-identifier">threads</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">thread</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">thread</span>.<span class="ruby-identifier">join</span>
+  }
+
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">schedule_set</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
@@ -625,7 +662,7 @@ selections from which randomly get inserted into <code>schedule</code>.</p>
                 
               </p>
               <div id="method-c-mutate-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 775</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 782</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">mutate!</span>(<span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-comment"># Merely converting to a list so that we may use the sample method on a set of class_sections</span>
   <span class="ruby-identifier">class_section_set_list</span> = <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">to_a</span>
@@ -688,7 +725,7 @@ mutation.</p>
                 
               </p>
               <div id="method-c-new_generation-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 827</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 834</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">new_generation!</span>(<span class="ruby-identifier">schedule_set</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">new_generation</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">schedule</span><span class="ruby-operator">|</span>
@@ -755,7 +792,7 @@ select random new class sections/genes.</p>
                 
               </p>
               <div id="method-c-purge_and_replace_invalid_schedules-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 930</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 938</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">purge_and_replace_invalid_schedules!</span>(<span class="ruby-identifier">schedule_set</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">schedule</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">is_valid?</span>
@@ -813,7 +850,7 @@ individual of a population).</p>
                 
               </p>
               <div id="method-c-select_mate_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 858</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 865</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">select_mate</span>(<span class="ruby-identifier">schedule</span>, <span class="ruby-identifier">schedule_set</span>)
   <span class="ruby-comment"># Convert the schedule set to an array simply for using the sample method</span>
   <span class="ruby-identifier">schedule_list</span> = <span class="ruby-identifier">schedule_set</span>.<span class="ruby-identifier">to_a</span>

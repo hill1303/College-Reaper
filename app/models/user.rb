@@ -53,12 +53,23 @@ class User < ActiveRecord::Base
   # Destroy the Person record(s) (plural just in case) when the User is destroyed
   before_destroy { |record| Person.destroy_all 'user_id = ' << record.id }
 
-  # Accessor for the associated CourseGroups of a User using the cache to limit database queries
+  # Accessor for the associated CourseGroups of a User without the :college_global flag set using the cache to limit
+  # database queries
   #
   # Returns:
   #
-  #   * Cached array of CourseGroup associated with a given User instance
-  def cached_course_groups
-    Rails.cache.fetch([self, course_groups]) { course_groups.to_a }
+  #   * Cached array of CourseGroup associated with a given College instance where :college_global = false
+  def cached_non_global_groups
+    Rails.cache.fetch([self, course_groups]) { course_groups.where(college_global: false).to_a }
+  end
+
+  # Accessor for the associated CourseGroups of a User without the :college_independent flag set using the cache to
+  # limit database queries
+  #
+  # Returns:
+  #
+  #   * Cached array of CourseGroup associated with a given College instance where :college_independent = false
+  def cached_non_independent_groups
+    Rails.cache.fetch([self, course_groups]) { course_groups.where(college_independent: false).to_a }
   end
 end

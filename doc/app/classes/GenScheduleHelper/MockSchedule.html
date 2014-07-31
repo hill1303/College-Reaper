@@ -506,7 +506,7 @@ corresponds to the users preferences.</p>
                 
               </p>
               <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 48</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">preferences</span>)
   <span class="ruby-ivar">@preferences</span> = <span class="ruby-identifier">preferences</span>
   <span class="ruby-ivar">@class_section_set</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
@@ -567,7 +567,7 @@ likely belonging to a schedule.</p>
                 
               </p>
               <div id="method-i-acceptable_credit_hours-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 365</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 369</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">acceptable_credit_hours?</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">schedule_total</span> = <span class="ruby-identifier">total_credit_hours_of</span> <span class="ruby-identifier">class_section_set</span>
   <span class="ruby-comment"># Get credit hour range from prefs</span>
@@ -621,7 +621,7 @@ class section set already contains <code>class_section</code>. This mimics
                 
               </p>
               <div id="method-i-assign_class_section-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 92</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assign_class_section!</span>(<span class="ruby-identifier">class_section</span>)
   <span class="ruby-ivar">@class_section_set</span>.<span class="ruby-identifier">add?</span> <span class="ruby-identifier">class_section</span>
 <span class="ruby-keyword">end</span></pre>
@@ -672,10 +672,10 @@ to another point will be calculated.</p>
                 
               </p>
               <div id="method-i-calculate_distance_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 501</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 505</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">calculate_distance</span>(<span class="ruby-identifier">location</span>, <span class="ruby-identifier">other_location</span>)
-  <span class="ruby-identifier">x</span> = (<span class="ruby-identifier">other_location</span>.<span class="ruby-identifier">lonlat</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">lonlat</span>.<span class="ruby-identifier">x</span>) <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">cos</span>((<span class="ruby-identifier">location</span>.<span class="ruby-identifier">lonlat</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">other_location</span>.<span class="ruby-identifier">lonlat</span>.<span class="ruby-identifier">y</span>) <span class="ruby-operator">/</span> <span class="ruby-number">2</span>)
-  <span class="ruby-identifier">y</span> = <span class="ruby-identifier">other_location</span>.<span class="ruby-identifier">lonlat</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">lonlat</span>.<span class="ruby-identifier">y</span>
+  <span class="ruby-identifier">x</span> = (<span class="ruby-identifier">other_location</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">x</span>) <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">cos</span>((<span class="ruby-identifier">location</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">other_location</span>.<span class="ruby-identifier">y</span>) <span class="ruby-operator">/</span> <span class="ruby-number">2</span>)
+  <span class="ruby-identifier">y</span> = <span class="ruby-identifier">other_location</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">y</span>
   <span class="ruby-identifier">distance</span> = <span class="ruby-constant">Math</span>.<span class="ruby-identifier">sqrt</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">**</span><span class="ruby-number">2</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">y</span><span class="ruby-operator">**</span><span class="ruby-number">2</span>) <span class="ruby-operator">*</span> <span class="ruby-constant">RADIUS_OF_EARTH</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">distance</span> <span class="ruby-operator">!=</span> <span class="ruby-number">0</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">distance</span>
@@ -716,7 +716,7 @@ to another point will be calculated.</p>
                 
               </p>
               <div id="method-i-contains_acceptable_time_range_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 373</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 377</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">contains_acceptable_time_range</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-comment"># Get time range from preferences</span>
   <span class="ruby-identifier">start_time_pref</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">parse</span> <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">start_time</span>
@@ -774,7 +774,7 @@ against which to check for duplicate course ids.</p>
                 
               </p>
               <div id="method-i-contains_course_conflict-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 693</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 697</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">contains_course_conflict?</span>(<span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">scheduled_class_section</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">class_section</span><span class="ruby-operator">|</span>
@@ -834,7 +834,7 @@ likely belonging to a schedule.</p>
                 
               </p>
               <div id="method-i-contains_explicit_courses-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 344</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 348</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">contains_explicit_courses?</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-comment"># Get set of explicitly named courses</span>
   <span class="ruby-identifier">named_courses</span> = <span class="ruby-identifier">get_named_courses_from</span> <span class="ruby-identifier">preferences</span>
@@ -886,7 +886,7 @@ against which to check for class section time overlap.</p>
                 
               </p>
               <div id="method-i-contains_time_conflict-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 712</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 716</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">contains_time_conflict?</span>(<span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">scheduled_class_section</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">class_section</span><span class="ruby-operator">|</span>
@@ -948,12 +948,12 @@ to a schedule.</p>
                 
               </p>
               <div id="method-i-count_ge_courses_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 595</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 599</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">count_ge_courses</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">num_ge_classes</span> = <span class="ruby-number">0</span>
   <span class="ruby-comment"># sum of classes that come from gen course group</span>
-  <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">cached_user</span>.<span class="ruby-identifier">cached_course_groups</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">college_independent</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">major</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">major</span>.<span class="ruby-identifier">cached_college</span>.<span class="ruby-identifier">cached_course_groups</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">college_global</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">course_group</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">cached_user</span>.<span class="ruby-identifier">cached_non_independent_groups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">major</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">major</span>.<span class="ruby-identifier">cached_college</span>.<span class="ruby-identifier">cached_global_groups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">course_group</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">class_section</span><span class="ruby-operator">|</span>
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">course_group</span>.<span class="ruby-identifier">cached_courses</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">class_section</span>.<span class="ruby-identifier">cached_course</span>
           <span class="ruby-identifier">num_ge_classes</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
@@ -1011,11 +1011,11 @@ to a schedule.</p>
                 
               </p>
               <div id="method-i-count_major_courses_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 621</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 625</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">count_major_courses</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">num_major_classes</span> = <span class="ruby-number">0</span>
   <span class="ruby-comment"># sum of classes that come from major course group</span>
-  <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">cached_user</span>.<span class="ruby-identifier">cached_course_groups</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">college_global</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">course_group</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">cached_user</span>.<span class="ruby-identifier">cached_non_global_groups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">course_group</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">class_section</span><span class="ruby-operator">|</span>
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">course_group</span>.<span class="ruby-identifier">cached_courses</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">class_section</span>.<span class="ruby-identifier">cached_course</span>
         <span class="ruby-identifier">num_major_classes</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
@@ -1072,7 +1072,7 @@ checked against by a section.</p>
                 
               </p>
               <div id="method-i-course_safe-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 293</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 297</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">course_safe?</span>(<span class="ruby-identifier">class_section_set</span>, <span class="ruby-identifier">class_section</span>)
   <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">scheduled_class_section</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">scheduled_class_section</span>.<span class="ruby-identifier">course_id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">class_section</span>.<span class="ruby-identifier">course_id</span>
@@ -1126,7 +1126,7 @@ checked against by a section.</p>
                 
               </p>
               <div id="method-i-course_times_overlap-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 254</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">course_times_overlap?</span>(<span class="ruby-identifier">class_section</span>, <span class="ruby-identifier">other_class_section</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">class_section</span>.<span class="ruby-identifier">start_time</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">other_class_section</span>.<span class="ruby-identifier">end_time</span> <span class="ruby-keyword">or</span>
       <span class="ruby-identifier">class_section</span>.<span class="ruby-identifier">end_time</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">other_class_section</span>.<span class="ruby-identifier">start_time</span>
@@ -1186,7 +1186,7 @@ calculate a score.</p>
                 
               </p>
               <div id="method-i-credit_hour_score_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 672</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 676</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">credit_hour_score</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">schedule_credit_hours</span> = <span class="ruby-identifier">total_credit_hours_of</span> <span class="ruby-identifier">class_section_set</span>
   <span class="ruby-identifier">credit_pref_weight</span> = <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">credit_lean_weight</span>.<span class="ruby-identifier">to_f</span>
@@ -1249,7 +1249,7 @@ calculate a score.</p>
                 
               </p>
               <div id="method-i-distance_score_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 568</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 572</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">distance_score</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-comment"># Get weight of importance for distance</span>
   <span class="ruby-identifier">distance_pref_weight</span> = <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">distance_weight</span>.<span class="ruby-identifier">to_f</span>
@@ -1310,7 +1310,7 @@ equal to the class sections found in <code>other_schedule</code>,
                 
               </p>
               <div id="method-i-eql-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 68</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">eql?</span>(<span class="ruby-identifier">other_schedule</span>)
   <span class="ruby-ivar">@class_section_set</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other_schedule</span>.<span class="ruby-identifier">class_section_set</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1362,7 +1362,7 @@ heuristics (list may change over time):</p>
                 
               </p>
               <div id="method-i-evaluate-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 188</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 192</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">evaluate!</span>
   <span class="ruby-ivar">@time_sub_score</span> = <span class="ruby-identifier">time_score</span> <span class="ruby-ivar">@preferences</span>, <span class="ruby-ivar">@class_section_set</span>
   <span class="ruby-ivar">@distance_sub_score</span> = <span class="ruby-identifier">distance_score</span> <span class="ruby-ivar">@preferences</span>, <span class="ruby-ivar">@class_section_set</span>
@@ -1423,7 +1423,7 @@ which to create a schedule.</p>
                 
               </p>
               <div id="method-i-fill_schedule-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 158</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 162</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">fill_schedule!</span>(<span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_valid?</span>
     <span class="ruby-identifier">evaluate!</span>
@@ -1493,7 +1493,7 @@ calculate a score.</p>
                 
               </p>
               <div id="method-i-ge_major_score_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 646</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 650</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">ge_major_score</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">ge_major_pref_weight</span> = <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">ge_major_lean_weight</span>.<span class="ruby-identifier">to_f</span>
   <span class="ruby-identifier">ge_major_pref_lean</span> = <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">ge_major_lean</span>.<span class="ruby-identifier">downcase</span>
@@ -1550,7 +1550,7 @@ named courses.</p>
                 
               </p>
               <div id="method-i-get_named_courses_from_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 324</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 328</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get_named_courses_from</span>(<span class="ruby-identifier">preferences</span>)
   <span class="ruby-identifier">named_courses</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">choices</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
@@ -1598,7 +1598,7 @@ named courses.</p>
                 
               </p>
               <div id="method-i-hash_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 78</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">hash</span>
   <span class="ruby-ivar">@class_section_set</span>.<span class="ruby-identifier">hash</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1650,7 +1650,7 @@ likely belonging to a schedule.# Parameters:</p>
                 
               </p>
               <div id="method-i-is_full-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 399</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 403</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">is_full?</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">num_courses</span>.<span class="ruby-identifier">to_i</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1699,13 +1699,11 @@ conflicts (no courses of the same name/id)</p>
                 
               </p>
               <div id="method-i-is_valid-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 120</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">is_valid?</span>
   <span class="ruby-identifier">is_full?</span> <span class="ruby-ivar">@preferences</span>, <span class="ruby-ivar">@class_section_set</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">contains_course_conflict?</span> <span class="ruby-ivar">@class_section_set</span> <span class="ruby-keyword">and</span> 
-    <span class="ruby-identifier">acceptable_credit_hours?</span> <span class="ruby-ivar">@preferences</span>, <span class="ruby-ivar">@class_section_set</span> <span class="ruby-keyword">and</span> 
       <span class="ruby-identifier">contains_explicit_courses?</span> <span class="ruby-ivar">@preferences</span>, <span class="ruby-ivar">@class_section_set</span> <span class="ruby-keyword">and</span> 
-        <span class="ruby-keyword">not</span> <span class="ruby-identifier">contains_time_conflict?</span> <span class="ruby-ivar">@class_section_set</span> <span class="ruby-keyword">and</span> 
-          <span class="ruby-identifier">contains_acceptable_time_range</span> <span class="ruby-ivar">@preferences</span>, <span class="ruby-ivar">@class_section_set</span>
+        <span class="ruby-keyword">not</span> <span class="ruby-identifier">contains_time_conflict?</span> <span class="ruby-ivar">@class_section_set</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -1753,7 +1751,7 @@ schedule with.</p>
                 
               </p>
               <div id="method-i-reset-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 207</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reset!</span>(<span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-ivar">@class_section_set</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">section_shuffle</span> = <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">shuffle</span>
@@ -1806,7 +1804,7 @@ contents of <code>self</code>.</p>
                 
               </p>
               <div id="method-i-safe_assignment-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 138</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">safe_assignment?</span>(<span class="ruby-identifier">class_section</span>)
   <span class="ruby-identifier">time_safe?</span> <span class="ruby-ivar">@class_section_set</span>, <span class="ruby-identifier">class_section</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">course_safe?</span> <span class="ruby-ivar">@class_section_set</span>, <span class="ruby-identifier">class_section</span> <span class="ruby-keyword">and</span> 
     <span class="ruby-keyword">not</span> <span class="ruby-identifier">is_full?</span> <span class="ruby-ivar">@preferences</span>, <span class="ruby-ivar">@class_section_set</span>
@@ -1856,7 +1854,7 @@ contents of <code>self</code>.</p>
                 
               </p>
               <div id="method-i-set_class_sections_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 223</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 227</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">set_class_sections</span>(<span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-ivar">@class_section_set</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">class_section_set</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1907,7 +1905,7 @@ checked against by a section.</p>
                 
               </p>
               <div id="method-i-share_day-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 239</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 243</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">share_day?</span>(<span class="ruby-identifier">class_section</span>, <span class="ruby-identifier">other_class_section</span>)
   <span class="ruby-comment"># Substring hand-waving, check if the repeat pattern of a section has any matching days with the other sections</span>
   <span class="ruby-identifier">class_section</span>.<span class="ruby-identifier">rpt_pattern</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/./</span>).<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">day</span><span class="ruby-operator">|</span> <span class="ruby-identifier">other_class_section</span>.<span class="ruby-identifier">rpt_pattern</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">day</span> }
@@ -1975,7 +1973,7 @@ belonging to a schedule.</p>
                 
               </p>
               <div id="method-i-sorted_classes_on_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 548</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 552</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">sorted_classes_on</span>(<span class="ruby-identifier">day</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-comment"># Find all class_sections that occur on day</span>
   <span class="ruby-identifier">classes_on_day</span> = <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">class_section</span><span class="ruby-operator">|</span> <span class="ruby-identifier">class_section</span>.<span class="ruby-identifier">rpt_pattern</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">day</span> }
@@ -2029,7 +2027,7 @@ than <code>other_time</code>, <code>false</code> otherwise.</p>
                 
               </p>
               <div id="method-i-time_earlier_than_other_time_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 414</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 418</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">time_earlier_than_other_time</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">other_time</span>)
   <span class="ruby-identifier">hour_diff</span> = <span class="ruby-identifier">time</span>.<span class="ruby-identifier">hour</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">other_time</span>.<span class="ruby-identifier">hour</span>
   <span class="ruby-identifier">min_diff</span> = <span class="ruby-identifier">time</span>.<span class="ruby-identifier">min</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">other_time</span>.<span class="ruby-identifier">min</span>
@@ -2090,7 +2088,7 @@ than <code>other_time</code>, <code>false</code> otherwise.</p>
                 
               </p>
               <div id="method-i-time_later_than_other_time_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 440</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 444</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">time_later_than_other_time</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">other_time</span>)
   <span class="ruby-identifier">hour_diff</span> = <span class="ruby-identifier">time</span>.<span class="ruby-identifier">hour</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">other_time</span>.<span class="ruby-identifier">hour</span>
   <span class="ruby-identifier">min_diff</span> = <span class="ruby-identifier">time</span>.<span class="ruby-identifier">min</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">other_time</span>.<span class="ruby-identifier">min</span>
@@ -2140,7 +2138,7 @@ contains another time range</p>
                 
               </p>
               <div id="method-i-time_range_contains_other_time_range_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 457</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 461</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">time_range_contains_other_time_range</span>(<span class="ruby-identifier">start_time</span>, <span class="ruby-identifier">end_time</span>, <span class="ruby-identifier">other_start_time</span>, <span class="ruby-identifier">other_end_time</span>)
   <span class="ruby-identifier">time_earlier_than_other_time</span> <span class="ruby-identifier">start_time</span>, <span class="ruby-identifier">other_start_time</span> <span class="ruby-keyword">and</span>
     <span class="ruby-identifier">time_later_than_other_time</span> <span class="ruby-identifier">end_time</span>, <span class="ruby-identifier">other_end_time</span>
@@ -2192,7 +2190,7 @@ checked against by a section.</p>
                 
               </p>
               <div id="method-i-time_safe-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 272</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 276</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">time_safe?</span>(<span class="ruby-identifier">class_section_set</span>, <span class="ruby-identifier">class_section</span>)
   <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">scheduled_class_section</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">scheduled_class_section</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">class_section</span>.<span class="ruby-identifier">id</span>
@@ -2253,7 +2251,7 @@ calculate a score.</p>
                 
               </p>
               <div id="method-i-time_score_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 474</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 478</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">time_score</span>(<span class="ruby-identifier">preferences</span>, <span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-comment"># Get time range from preferences</span>
   <span class="ruby-identifier">start_time_pref</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">parse</span> <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">start_time</span>
@@ -2315,7 +2313,7 @@ to a schedule.</p>
                 
               </p>
               <div id="method-i-total_credit_hours_of_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 309</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 313</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">total_credit_hours_of</span>(<span class="ruby-identifier">class_section_set</span>)
   <span class="ruby-identifier">total_credit_hours</span> = <span class="ruby-number">0</span>
   <span class="ruby-identifier">class_section_set</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">class_section</span><span class="ruby-operator">|</span> <span class="ruby-identifier">total_credit_hours</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">class_section</span>.<span class="ruby-identifier">cached_course</span>.<span class="ruby-identifier">credit_hours</span> }
@@ -2366,13 +2364,13 @@ on a particular day.</p>
                 
               </p>
               <div id="method-i-total_distance_of_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 521</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 525</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">total_distance_of</span>(<span class="ruby-identifier">sorted_class_sections_on_day</span>)
   <span class="ruby-identifier">distance</span> = <span class="ruby-number">0</span>
   <span class="ruby-comment"># Calculate distance by class_section pairs in sorted list</span>
     (<span class="ruby-identifier">sorted_class_sections_on_day</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-number">1</span>).<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">location</span> = <span class="ruby-identifier">sorted_class_sections_on_day</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">cached_location</span>
-      <span class="ruby-identifier">other_location</span> = <span class="ruby-identifier">sorted_class_sections_on_day</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-number">1</span>].<span class="ruby-identifier">cached_location</span>
+      <span class="ruby-identifier">location</span> = <span class="ruby-identifier">sorted_class_sections_on_day</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">cached_coordinates</span>
+      <span class="ruby-identifier">other_location</span> = <span class="ruby-identifier">sorted_class_sections_on_day</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-number">1</span>].<span class="ruby-identifier">cached_coordinates</span>
       <span class="ruby-identifier">distance</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">calculate_distance</span> <span class="ruby-identifier">location</span>, <span class="ruby-identifier">other_location</span>
     <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2422,7 +2420,7 @@ class  section set did not contain <code>class_section</code>. This mimics
                 
               </p>
               <div id="method-i-unassign_class_section-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 106</span>
+                <pre><span class="ruby-comment"># File app/helpers/gen_schedule_helper.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">unassign_class_section!</span>(<span class="ruby-identifier">class_section</span>)
   <span class="ruby-ivar">@class_section_set</span>.<span class="ruby-identifier">delete?</span> <span class="ruby-identifier">class_section</span>
 <span class="ruby-keyword">end</span></pre>

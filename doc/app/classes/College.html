@@ -76,7 +76,7 @@ college</p>
             
               
               <li>
-                <a href="#method-i-cached_course_groups">cached_course_groups</a>
+                <a href="#method-i-cached_global_groups">cached_global_groups</a>
               </li>
             
           </ul>
@@ -106,22 +106,24 @@ college</p>
       <div class="sectiontitle">Instance Public methods</div>
       
         <div class="method">
-          <div class="title method-title" id="method-i-cached_course_groups">
+          <div class="title method-title" id="method-i-cached_global_groups">
             
-              <b>cached_course_groups</b>()
+              <b>cached_global_groups</b>()
             
-            <a href="../classes/College.html#method-i-cached_course_groups" name="method-i-cached_course_groups" class="permalink">Link</a>
+            <a href="../classes/College.html#method-i-cached_global_groups" name="method-i-cached_global_groups" class="permalink">Link</a>
           </div>
           
           
             <div class="description">
               <p>Accessor for the associated CourseGroups of a <a
-href="College.html">College</a> using the cache to limit database queries</p>
+href="College.html">College</a> with the :college_global flag set using the
+cache to limit database queries</p>
 
 <p>Returns:</p>
 <ul><li>
 <p>Cached array of <a href="CourseGroup.html">CourseGroup</a> associated with
-a given <a href="College.html">College</a> instance</p>
+a given <a href="College.html">College</a> instance where :college_global =
+true</p>
 </li></ul>
             </div>
           
@@ -136,13 +138,13 @@ a given <a href="College.html">College</a> instance</p>
               
               <p class="source-link">
                 Source: 
-                <a href="javascript:toggleSource('method-i-cached_course_groups_source')" id="l_method-i-cached_course_groups_source">show</a>
+                <a href="javascript:toggleSource('method-i-cached_global_groups_source')" id="l_method-i-cached_global_groups_source">show</a>
                 
               </p>
-              <div id="method-i-cached_course_groups_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/models/college.rb, line 18</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cached_course_groups</span>
-  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">fetch</span>([<span class="ruby-keyword">self</span>, <span class="ruby-identifier">course_groups</span>]) { <span class="ruby-identifier">course_groups</span>.<span class="ruby-identifier">to_a</span> }
+              <div id="method-i-cached_global_groups_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/college.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cached_global_groups</span>
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">fetch</span>([<span class="ruby-keyword">self</span>, <span class="ruby-identifier">course_groups</span>]) { <span class="ruby-identifier">course_groups</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">college_global</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">to_a</span> }
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>

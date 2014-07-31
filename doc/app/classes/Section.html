@@ -98,12 +98,12 @@ seat capacity of the waitlist for the section</p>
             
               
               <li>
-                <a href="#method-i-cached_course">cached_course</a>,
+                <a href="#method-i-cached_coordinates">cached_coordinates</a>,
               </li>
             
               
               <li>
-                <a href="#method-i-cached_location">cached_location</a>
+                <a href="#method-i-cached_course">cached_course</a>
               </li>
             
           </ul>
@@ -132,6 +132,49 @@ seat capacity of the waitlist for the section</p>
         
       <div class="sectiontitle">Instance Public methods</div>
       
+        <div class="method">
+          <div class="title method-title" id="method-i-cached_coordinates">
+            
+              <b>cached_coordinates</b>()
+            
+            <a href="../classes/Section.html#method-i-cached_coordinates" name="method-i-cached_coordinates" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Gets the coordinates of the associated <a href="Location.html">Location</a>
+using the cache to limit future database queries</p>
+
+<p>Returns:</p>
+<ul><li>
+<p>Cached RGeo point for the given Location&#39;s lonlat property</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cached_coordinates_source')" id="l_method-i-cached_coordinates_source">show</a>
+                
+              </p>
+              <div id="method-i-cached_coordinates_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/section.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cached_coordinates</span>
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">fetch</span>([<span class="ruby-keyword">self</span>, <span class="ruby-identifier">location</span>]) { <span class="ruby-identifier">location</span>.<span class="ruby-identifier">lonlat</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
         <div class="method">
           <div class="title method-title" id="method-i-cached_course">
             
@@ -170,50 +213,6 @@ href="Section.html">Section</a> instance</p>
                 <pre><span class="ruby-comment"># File app/models/section.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cached_course</span>
   <span class="ruby-constant">Course</span>.<span class="ruby-identifier">cached_find</span>(<span class="ruby-identifier">course_id</span>)
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
-        
-        <div class="method">
-          <div class="title method-title" id="method-i-cached_location">
-            
-              <b>cached_location</b>()
-            
-            <a href="../classes/Section.html#method-i-cached_location" name="method-i-cached_location" class="permalink">Link</a>
-          </div>
-          
-          
-            <div class="description">
-              <p>Accessor for the associated <a href="Location.html">Location</a> of a <a
-href="Section.html">Section</a> using the cache to limit database queries</p>
-
-<p>Returns:</p>
-<ul><li>
-<p>Cached <a href="Location.html">Location</a> associated with a given <a
-href="Section.html">Section</a> instance</p>
-</li></ul>
-            </div>
-          
-          
-          
-
-          
-          
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                Source: 
-                <a href="javascript:toggleSource('method-i-cached_location_source')" id="l_method-i-cached_location_source">show</a>
-                
-              </p>
-              <div id="method-i-cached_location_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/models/section.rb, line 45</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cached_location</span>
-  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">fetch</span>([<span class="ruby-keyword">self</span>, <span class="ruby-identifier">location</span>]) { <span class="ruby-identifier">location</span> }
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>

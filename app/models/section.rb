@@ -37,12 +37,12 @@ class Section < ActiveRecord::Base
     Course.cached_find(course_id)
   end
 
-  # Accessor for the associated Location of a Section using the cache to limit database queries
+  # Gets the coordinates of the associated Location using the cache to limit future database queries
   #
   # Returns:
   #
-  #   * Cached Location associated with a given Section instance
-  def cached_location
-    Rails.fetch([self, location]) { location }
+  #   * Cached RGeo point for the given Location's lonlat property
+  def cached_coordinates
+    Rails.cache.fetch([self, location]) { location.lonlat }
   end
 end

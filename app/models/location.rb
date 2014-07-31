@@ -3,8 +3,7 @@
 #
 # Attributes are stored as follows:
 #   * +:name+ string that represents the building name
-#   * +:latitude+ coordinate for North/South representation of location
-#   * +:longitude+ coordinate for East/West representation of location
+#   * +:lonlat+ stores the GPS coordinates (SRID 4326) of the location
 #   * +:street1+ string that stores primary street address
 #   * +:street2+ string for optional entry
 #   * +:city+ string to store city from address
@@ -19,5 +18,5 @@ class Location < ActiveRecord::Base
 
   has_many :sections
 
-  set_rgeo_factory_for_column(:lonlat, RGeo::Geographic.spherical_factory(:srid => 4326))
+  set_rgeo_factory_for_column :lonlat, RGeo::Geographic.spherical_factory(:srid => 4326)
 end
