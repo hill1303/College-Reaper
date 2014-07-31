@@ -46,8 +46,9 @@ describe GenScheduleHelper do
     it 'still has an aggregate score of zero' do
       expect(@mock_schedule.aggregate_score).to eq(0)
     end
-=end
   end
+=end
+
 # evaluate!
 # fill_schedule!
 # class_section_set
