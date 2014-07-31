@@ -74,6 +74,36 @@ toward degree</p>
 
 
   
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-cached_find">cached_find</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-flush_cache">flush_cache</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
 
   
 
@@ -92,7 +122,93 @@ toward degree</p>
 
 
     <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-cached_find">
+            
+              <b>cached_find</b>(id)
+            
+            <a href="../classes/Course.html#method-c-cached_find" name="method-c-cached_find" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Finds and caches the resulting <a href="Course.html">Course</a> using the
+cache to limit future database queries</p>
+
+<p>Returns:</p>
+<ul><li>
+<p>Cached <a href="Course.html">Course</a> with the given <code>id</code></p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-cached_find_source')" id="l_method-c-cached_find_source">show</a>
+                
+              </p>
+              <div id="method-c-cached_find_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/course.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">cached_find</span> <span class="ruby-identifier">id</span>
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">fetch</span>([<span class="ruby-identifier">id</span>, <span class="ruby-identifier">name</span>], <span class="ruby-identifier">expires_in</span><span class="ruby-operator">:</span> <span class="ruby-number">1</span>.<span class="ruby-identifier">hour</span>) { <span class="ruby-identifier">find</span> <span class="ruby-identifier">id</span> }
+<span class="ruby-keyword">end</span></pre>
               </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-flush_cache">
+            
+              <b>flush_cache</b>()
+            
+            <a href="../classes/Course.html#method-i-flush_cache" name="method-i-flush_cache" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Removes the designated <a href="Course.html">Course</a> from the cache when
+called, intended to be called by the <code>after_commit</code> action in
+order to maintain the freshness of the cache after objects are touched.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-flush_cache_source')" id="l_method-i-flush_cache_source">show</a>
+                
+              </p>
+              <div id="method-i-flush_cache_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/course.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">flush_cache</span>
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">delete</span>([<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">id</span>])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
 
     </div>
   </body>

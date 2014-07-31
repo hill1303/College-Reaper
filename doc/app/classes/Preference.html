@@ -64,6 +64,24 @@ to be query-able as well</p>
 
 
   
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-cached_user">cached_user</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
 
   
 
@@ -96,7 +114,54 @@ to be query-able as well</p>
 
 
     <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-cached_user">
+            
+              <b>cached_user</b>()
+            
+            <a href="../classes/Preference.html#method-i-cached_user" name="method-i-cached_user" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Accessor for the associated <a href="User.html">User</a> of a <a
+href="Preference.html">Preference</a> using the cache to limit database
+queries</p>
+
+<p>Returns:</p>
+<ul><li>
+<p>Cached <a href="User.html">User</a> associated with a given <a
+href="Preference.html">Preference</a> instance</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cached_user_source')" id="l_method-i-cached_user_source">show</a>
+                
+              </p>
+              <div id="method-i-cached_user_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/preference.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cached_user</span>
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">fetch</span>([<span class="ruby-keyword">self</span>, <span class="ruby-identifier">user</span>]) { <span class="ruby-identifier">user</span> }
+<span class="ruby-keyword">end</span></pre>
               </div>
+            </div>
+            
+          </div>
+                    </div>
 
     </div>
   </body>

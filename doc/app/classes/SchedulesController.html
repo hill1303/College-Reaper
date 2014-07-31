@@ -507,7 +507,7 @@ preferences</p>
                 
               </p>
               <div id="method-i-flatten_courses_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 160</span>
+                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">flatten_courses</span>
   <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;preference&#39;</span>][<span class="ruby-string">&#39;choices&#39;</span>].<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>[<span class="ruby-number">0</span>,<span class="ruby-number">6</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;course&#39;</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;preference&#39;</span>][<span class="ruby-string">&#39;choices&#39;</span>][<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>].<span class="ruby-identifier">empty?</span>
@@ -553,7 +553,7 @@ preferences</p>
                 
               </p>
               <div id="method-i-flatten_exclusions_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 174</span>
+                <pre><span class="ruby-comment"># File app/controllers/schedules_controller.rb, line 178</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">flatten_exclusions</span>
   <span class="ruby-comment"># Invert choices to build the exclusion string</span>
   <span class="ruby-identifier">attendance_string</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>
@@ -603,6 +603,10 @@ preferences</p>
   <span class="ruby-identifier">preference</span> = <span class="ruby-constant">Preference</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">last</span>
   <span class="ruby-identifier">section_set</span> = <span class="ruby-constant">Section</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">to_set</span>
   <span class="ruby-identifier">schedules</span> = <span class="ruby-constant">GenScheduleHelper</span><span class="ruby-operator">::</span><span class="ruby-constant">ScheduleGenerator</span>.<span class="ruby-identifier">evolve_schedules</span> <span class="ruby-identifier">preference</span>, <span class="ruby-identifier">section_set</span>
+  <span class="ruby-identifier">schedules</span> = <span class="ruby-identifier">schedules</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">x</span>.<span class="ruby-identifier">aggregate_score</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">aggregate_score</span>
+  <span class="ruby-keyword">end</span>
+
   <span class="ruby-comment"># Save the schedules to the database</span>
   <span class="ruby-identifier">schedules</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">schedule</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">section_ids</span> = []

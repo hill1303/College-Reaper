@@ -88,6 +88,29 @@ seat capacity of the waitlist for the section</p>
 
 
   
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-cached_course">cached_course</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-cached_location">cached_location</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
 
   
 
@@ -106,7 +129,97 @@ seat capacity of the waitlist for the section</p>
 
 
     <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-cached_course">
+            
+              <b>cached_course</b>()
+            
+            <a href="../classes/Section.html#method-i-cached_course" name="method-i-cached_course" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Accessor for the associated <a href="Course.html">Course</a> of a <a
+href="Section.html">Section</a> using the cache to limit database queries</p>
+
+<p>Returns:</p>
+<ul><li>
+<p>Cached <a href="Course.html">Course</a> associated with a given <a
+href="Section.html">Section</a> instance</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cached_course_source')" id="l_method-i-cached_course_source">show</a>
+                
+              </p>
+              <div id="method-i-cached_course_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/section.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cached_course</span>
+  <span class="ruby-constant">Course</span>.<span class="ruby-identifier">cached_find</span>(<span class="ruby-identifier">course_id</span>)
+<span class="ruby-keyword">end</span></pre>
               </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-cached_location">
+            
+              <b>cached_location</b>()
+            
+            <a href="../classes/Section.html#method-i-cached_location" name="method-i-cached_location" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Accessor for the associated <a href="Location.html">Location</a> of a <a
+href="Section.html">Section</a> using the cache to limit database queries</p>
+
+<p>Returns:</p>
+<ul><li>
+<p>Cached <a href="Location.html">Location</a> associated with a given <a
+href="Section.html">Section</a> instance</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cached_location_source')" id="l_method-i-cached_location_source">show</a>
+                
+              </p>
+              <div id="method-i-cached_location_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/section.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cached_location</span>
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">fetch</span>([<span class="ruby-keyword">self</span>, <span class="ruby-identifier">location</span>]) { <span class="ruby-identifier">location</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
 
     </div>
   </body>

@@ -73,6 +73,29 @@ apply to College_Global.</p>
 
 
   
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-cached_college">cached_college</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-cached_courses">cached_courses</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
 
   
 
@@ -91,7 +114,99 @@ apply to College_Global.</p>
 
 
     <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-cached_college">
+            
+              <b>cached_college</b>()
+            
+            <a href="../classes/CourseGroup.html#method-i-cached_college" name="method-i-cached_college" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Accessor for the associated <a href="College.html">College</a> of a <a
+href="CourseGroup.html">CourseGroup</a> using the cache to limit database
+queries</p>
+
+<p>Returns:</p>
+<ul><li>
+<p>Cached <a href="College.html">College</a> associated with a given <a
+href="CourseGroup.html">CourseGroup</a> instance</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cached_college_source')" id="l_method-i-cached_college_source">show</a>
+                
+              </p>
+              <div id="method-i-cached_college_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/course_group.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cached_college</span>
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">fetch</span>([<span class="ruby-keyword">self</span>, <span class="ruby-identifier">college</span>]) { <span class="ruby-identifier">college</span> }
+<span class="ruby-keyword">end</span></pre>
               </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-cached_courses">
+            
+              <b>cached_courses</b>()
+            
+            <a href="../classes/CourseGroup.html#method-i-cached_courses" name="method-i-cached_courses" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Accessor for the associated courses of a <a
+href="CourseGroup.html">CourseGroup</a> using the cache to limit database
+queries</p>
+
+<p>Returns:</p>
+<ul><li>
+<p>Cached array of <a href="Course.html">Course</a> associated with a given <a
+href="CourseGroup.html">CourseGroup</a> instance</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cached_courses_source')" id="l_method-i-cached_courses_source">show</a>
+                
+              </p>
+              <div id="method-i-cached_courses_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/course_group.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cached_courses</span>
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">fetch</span>([<span class="ruby-keyword">self</span>, <span class="ruby-identifier">courses</span>]) { <span class="ruby-identifier">courses</span>.<span class="ruby-identifier">to_a</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
 
     </div>
   </body>
