@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 term = Term.create({
                        name: 'Autumn 2014',
-                       start_date: Date.new(2014, 08, 27),
+                       start_date: Date.new(2014, 8, 27),
                        end_date: Date.new(2014, 12, 07)
                    })
 
@@ -542,7 +542,7 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Isaac Newton',
+                    person: Person.find_by_name('Isaac Newton'),
                     term: term,
                     course: Course.find_by_name('Software I'),
                     location: Location.find_by_name('Caldwell Lab')
@@ -557,10 +557,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Isaac Newton',
+                    person: Person.find_by_name('Isaac Newton'),
                     term: term,
-                    course: Course.find_by_name ('Software I'),
-                    location: Location.find_by_name ('Dreese Lab')
+                    course: Course.find_by_name('Software I'),
+                    location: Location.find_by_name('Dreese Lab')
                 },
                 {
                     room: '280' << i.to_s,
@@ -572,10 +572,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Jimmy Newtron',
+                    person: Person.find_by_name('Jimmy Newtron'),
                     term: term,
-                    course: Course.find_by_name ('Software I'),
-                    location: Location.find_by_name ('Caldwell Lab')
+                    course: Course.find_by_name('Software I'),
+                    location: Location.find_by_name('Caldwell Lab')
                 },
                 {
                     room: '280' << i.to_s,
@@ -587,10 +587,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Jimmy Newtron',
+                    person: Person.find_by_name('Jimmy Newtron'),
                     term: term,
-                    course: Course.find_by_name ('Software I'),
-                    location: Location.find_by_name ('Dreese Lab')
+                    course: Course.find_by_name('Software I'),
+                    location: Location.find_by_name('Dreese Lab')
                 },
                 {
                     room: '357' << i.to_s,
@@ -602,10 +602,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Jimmy Newtron',
+                    person: Person.find_by_name('Jimmy Newtron'),
                     term: term,
-                    course: Course.find_by_name ('Software II'),
-                    location: Location.find_by_name ('Caldwell Lab')
+                    course: Course.find_by_name('Software II'),
+                    location: Location.find_by_name('Caldwell Lab')
                 },
                 {
                     room: '357' << i.to_s,
@@ -617,10 +617,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Jimmy Newtron',
+                    person: Person.find_by_name('Jimmy Newtron'),
                     term: term,
-                    course: Course.find_by_name ('Software II'),
-                    location: Location.find_by_name ('Caldwell Lab')
+                    course: Course.find_by_name('Software II'),
+                    location: Location.find_by_name('Caldwell Lab')
                 },
                 {
                     room: '357' << i.to_s,
@@ -632,10 +632,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Isaac Newton',
+                    person: Person.find_by_name('Isaac Newton'),
                     term: term,
-                    course: Course.find_by_name ('Software II'),
-                    location: Location.find_by_name ('Dreese Lab')
+                    course: Course.find_by_name('Software II'),
+                    location: Location.find_by_name('Dreese Lab')
                 },
                 {
                     room: '357' << i.to_s,
@@ -647,10 +647,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Isaac Newton',
+                    person: Person.find_by_name('Isaac Newton'),
                     term: term,
-                    course: Course.find_by_name ('Software II'),
-                    location: Location.find_by_name ('Dreese Lab')
+                    course: Course.find_by_name('Software II'),
+                    location: Location.find_by_name('Dreese Lab')
                 },
                 {
                     room: '369' << i.to_s,
@@ -662,10 +662,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Ada Lovelace',
+                    person: Person.find_by_name('Ada Lovelace'),
                     term: term,
-                    course: Course.find_by_name ('Foundations 1'),
-                    location: Location.find_by_name ('Caldwell Lab')
+                    course: Course.find_by_name('Foundations 1'),
+                    location: Location.find_by_name('Caldwell Lab')
                 },
                 {
                     room: '369' << i.to_s,
@@ -677,10 +677,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Albert Einstein',
+                    person: Person.find_by_name('Albert Einstein'),
                     term: term,
-                    course: Course.find_by_name ('Foundations 1'),
-                    location: Location.find_by_name ('Caldwell Lab')
+                    course: Course.find_by_name('Foundations 1'),
+                    location: Location.find_by_name('Caldwell Lab')
                 },
                 {
                     room: '369' << i.to_s,
@@ -692,10 +692,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Isaac Newton',
+                    person: Person.find_by_name('Isaac Newton'),
                     term: term,
-                    course: Course.find_by_name ('Foundations 1'),
-                    location: Location.find_by_name ('Dreese Lab')
+                    course: Course.find_by_name('Foundations 1'),
+                    location: Location.find_by_name('Dreese Lab')
                 },
                 {
                     room: '357' << i.to_s,
@@ -707,10 +707,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Madam Marie Curie',
+                    person: Person.find_by_name('Madam Marie Curie'),
                     term: term,
-                    course: Course.find_by_name ('Foundations 1'),
-                    location: Location.find_by_name ('Caldwell Lab')
+                    course: Course.find_by_name('Foundations 1'),
+                    location: Location.find_by_name('Caldwell Lab')
                 },
                 {
                     room: '264' << i.to_s,
@@ -722,10 +722,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Ada Lovelace',
+                    person: Person.find_by_name('Ada Lovelace'),
                     term: term,
-                    course: Course.find_by_name ('Foundations 2'),
-                    location: Location.find_by_name ('Caldwell Lab')
+                    course: Course.find_by_name('Foundations 2'),
+                    location: Location.find_by_name('Caldwell Lab')
                 },
                 {
                     room: '264' << i.to_s,
@@ -737,10 +737,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Albert Einstein',
+                    person: Person.find_by_name('Albert Einstein'),
                     term: term,
-                    course: Course.find_by_name ('Foundations 2'),
-                    location: Location.find_by_name ('Caldwell Lab')
+                    course: Course.find_by_name('Foundations 2'),
+                    location: Location.find_by_name('Caldwell Lab')
                 },
                 {
                     room: '305' << i.to_s,
@@ -752,10 +752,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Isaac Newton',
+                    person: Person.find_by_name('Isaac Newton'),
                     term: term,
-                    course: Course.find_by_name ('Foundations 2'),
-                    location: Location.find_by_name ('Caldwell Lab')
+                    course: Course.find_by_name('Foundations 2'),
+                    location: Location.find_by_name('Caldwell Lab')
                 },
                 {
                     room: '305' << i.to_s,
@@ -767,10 +767,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Madam Marie Curie',
+                    person: Person.find_by_name('Madam Marie Curie'),
                     term: term,
-                    course: Course.find_by_name ('Foundations 2'),
-                    location: Location.find_by_name ('Caldwell Lab')
+                    course: Course.find_by_name('Foundations 2'),
+                    location: Location.find_by_name('Caldwell Lab')
                 },
                 {
                     room: '369' << i.to_s,
@@ -782,10 +782,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Madam Marie Curie',
+                    person: Person.find_by_name('Madam Marie Curie'),
                     term: term,
-                    course: Course.find_by_name ('Systems 1'),
-                    location: Location.find_by_name ('Dreese Lab')
+                    course: Course.find_by_name('Systems 1'),
+                    location: Location.find_by_name('Dreese Lab')
                 },
                 {
                     room: '198' << i.to_s,
@@ -797,10 +797,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Rachel Carson',
+                    person: Person.find_by_name('Rachel Carson'),
                     term: term,
-                    course: Course.find_by_name ('Systems 1'),
-                    location: Location.find_by_name ('Dreese Lab')
+                    course: Course.find_by_name('Systems 1'),
+                    location: Location.find_by_name('Dreese Lab')
                 },
                 {
                     room: '40' << i.to_s,
@@ -812,10 +812,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Elizabeth Blackwell',
+                    person: Person.find_by_name('Elizabeth Blackwell'),
                     term: term,
-                    course: Course.find_by_name ('Systems 1'),
-                    location: Location.find_by_name ('Dreese Lab')
+                    course: Course.find_by_name('Systems 1'),
+                    location: Location.find_by_name('Dreese Lab')
                 },
                 {
                     room: '80' << i.to_s,
@@ -827,10 +827,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Meean Feerash',
+                    person: Person.find_by_name('Meean Feerash'),
                     term: term,
-                    course: Course.find_by_name ('Systems 1'),
-                    location: Location.find_by_name ('Dreese Lab')
+                    course: Course.find_by_name('Systems 1'),
+                    location: Location.find_by_name('Dreese Lab')
                 },
                 {
                     room: '10' << i.to_s,
@@ -842,10 +842,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Rachel Carson',
+                    person: Person.find_by_name('Rachel Carson'),
                     term: term,
-                    course: Course.find_by_name ('Systems 2'),
-                    location: Location.find_by_name ('Bolz Hall')
+                    course: Course.find_by_name('Systems 2'),
+                    location: Location.find_by_name('Bolz Hall')
                 },
                 {
                     room: '198' << i.to_s,
@@ -857,10 +857,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Meean Feerash',
+                    person: Person.find_by_name('Meean Feerash'),
                     term: term,
-                    course: Course.find_by_name ('Systems 2'),
-                    location: Location.find_by_name ('Bolz Hall')
+                    course: Course.find_by_name('Systems 2'),
+                    location: Location.find_by_name('Bolz Hall')
                 },
                 {
                     room: '305' << i.to_s,
@@ -872,10 +872,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Elizabeth Blackwell',
+                    person: Person.find_by_name('Elizabeth Blackwell'),
                     term: term,
-                    course: Course.find_by_name ('Systems 2'),
-                    location: Location.find_by_name ('Dreese Lab')
+                    course: Course.find_by_name('Systems 2'),
+                    location: Location.find_by_name('Dreese Lab')
                 },
                 {
                     room: '480' << i.to_s,
@@ -887,10 +887,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Madam Marie Curie',
+                    person: Person.find_by_name('Madam Marie Curie'),
                     term: term,
-                    course: Course.find_by_name ('Systems 2'),
-                    location: Location.find_by_name ('Dreese Lab')
+                    course: Course.find_by_name('Systems 2'),
+                    location: Location.find_by_name('Dreese Lab')
                 },
 
                 {
@@ -903,10 +903,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Ada Lovelace',
+                    person: Person.find_by_name('Ada Lovelace'),
                     term: term,
-                    course: Course.find_by_name ('Database'),
-                    location: Location.find_by_name ('Bolz Hall')
+                    course: Course.find_by_name('Database'),
+                    location: Location.find_by_name('Bolz Hall')
                 },
                 {
                     room: '317' << i.to_s,
@@ -918,10 +918,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Aubrey Hawkins',
+                    person: Person.find_by_name('Aubrey Hawkins'),
                     term: term,
-                    course: Course.find_by_name ('Database'),
-                    location: Location.find_by_name ('Enarson Classrooms Building')
+                    course: Course.find_by_name('Database'),
+                    location: Location.find_by_name('Enarson Classrooms Building')
                 },
                 {
                     room: '226' << i.to_s,
@@ -933,10 +933,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Isaac Newton',
+                    person: Person.find_by_name('Isaac Newton'),
                     term: term,
-                    course: Course.find_by_name ('Database'),
-                    location: Location.find_by_name ('Dreese Lab')
+                    course: Course.find_by_name('Database'),
+                    location: Location.find_by_name('Dreese Lab')
                 },
                 {
                     room: '480' << i.to_s,
@@ -948,10 +948,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Aubrey Hawkins',
+                    person: Person.find_by_name('Aubrey Hawkins'),
                     term: term,
-                    course: Course.find_by_name ('Database'),
-                    location: Location.find_by_name ('Caldwell Lab')
+                    course: Course.find_by_name('Database'),
+                    location: Location.find_by_name('Caldwell Lab')
                 },
                 {
                     room: '225' << i.to_s,
@@ -963,10 +963,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Rachel Carson',
+                    person: Person.find_by_name('Rachel Carson'),
                     term: term,
-                    course: Course.find_by_name ('Writing I'),
-                    location: Location.find_by_name ('Mathematics Tower')
+                    course: Course.find_by_name('Writing I'),
+                    location: Location.find_by_name('Mathematics Tower')
                 },
                 {
                     room: '155' << i.to_s,
@@ -978,10 +978,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Albert Einstein',
+                    person: Person.find_by_name('Albert Einstein'),
                     term: term,
-                    course: Course.find_by_name ('Writing I'),
-                    location: Location.find_by_name ('University Hall')
+                    course: Course.find_by_name('Writing I'),
+                    location: Location.find_by_name('University Hall')
                 },
                 {
                     room: '369' << i.to_s,
@@ -993,10 +993,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Rachel Carson',
+                    person: Person.find_by_name('Rachel Carson'),
                     term: term,
-                    course: Course.find_by_name ('Writing II'),
-                    location: Location.find_by_name ('Mathematics Tower')
+                    course: Course.find_by_name('Writing II'),
+                    location: Location.find_by_name('Mathematics Tower')
                 },
                 {
                     room: '416' << i.to_s,
@@ -1008,10 +1008,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Ada Lovelace',
+                    person: Person.find_by_name('Ada Lovelace'),
                     term: term,
-                    course: Course.find_by_name ('Writing II'),
-                    location: Location.find_by_name ('University Hall')
+                    course: Course.find_by_name('Writing II'),
+                    location: Location.find_by_name('University Hall')
                 },
                 {
                     room: '211' << i.to_s,
@@ -1023,10 +1023,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'James Prescott Joule',
+                    person: Person.find_by_name('James Prescott Joule'),
                     term: term,
-                    course: Course.find_by_name ('Calculus I'),
-                    location: Location.find_by_name ('Mathematics Tower')
+                    course: Course.find_by_name('Calculus I'),
+                    location: Location.find_by_name('Mathematics Tower')
                 },
                 {
                     room: '330' << i.to_s,
@@ -1038,10 +1038,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Meean Feerash',
+                    person: Person.find_by_name('Meean Feerash'),
                     term: term,
-                    course: Course.find_by_name ('Calculus I'),
-                    location: Location.find_by_name ('Mathematics Tower')
+                    course: Course.find_by_name('Calculus I'),
+                    location: Location.find_by_name('Mathematics Tower')
                 },
                 {
                     room: '180' << i.to_s,
@@ -1053,10 +1053,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'James Prescott Joule',
+                    person: Person.find_by_name('James Prescott Joule'),
                     term: term,
-                    course: Course.find_by_name ('Calculus II'),
-                    location: Location.find_by_name ('Mathematics Tower')
+                    course: Course.find_by_name('Calculus II'),
+                    location: Location.find_by_name('Mathematics Tower')
                 },
                 {
                     room: '170' << i.to_s,
@@ -1068,10 +1068,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Meean Feerash',
+                    person: Person.find_by_name('Meean Feerash'),
                     term: term,
-                    course: Course.find_by_name ('Calculus II'),
-                     location: Location.find_by_name ('Mathematics Tower')
+                    course: Course.find_by_name('Calculus II'),
+                     location: Location.find_by_name('Mathematics Tower')
                 },
                 {
                     room: '209' << i.to_s,
@@ -1083,10 +1083,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Aubrey Hawkins',
+                    person: Person.find_by_name('Aubrey Hawkins'),
                     term: term,
-                    course: Course.find_by_name ('Foundations of Higher Math'),
-                    location: Location.find_by_name ('Jennings Hall')
+                    course: Course.find_by_name('Foundations of Higher Math'),
+                    location: Location.find_by_name('Jennings Hall')
                 },
                 {
                     room: '130' << i.to_s,
@@ -1098,10 +1098,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Jimmy Neutron',
+                    person: Person.find_by_name('Jimmy Neutron'),
                     term: term,
-                    course: Course.find_by_name ('Foundations of Higher Math'),
-                    location: Location.find_by_name ('Mathematics Tower')
+                    course: Course.find_by_name('Foundations of Higher Math'),
+                    location: Location.find_by_name('Mathematics Tower')
                 },
                 {
                     room: '354' << i.to_s,
@@ -1113,10 +1113,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Meean Feerash',
+                    person: Person.find_by_name('Meean Feerash'),
                     term: term,
-                    course: Course.find_by_name ('Foundations of Higher Math'),
-                    location: Location.find_by_name ('Hagerty Hall')
+                    course: Course.find_by_name('Foundations of Higher Math'),
+                    location: Location.find_by_name('Hagerty Hall')
                 },
                 {
                     room: '354' << i.to_s,
@@ -1128,10 +1128,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Thomas Edison',
+                    person: Person.find_by_name('Thomas Edison'),
                     term: term,
-                    course: Course.find_by_name ('Foundations of Higher Math'),
-                    location: Location.find_by_name ('Postle Hall')
+                    course: Course.find_by_name('Foundations of Higher Math'),
+                    location: Location.find_by_name('Postle Hall')
                 },
                 {
                     room: '224' << i.to_s,
@@ -1143,10 +1143,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Isaac Newton',
+                    person: Person.find_by_name('Isaac Newton'),
                     term: term,
-                    course: Course.find_by_name ('Mechanical Physics'),
-                    location: Location.find_by_name ('Smith Lab')
+                    course: Course.find_by_name('Mechanical Physics'),
+                    location: Location.find_by_name('Smith Lab')
                 },
                 {
                     room: '224' << i.to_s,
@@ -1158,10 +1158,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Isaac Newton',
+                    person: Person.find_by_name('Isaac Newton'),
                     term: term,
-                    course: Course.find_by_name ('Mechanical Physics'),
-                    location: Location.find_by_name ('Smith Lab')
+                    course: Course.find_by_name('Mechanical Physics'),
+                    location: Location.find_by_name('Smith Lab')
                 },
                 {
                     room: '367' << i.to_s,
@@ -1173,10 +1173,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Ada Lovelace',
+                    person: Person.find_by_name('Ada Lovelace'),
                     term: term,
-                    course: Course.find_by_name ('Social and Moral Problems in the U.S.'),
-                    location: Location.find_by_name ('Hagerty Hall')
+                    course: Course.find_by_name('Social and Moral Problems in the U.S.'),
+                    location: Location.find_by_name('Hagerty Hall')
                 },
                 {
                     room: '367' << i.to_s,
@@ -1188,10 +1188,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Ada Lovelace',
+                    person: Person.find_by_name('Ada Lovelace'),
                     term: term,
-                    course: Course.find_by_name ('Social and Moral Problems in the U.S.'),
-                    location: Location.find_by_name ('Hagerty Hall')
+                    course: Course.find_by_name('Social and Moral Problems in the U.S.'),
+                    location: Location.find_by_name('Hagerty Hall')
                 },
                 {
                     room: '100' << i.to_s,
@@ -1203,10 +1203,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Elizabeth Blackwell',
-                                                term: term,
-                                                course: Course.find_by_name ('Biology I'),
-                                                                            location: Location.find_by_name ('Kottman Hall')
+                    person: Person.find_by_name('Elizabeth Blackwell'),
+                    term: term,
+                    course: Course.find_by_name('Biology I'),
+                    location: Location.find_by_name('Kottman Hall')
                 },
                 {
                     room: '100' << i.to_s,
@@ -1218,10 +1218,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Elizabeth Blackwell',
-                                                term: term,
-                    course: Course.find_by_name ('Biology I'),
-                    location: Location.find_by_name ('Kottman Hall')
+                    person: Person.find_by_name('Elizabeth Blackwell'),
+                    term: term,
+                    course: Course.find_by_name('Biology I'),
+                    location: Location.find_by_name('Kottman Hall')
                 },
                 {
                     room: '100' << i.to_s,
@@ -1233,10 +1233,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Elizabeth Blackwell',
+                    person: Person.find_by_name('Elizabeth Blackwell'),
                     term: term,
-                    course: Course.find_by_name ('Biology I'),
-                    location: Location.find_by_name ('Kottman Hall')
+                    course: Course.find_by_name('Biology I'),
+                    location: Location.find_by_name('Kottman Hall')
                 },
                 {
                     room: '120' << i.to_s,
@@ -1248,10 +1248,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Jimmy Neutron',
+                    person: Person.find_by_name('Jimmy Neutron'),
                     term: term,
-                    course: Course.find_by_name ('Greek and Roman Mythology'),
-                    location: Location.find_by_name ('University Hall')
+                    course: Course.find_by_name('Greek and Roman Mythology'),
+                    location: Location.find_by_name('University Hall')
                 },
                 {
                     room: '120' << i.to_s,
@@ -1263,10 +1263,10 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name 'Jimmy Neutron',
+                    person: Person.find_by_name('Jimmy Neutron'),
                     term: term,
-                    course: Course.find_by_name ('Greek and Roman Mythology'),
-                    location: Location.find_by_name ('University Hall')
+                    course: Course.find_by_name('Greek and Roman Mythology'),
+                    location: Location.find_by_name('University Hall')
                 }
                 ])
 

@@ -119,10 +119,8 @@ module GenScheduleHelper
     #     * +self+ has no course conflicts (no courses of the same name/id)
     def is_valid?
       is_full? @preferences, @class_section_set and not contains_course_conflict? @class_section_set and 
-        acceptable_credit_hours? @preferences, @class_section_set and 
           contains_explicit_courses? @preferences, @class_section_set and 
-            not contains_time_conflict? @class_section_set and 
-              contains_acceptable_time_range @preferences, @class_section_set
+            not contains_time_conflict? @class_section_set
     end
 
     # Checks if +class_section+ is able to be added to +self+ based on the contents of +self+'s class section set.
