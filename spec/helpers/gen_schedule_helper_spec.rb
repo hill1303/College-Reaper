@@ -7,7 +7,7 @@ describe GenScheduleHelper do
     preference = build :preference
     @mock_schedule = GenScheduleHelper::MockSchedule.new preference
   end
-
+=begin
   context '#new with a preference' do
     it 'takes a preference and creates a MockSchedule' do
       puts @mock_schedule.preferences
@@ -29,7 +29,7 @@ describe GenScheduleHelper do
       expect(@mock_schedule.preference).to be_truthy
     end
   end
-=begin
+  
   context '#assign_class_section! just once' do
     it 'has a non-empty class section set' do
       expect(@mock_schedule.class_section_set.empty?).to be false
