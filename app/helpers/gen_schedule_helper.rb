@@ -837,7 +837,6 @@ module GenScheduleHelper
         # Select a mate for the schedule
         mate = select_mate schedule, schedule_set
         unless mate.nil?
-          
           # Breed the two schedules and mutate them
           exchange_genes! schedule, mate
           mutate! schedule, class_section_set
@@ -1015,12 +1014,17 @@ module GenScheduleHelper
       
       population_snapshot = Set.new
       population = generate_schedules preferences, class_section_set
+
       while convergence_tracker < MAX_STALE_GENERATIONS
         population_copy = Set.new population
         # Progress the population through a generation and rank the population
         population = new_generation! population_copy, class_section_set
         purge_and_replace_invalid_schedules! population, class_section_set
-        
+
+        if population.size == 0 then
+          throw Exception.new 'Zero population'
+        end
+
         top_individual_score, population_avg_score = evaluate_population population
         # Check for population improvement
         if top_individual_score > best_top_individual_score

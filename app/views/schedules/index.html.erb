@@ -74,9 +74,7 @@
 
       var <%= day.downcase %>_dir = MQ.routing.directions();
 
-
-      <%= day.downcase %>_dir.route({
-        locations: [
+      var <%= day.downcase %>_locations = [
           <%= location_coords = Array.new
            @schedule.sections.order(start_time: :asc).each do |section|
               unless section.rpt_pattern.index(day_map[day][:code]).nil?
@@ -85,7 +83,10 @@
             end
             location_coords.join(',')
             %>
-        ],
+          ];
+
+      <%= day.downcase %>_dir.route({
+        locations: <%= day.downcase %>_locations,
         options: {routeType:'pedestrian'}
       });
 

@@ -831,7 +831,7 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name('Meean Feerash'),
+                    person: Person.find_by_name('Reed Wright'),
                     term: term,
                     course: Course.find_by_name('Systems 1'),
                     location: Location.find_by_name('Dreese Lab')
@@ -861,7 +861,7 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name('Meean Feerash'),
+                    person: Person.find_by_name('Reed Wright'),
                     term: term,
                     course: Course.find_by_name('Systems 2'),
                     location: Location.find_by_name('Bolz Hall')
@@ -1042,7 +1042,7 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name('Meean Feerash'),
+                    person: Person.find_by_name('Reed Wright'),
                     term: term,
                     course: Course.find_by_name('Calculus I'),
                     location: Location.find_by_name('Mathematics Tower')
@@ -1072,7 +1072,7 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name('Meean Feerash'),
+                    person: Person.find_by_name('Reed Wright'),
                     term: term,
                     course: Course.find_by_name('Calculus II'),
                      location: Location.find_by_name('Mathematics Tower')
@@ -1117,7 +1117,7 @@ Section.create([{
                     wait_seats: 0,
                     seat_max: 100,
                     wait_max: 999,
-                    person: Person.find_by_name('Meean Feerash'),
+                    person: Person.find_by_name('Reed Wright'),
                     term: term,
                     course: Course.find_by_name('Foundations of Higher Math'),
                     location: Location.find_by_name('Hagerty Hall')

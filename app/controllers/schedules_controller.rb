@@ -4,7 +4,7 @@
 class SchedulesController < ApplicationController
   include Wicked::Wizard
 
-  steps :course_load, :courses, :times, :locations, :generate_schedules
+  steps :course_load, :courses, :times, :locations, :finished
 
   DAY_REMAP = {
                 'Sunday' => 'U',
@@ -33,9 +33,6 @@ class SchedulesController < ApplicationController
         unless user_session['new_prefs']['force_courses'] == '1'
           skip_step
         end
-      when :generate_schedules
-        run_schedules
-      else
     end
     @preference = Preference.new choices: user_session['new_prefs'], user: current_user
     render_wizard
@@ -73,6 +70,9 @@ class SchedulesController < ApplicationController
 
         # Save to the database
         pref = Preference.create choices: user_session['new_prefs'], user: current_user
+
+        # Generate schedules
+        run_schedules
       else
         user_session['new_prefs'].merge! params['preference']
     end
@@ -82,7 +82,9 @@ class SchedulesController < ApplicationController
       value == ''
     end
 
-    redirect_to next_wizard_path
+    unless flash[:alert]
+      redirect_to next_wizard_path
+    end
   end
 
 
@@ -91,6 +93,10 @@ class SchedulesController < ApplicationController
   # application to find more optimal schedules for them.
   def tips
     {
+      course_load: [
+          'The fewer classes you want in your schedule, the easier it is to schedule, and to pace yourself!',
+          'Use lower settings for credit hours and the total number of courses to increase your choices.'
+      ],
       courses: [
           'Leaving more blank fields will result in more possible schedules.',
           'Having more possible schedules means we can find the best fit for you more easily.',
@@ -123,7 +129,15 @@ class SchedulesController < ApplicationController
   def run_schedules
     preference = Preference.where(user_id: current_user.id).last
     section_set = Section.all.to_set
-    schedules = GenScheduleHelper::ScheduleGenerator.evolve_schedules preference, section_set
+
+    begin
+      schedules = GenScheduleHelper::ScheduleGenerator.evolve_schedules preference, section_set
+    rescue
+      flash[:alert] = 'Sorry, but your preferences were too constrained - we couldn\'t generate any valid schedules.' <<
+                      ' Please adjust your choices to include more options and try again.'
+      redirect_to wizard_path :course_load
+    end
+
     schedules = schedules.to_a.sort do |x,y|
       x.aggregate_score <=> y.aggregate_score
     end
@@ -148,7 +162,7 @@ class SchedulesController < ApplicationController
       Schedule.create ({
           preference: schedule.preferences,
           score: schedule.aggregate_score,
-          user: schedule.preferences.user,
+          user: current_user,
           sections: Section.where(sections_sql),
           sub_scores: {
               time_sub_score: schedule.time_sub_score,
