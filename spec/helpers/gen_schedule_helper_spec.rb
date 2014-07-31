@@ -3,7 +3,7 @@ require 'rails_helper'
 describe GenScheduleHelper do
 
   before do
-    sections = build :
+    sections = build
     preference = build :preference
     @mock_schedule = GenScheduleHelper::MockSchedule.new preference
   end
