@@ -16,23 +16,25 @@
 
   <body>
     <header class="row">
-      <div class="medium-3 columns">
+      <div class="medium-4 columns">
         <h1><a href="<%= user_signed_in? ? user_root_path : '/' %>">CollegeReaper</a></h1>
       </div>
-      <div class="medium-9 columns">
+      <div class="medium-8 columns">
+        <% if user_signed_in? %>
+        <span class="button right" data-dropdown="user-actions"><i class="fa fa-user"></i> <%= current_user.email %></span>
+        <ul id="user-actions" class="f-dropdown" data-dropdown-content>
+          <li><%= link_to '<i class="fa fa-calendar"></i> Start a new schedule'.html_safe, '/schedules/course_load', data: { no_turbolink: true } %></li>
+          <li><%= link_to '<i class="fa fa-check-square-o"></i> Manage your courses'.html_safe, completions_path %></li>
+          <li><%= link_to '<i class="fa fa-edit"></i> Edit your account'.html_safe, edit_user_registration_path %></li>
+          <li><%= link_to '<i class="fa fa-sign-out"></i> Sign out'.html_safe, destroy_user_session_path, method: :delete %></li>
+        </ul>
+        <% else %>
         <ul class="right button-group">
-          <% if user_signed_in? %>
-          <li><%= link_to current_user.email, edit_user_registration_path,
-                          class: 'button secondary small disabled' %></li>
-          <li><%= link_to 'Start your schedule!', '/schedules/course_load', class: 'button small', data: { no_turbolink: true }  %></li>
-          <li><%= link_to 'Completed Courses', completions_path, class: 'button small' %></li>
-          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'button small' %></li>
-          <% else %>
           <li class="hide-for-small-only"><span class="button secondary disabled">Get started today!</span></li>
           <li><%= link_to 'Sign in', new_user_session_path, class: 'button' %></li>
           <li><%= link_to 'Sign up', new_user_registration_path, class: 'button' %></li>
-          <% end %>
         </ul>
+        <% end %>
       </div>
     </header>
     <hr />

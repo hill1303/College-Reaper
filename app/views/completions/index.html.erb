@@ -1,11 +1,22 @@
 <div class="row">
   <div class="medium-8 columns">
     <h2>Completed courses</h2>
-    <ul>
+    <table style="width:100%">
+      <thead>
+        <tr>
+          <th>Course (click to edit)</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
       <% @completions.each do |completion| %>
-      <li><%= link_to String.new << completion.course.instructional_unit << ' ' << completion.course.course_number << ' - ' << completion.grade, edit_completion_path(completion) %></li>
+      <tr>
+        <td><%= link_to String.new << completion.course.instructional_unit << ' ' << completion.course.course_number, edit_completion_path(completion) %></td>
+        <td><%= completion.grade %></td>
+      </tr>
       <% end %>
-    </ul>
+      </tbody>
+    </table>
   </div>
   <div class="medium-4 columns">
     <h3>Actions</h3>

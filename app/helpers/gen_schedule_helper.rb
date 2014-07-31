@@ -405,12 +405,12 @@ module GenScheduleHelper
     # 
     # Returns:
     #
-    # 	+true+ if +time+ occurs at the same time or earlier than +other_time+, +false+ otherwise.
+    #   +true+ if +time+ occurs at the same time or earlier than +other_time+, +false+ otherwise.
     #
     # Paramters:
-    # 	
-    # 	* +time+ - The time being compared to another time.
-    # 	* +other_time+ - The other time being compared to the first time.
+    #
+    #   * +time+ - The time being compared to another time.
+    #   * +other_time+ - The other time being compared to the first time.
     def time_earlier_than_other_time(time, other_time)
       hour_diff = time.hour - other_time.hour
       min_diff = time.min - other_time.min
@@ -431,12 +431,12 @@ module GenScheduleHelper
     # 
     # Returns:
     #
-    # 	+true+ if +time+ occurs at the same time or later than +other_time+, +false+ otherwise.
+    #   +true+ if +time+ occurs at the same time or later than +other_time+, +false+ otherwise.
     #
     # Paramters:
-    # 	
-    # 	* +time+ - The time being compared to another time.
-    # 	* +other_time+ - The other time being compared to the first time.
+    #
+    #   * +time+ - The time being compared to another time.
+    #   * +other_time+ - The other time being compared to the first time.
     def time_later_than_other_time(time, other_time)
       hour_diff = time.hour - other_time.hour
       min_diff = time.min - other_time.min
